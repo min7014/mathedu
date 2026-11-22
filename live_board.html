@@ -5,6 +5,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>mathedu · 시각적 수학 증명과 디딤돌 퀴즈 · 수학자료실</title>
 <meta name="description" content="3,400+ 시각적 기하·증명과 단계별 디딤돌 퀴즈를 담은 100% 영구 무료 수학자료실">
 <meta name="keywords" content="수학교육, 수학자료실, mathedu, 단델린의 구, 원뿔곡선, 지오지브라, 디딤돌 퀴즈, 수능 기출, GeoGebra, Scaffolding Math">
@@ -2243,7 +2244,7 @@ function toggleMathStory() {
       if (typeof openProjectorScreen === 'function') {
         openProjectorScreen(studentUrl, defaultRoom + ' (수업 팩 ' + selectedPackSlugs.length + '문항)');
       } else {
-        window.open('https://api.qrserver.com/v1/create-qr-code/?size=450x450&data=' + encodeURIComponent(studentUrl), '_blank');
+        window.open('https://api.qrserver.com/v1/create-qr-code/?size=450x450&data=' + encodeURIComponent(studentUrl), '_blank', 'noopener');
       }
     } else if (action === 'start') {
       window.location.href = 'board/' + firstSlug + '.html?pack=' + encodeURIComponent(packParam) + '&room=' + encodeURIComponent(defaultRoom);
@@ -2270,7 +2271,7 @@ function toggleMathStory() {
           filterMin7014Materials();
         })
         .catch(function(e) {
-          if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#fb7185">자료를 불러오지 못했습니다. <a href="https://min7014.github.io/" target="_blank" style="color:#7cc4ff">공식 웹사이트 바로가기</a></div>';
+          if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#fb7185">자료를 불러오지 못했습니다. <a href="https://min7014.github.io/" target="_blank" rel="noopener noreferrer" style="color:#7cc4ff">공식 웹사이트 바로가기</a></div>';
         });
     } else {
       filterMin7014Materials();
@@ -2651,7 +2652,7 @@ function toggleMathStory() {
         if (displayTags.length > 0) {
           tagPillsHtml = '<div class="flex items-center gap-1 flex-wrap mt-0.5">';
           displayTags.forEach(function(tg) {
-            tagPillsHtml += '<button type="button" onclick="triggerSmartQuizSearch(\'' + escapeHtml(tg) + '\', false)" class="px-1.5 py-0.5 rounded bg-surface-container-low hover:bg-secondary/10 text-on-surface-variant hover:text-secondary font-label-badge text-[10px] border-0 cursor-pointer transition-colors">#' + escapeHtml(tg) + '</button>';
+            tagPillsHtml += '<button type="button" data-smart-q="' + escapeHtml(tg) + '" onclick="triggerSmartQuizSearch(this.getAttribute(\'data-smart-q\') || \'\', false)" class="px-1.5 py-0.5 rounded bg-surface-container-low hover:bg-secondary/10 text-on-surface-variant hover:text-secondary font-label-badge text-[10px] border-0 cursor-pointer transition-colors">#' + escapeHtml(tg) + '</button>';
           });
           tagPillsHtml += '</div>';
         }
@@ -2691,7 +2692,7 @@ function toggleMathStory() {
       html += '      <div class="font-body-sm text-[11px] text-on-surface-variant">검색하신 ' + escapeHtml(parsedQ.month) + ' 문항과 동일한 과목·수준의 연관 기출문제입니다.</div>';
       html += '    </div>';
       html += '  </div>';
-      html += '  <button type="button" onclick="triggerSmartQuizSearch(\'' + escapeHtml(relSubjLabel) + ' 문제들\', false)" class="px-3 py-1 rounded-lg bg-secondary text-white font-label-badge text-[11px] font-bold border-0 cursor-pointer">' + escapeHtml(parsedQ.subject || parsedQ.subSubject) + ' 전체 보기</button>';
+      html += '  <button type="button" data-smart-q="' + escapeHtml(relSubjLabel + ' 문제들') + '" onclick="triggerSmartQuizSearch(this.getAttribute(\'data-smart-q\') || \'\', false)" class="px-3 py-1 rounded-lg bg-secondary text-white font-label-badge text-[11px] font-bold border-0 cursor-pointer">' + escapeHtml(parsedQ.subject || parsedQ.subSubject) + ' 전체 보기</button>';
       html += '</div>';
 
       for (var rIdx = 0; rIdx < relatedItems.length; rIdx++) {

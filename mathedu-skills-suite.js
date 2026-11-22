@@ -197,13 +197,20 @@
     var filterTitle = (searchInp && searchInp.value.trim()) ? searchInp.value.trim() : '수능·평가원 핵심 기출 선별';
     var todayStr = new Date().toISOString().slice(0, 10);
 
+    var escSuite = function(s) {
+      return String(s || '').replace(/[&<>"']/g, function(c) {
+        return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+      });
+    };
     var rowsHtml = items.map(function (it) {
-      var fullUrl = 'https://min7014.github.io/mathedu/board/' + (it.slug.indexOf('exam_') === 0 ? ('archive.html?id=' + it.slug) : (it.slug + '.html'));
+      var rawSlug = String(it && it.slug || '').trim();
+      var safeSlug = /^[A-Za-z0-9_-]{1,80}$/.test(rawSlug) ? rawSlug : '';
+      var fullUrl = 'https://min7014.github.io/mathedu/board/' + (safeSlug.indexOf('exam_') === 0 ? ('archive.html?id=' + encodeURIComponent(safeSlug)) : (safeSlug ? (encodeURIComponent(safeSlug) + '.html') : 'archive.html'));
       return (
         '<div style="border:1.5px solid #1e293b;border-radius:12px;padding:16px;margin-bottom:14px;page-break-inside:avoid;">' +
         '  <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px dashed #94a3b8;padding-bottom:8px;margin-bottom:10px;">' +
-        '    <strong style="font-size:15px;">문항 ' + it.num + '. ' + it.title + '</strong>' +
-        '    <span style="font-size:11px;color:#475569;">온라인 디딤돌: ' + fullUrl + '</span>' +
+        '    <strong style="font-size:15px;">문항 ' + (parseInt(it.num, 10) || 1) + '. ' + escSuite(it.title) + '</strong>' +
+        '    <span style="font-size:11px;color:#475569;">온라인 디딤돌: ' + escSuite(fullUrl) + '</span>' +
         '  </div>' +
         '  <div style="display:flex;gap:14px;font-size:12px;color:#334155;margin-bottom:8px;">' +
         '    <span>□ 🎯 ① 구하는 값 확인</span>' +
@@ -218,8 +225,9 @@
 
     var w = window.open('', '_blank', 'width=900,height=800');
     if (!w) return;
+    try { w.opener = null; } catch (e) {}
     w.document.write(
-      '<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><title>mathedu 맞춤형 수학 시험지 (' + todayStr + ')</title>' +
+      '<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><title>mathedu 맞춤형 수학 시험지 (' + escSuite(todayStr) + ')</title>' +
       '<style>body{font-family:"Pretendard","Malgun Gothic",sans-serif;padding:28px;color:#0f172a;max-width:820px;margin:0 auto;}@media print{.no-print{display:none!important;}}</style></head><body>' +
       '<div class="no-print" style="margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#f0f9ff;border:1px solid #bae6fd;border-radius:10px;">' +
       '  <span style="font-size:13px;font-weight:700;color:#0369a1;">🖨️ 브라우저 인쇄 창에서 [PDF로 저장] 또는 프린터를 선택하세요.</span>' +
@@ -227,8 +235,8 @@
       '</div>' +
       '<div style="border-bottom:3px double #0f172a;padding-bottom:12px;margin-bottom:18px;text-align:center;">' +
       '  <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;">2027학년도 대학수학능력시험 수학 영역 대비 · mathedu 단계별 디딤돌 워크시트</div>' +
-      '  <h1 style="margin:6px 0;font-size:24px;font-weight:900;">수학 영역 (' + filterTitle + ')</h1>' +
-      '  <div style="font-size:12px;color:#475569;">생성일: ' + todayStr + ' · 성명: ____________ · 목표: 수능 수학 100점 만점 (https://min7014.github.io/mathedu/)</div>' +
+      '  <h1 style="margin:6px 0;font-size:24px;font-weight:900;">수학 영역 (' + escSuite(filterTitle) + ')</h1>' +
+      '  <div style="font-size:12px;color:#475569;">생성일: ' + escSuite(todayStr) + ' · 성명: ____________ · 목표: 수능 수학 100점 만점 (https://min7014.github.io/mathedu/)</div>' +
       '</div>' +
       rowsHtml +
       '<script>setTimeout(function(){window.print();},400);<\/script>' +

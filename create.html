@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>새 문제 출제 & 퀴즈 생성 · mathedu</title>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
@@ -1009,7 +1010,7 @@ function renderMemberNotice() {
               ${quota.createdToday.map(q => `
                 <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;">
                   <span style="font-weight: 600; color: #f1f5f9; font-size: 0.88rem;">• ${escapeHtml(q.title || '수학 퀴즈')}</span>
-                  <a href="board/${escapeHtml(q.slug)}.html" class="tbtn" style="padding: 3px 10px; font-size: 0.78rem; text-decoration: none;" target="_blank">
+                  <a href="board/${escapeHtml(q.slug)}.html" class="tbtn" style="padding: 3px 10px; font-size: 0.78rem; text-decoration: none;" target="_blank" rel="noopener noreferrer">
                     퀴즈 열기 ➔
                   </a>
                 </div>

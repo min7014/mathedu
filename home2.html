@@ -172,11 +172,16 @@ function checkDone(){
     });
     const box=document.getElementById('doneBox');
     const list=document.getElementById('doneList');
+    const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     if(items.length){
       box.style.display='block';
-      list.innerHTML=items.map(it=>
-        `<div>📄 <a href="/board/${it.slug}">${it.title}</a>`+
-        ` <span style="color:#9aa6c0;font-size:.8rem"> — ${it.time}</span></div>`).join('');
+      list.innerHTML=items.map(it=>{
+        const rawSlug=String(it.slug||'').trim();
+        const safeSlug=/^[A-Za-z0-9_.-]{1,80}$/.test(rawSlug)?rawSlug:'';
+        const href=safeSlug?('/board/'+encodeURIComponent(safeSlug)):'/board/';
+        return `<div>📄 <a href="${href}">${esc(it.title)}</a>`+
+          ` <span style="color:#9aa6c0;font-size:.8rem"> — ${esc(it.time)}</span></div>`;
+      }).join('');
       // 3개 초과면 스크롤, 3개 이하면 자동 높이
       box.style.maxHeight = items.length > 3 ? '300px' : 'none';
       box.style.overflowY = items.length > 3 ? 'auto' : 'visible';
@@ -186,9 +191,9 @@ function checkDone(){
   }).catch(()=>{});
 }
 // 중복 안내 팝업: 기존 풀이로 이동
-(function(){const p=new URLSearchParams(location.search);const g=p.get('goto');
-if(g){const m=document.getElementById('dupModal');document.getElementById('dupLink').href='/board/'+g;
-m.style.display='block';setTimeout(()=>{location.href='/board/'+g;},2200);}})();
+(function(){const p=new URLSearchParams(location.search);const g=(p.get('goto')||'').trim();
+if(g&&/^[A-Za-z0-9_-]{1,80}(?:\.html)?$/.test(g)){const m=document.getElementById('dupModal');const safeTarget='/board/'+encodeURIComponent(g);document.getElementById('dupLink').href=safeTarget;
+m.style.display='block';setTimeout(()=>{location.href=safeTarget;},2200);}})();
 checkDone(); setInterval(checkDone, 15000);
 
 </script>

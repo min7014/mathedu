@@ -5,6 +5,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="google-adsense-account" content="ca-pub-4433368698941458">
 <title>mathedu · 시각적 수학 증명과 디딤돌 퀴즈 · 수학자료실</title>
 <meta name="description" content="3,400+ 시각적 기하·증명과 단계별 디딤돌 퀴즈를 담은 100% 영구 무료 수학자료실">
@@ -3335,7 +3336,7 @@ function toggleMathStory() {
       if (typeof openProjectorScreen === 'function') {
         openProjectorScreen(studentUrl, defaultRoom + ' (수업 팩 ' + selectedPackSlugs.length + '문항)');
       } else {
-        window.open('https://api.qrserver.com/v1/create-qr-code/?size=450x450&data=' + encodeURIComponent(studentUrl), '_blank');
+        window.open('https://api.qrserver.com/v1/create-qr-code/?size=450x450&data=' + encodeURIComponent(studentUrl), '_blank', 'noopener');
       }
     } else if (action === 'start') {
       window.location.href = 'board/' + firstSlug + '.html?pack=' + encodeURIComponent(packParam) + '&room=' + encodeURIComponent(defaultRoom);
@@ -3362,7 +3363,7 @@ function toggleMathStory() {
           filterMin7014Materials();
         })
         .catch(function(e) {
-          if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#38bdf8">자료를 불러오지 못했습니다. <a href="https://min7014.github.io/" target="_blank" style="color:#006398">공식 웹사이트 바로가기</a></div>';
+          if (listEl) listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#38bdf8">자료를 불러오지 못했습니다. <a href="https://min7014.github.io/" target="_blank" rel="noopener noreferrer" style="color:#006398">공식 웹사이트 바로가기</a></div>';
         });
     } else {
       filterMin7014Materials();
@@ -3921,7 +3922,7 @@ function toggleMathStory() {
       html += '      <div class="font-body-sm text-[11px] text-on-surface-variant">검색하신 ' + escapeHtml(parsedQ.month) + ' 문항과 동일한 과목·수준의 연관 기출문제입니다.</div>';
       html += '    </div>';
       html += '  </div>';
-      html += '  <button type="button" onclick="triggerSmartQuizSearch(\'' + escapeHtml(relSubjLabel) + ' 문제들\', false)" class="px-3 py-1 rounded-lg bg-secondary text-white font-label-badge text-[11px] font-bold border-0 cursor-pointer">' + escapeHtml(parsedQ.subject || parsedQ.subSubject) + ' 전체 보기</button>';
+      html += '  <button type="button" data-smart-q="' + escapeHtml(relSubjLabel + ' 문제들') + '" onclick="triggerSmartQuizSearch(this.getAttribute(\'data-smart-q\') || \'\', false)" class="px-3 py-1 rounded-lg bg-secondary text-white font-label-badge text-[11px] font-bold border-0 cursor-pointer">' + escapeHtml(parsedQ.subject || parsedQ.subSubject) + ' 전체 보기</button>';
       html += '</div>';
 
       for (var rIdx = 0; rIdx < relatedItems.length; rIdx++) {
@@ -4387,10 +4388,13 @@ window.openMathClinicModal = function() {
   var queueHtml = qItems.length === 0
     ? '<div class="text-[var(--sub)] py-2">아직 오답이나 힌트 보강이 기록된 문항이 없습니다. 문제를 풀면 자동으로 에빙하우스 복습 주기가 설계됩니다.</div>'
     : qItems.slice(0, 8).map(function(it) {
+        var rawItSlug = String(it && it.slug || '').trim();
+        var safeItSlug = /^[A-Za-z0-9_-]{1,80}$/.test(rawItSlug) ? rawItSlug : '';
+        var hrefSlug = safeItSlug ? ('board/' + encodeURIComponent(safeItSlug) + '.html') : '#';
         return (
-          '<a href="board/' + it.slug + '.html" class="p-2.5 rounded-lg bg-[var(--card)] border border-[var(--line)] hover:border-[#006398] no-underline flex items-center justify-between gap-2">' +
-            '<div class="truncate text-[var(--txt)] font-semibold">' + (it.title || it.slug) + ' <span class="text-[#0284c7] text-[11px]">(' + (it.weakStep || 1) + '단계 집중 복습)</span></div>' +
-            '<span class="text-[11px] text-[#006398] font-bold shrink-0">복습 권장일: ' + (it.nextReviewDate || '오늘') + ' ➔</span>' +
+          '<a href="' + hrefSlug + '" class="p-2.5 rounded-lg bg-[var(--card)] border border-[var(--line)] hover:border-[#006398] no-underline flex items-center justify-between gap-2">' +
+            '<div class="truncate text-[var(--txt)] font-semibold">' + escapeHtml(it.title || it.slug) + ' <span class="text-[#0284c7] text-[11px]">(' + (parseInt(it.weakStep, 10) || 1) + '단계 집중 복습)</span></div>' +
+            '<span class="text-[11px] text-[#006398] font-bold shrink-0">복습 권장일: ' + escapeHtml(it.nextReviewDate || '오늘') + ' ➔</span>' +
           '</a>'
         );
       }).join('');
@@ -4399,10 +4403,13 @@ window.openMathClinicModal = function() {
   var eurekaHtml = eurekaItems.length === 0
     ? '<div class="text-[var(--sub)] py-2">문항 페이지 상단 <b>[🔄 변이·전이 & 유레카 노트]</b>에서 작성한 나만의 1줄 핵심 원리가 이곳에 차곡차곡 모입니다.</div>'
     : eurekaItems.map(function(item) {
+        var rawEuSlug = String(item && item.slug || '').trim();
+        var safeEuSlug = /^[A-Za-z0-9_-]{1,80}$/.test(rawEuSlug) ? rawEuSlug : '';
+        var hrefEuSlug = safeEuSlug ? ('board/' + encodeURIComponent(safeEuSlug) + '.html') : '#';
         return (
-          '<a href="board/' + item.slug + '.html" class="p-2.5 rounded-lg bg-[#fefce8] border border-[#fde047] no-underline flex flex-col gap-1">' +
-            '<div class="font-extrabold text-[#b45309]">💡 ' + (item.title || item.slug) + '</div>' +
-            '<div class="text-[#1e293b]">' + item.note + '</div>' +
+          '<a href="' + hrefEuSlug + '" class="p-2.5 rounded-lg bg-[#fefce8] border border-[#fde047] no-underline flex flex-col gap-1">' +
+            '<div class="font-extrabold text-[#b45309]">💡 ' + escapeHtml(item.title || item.slug) + '</div>' +
+            '<div class="text-[#1e293b]">' + escapeHtml(item.note) + '</div>' +
           '</a>'
         );
       }).join('');

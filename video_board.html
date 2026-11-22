@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="google-adsense-account" content="ca-pub-4433368698941458" />
   <title>단계별 시각적 수학 증명 & 네온 시네마 설명 영상 게시판 | @min7014_ai & min7014.github.io</title>
   <meta name="description" content="https://min7014.github.io/ 의 전체 1,111개 수학 자료에 대한 설명 영상 게시판. @min7014_ai 채널(한국어·영어 AI 단계별 시각 증명 강의) 및 @min7014 원본 해설 영상 통합 아카이브." />
@@ -2297,14 +2298,24 @@
 
     window.printClassroomQrWorksheet = function(itemIdx) {
       const item = ALL_ITEMS[itemIdx] || ALL_ITEMS[0] || { title: '시각적 수학 증명', id: '0001', _slug: 'math20250130001' };
-      const ytUrl = item._ytIdeaKo || item._ytKo || item._ytEn || 'https://www.youtube.com/@min7014_ai?sub_confirmation=1';
+      const rawYtUrl = String(item._ytIdeaKo || item._ytKo || item._ytEn || '').trim();
+      const ytUrl = /^https:\/\/(?:www\.)?(?:youtube\.com|youtu\.be)\/[A-Za-z0-9_./?=&%-]+$/i.test(rawYtUrl)
+        ? rawYtUrl
+        : 'https://www.youtube.com/@min7014_ai?sub_confirmation=1';
       const subUrl = 'https://www.youtube.com/@min7014_ai?sub_confirmation=1';
       const webUrl = 'https://min7014.github.io/mathedu/video_board.html?slug=' + encodeURIComponent(item._slug || '');
       const qrYt = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + encodeURIComponent(ytUrl);
       const qrSub = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + encodeURIComponent(subUrl);
+      const escWs = s => String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+      const safeTitle = escWs(item.title || '시각적 수학 증명');
+      const safeCategory = escWs(item.category || '기하·대수 시각적 증명');
+      const safeId = escWs(item.id || '');
+      const safeSlug = escWs(item._slug || '');
+      const safeYtUrl = escWs(ytUrl);
       const w = window.open('', '_blank', 'width=900,height=1050');
       if (!w) { alert('팝업 차단을 해제해 주세요!'); return; }
-      w.document.write(`<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><title>[교실 배포용 QR 탐구 활동지] ${item.title}</title>
+      try { w.opener = null; } catch (e) {}
+      w.document.write(`<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><title>[교실 배포용 QR 탐구 활동지] ${safeTitle}</title>
       <style>
         @page { size: A4; margin: 12mm; }
         body { font-family: 'Malgun Gothic', sans-serif; color: #0f172a; margin: 0; padding: 16px; line-height: 1.5; }
@@ -2326,8 +2337,8 @@
       <div class="hdr">
         <div>
           <div class="badge">📐 질문하는 수학 수업 × @min7014_ai 창의 수학 시네마 탐구 활동지</div>
-          <div style="font-size:20px;font-weight:900;color:#0f172a;">${item.title}</div>
-          <div style="font-size:12px;color:#475569;margin-top:4px;">단원: ${item.category || '기하·대수 시각적 증명'} | 자료 번호: #${item.id || ''} (${item._slug || ''})</div>
+          <div style="font-size:20px;font-weight:900;color:#0f172a;">${safeTitle}</div>
+          <div style="font-size:12px;color:#475569;margin-top:4px;">단원: ${safeCategory} | 자료 번호: #${safeId} (${safeSlug})</div>
         </div>
         <div style="text-align:right;font-size:13px;font-weight:700;">
           <div>학교/학년/반: ______________________</div>
@@ -2340,7 +2351,7 @@
           <div>
             <div style="font-weight:900;color:#0369a1;font-size:14px;">🎬 [QR 1] 1080p 창의 수학 시네마 영상 보기</div>
             <div style="font-size:12px;color:#334155;margin-top:4px;">스마트폰 카메라로 스캔하면 공식 암기 없이 눈으로 깨치는 <b>@min7014_ai 유튜브 영상</b>이 바로 재생됩니다!</div>
-            <div style="font-size:11px;color:#64748b;margin-top:3px;">${ytUrl}</div>
+            <div style="font-size:11px;color:#64748b;margin-top:3px;">${safeYtUrl}</div>
           </div>
         </div>
         <div class="qr-card" style="border-color:#0284c7;background:#f0f9ff;">
@@ -2348,13 +2359,13 @@
           <div>
             <div style="font-weight:900;color:#0369a1;font-size:14px;">🔔 [QR 2] @min7014_ai 구독 & 60fps 실험실</div>
             <div style="font-size:12px;color:#334155;margin-top:4px;">채널 <b>[구독]</b>을 누르고 매일 업로드되는 1,113개 시각 증명 시네마와 동적 시뮬레이터를 만나보세요!</div>
-            <div style="font-size:11px;color:#64748b;margin-top:3px;">${webUrl}</div>
+            <div style="font-size:11px;color:#64748b;margin-top:3px;">${escWs(webUrl)}</div>
           </div>
         </div>
       </div>
       <div class="sec">
         <h3>👁️ [1단계 · 관찰과 발견 (Notice & Wonder)] 도형이 움직여도 절대 변하지 않는 '불변량(Invariant)'은 무엇인가요?</h3>
-        <div style="font-size:12.5px;color:#475569;">💡 핵심 단서: ${item.core_concept || '점과 선분이 움직일 때 서로 상쇄되거나 일정하게 보존되는 넓이·길이·각도 관계를 찾아 적어 보세요.'}</div>
+        <div style="font-size:12.5px;color:#475569;">💡 핵심 단서: ${escWs(item.core_concept || '점과 선분이 움직일 때 서로 상쇄되거나 일정하게 보존되는 넓이·길이·각도 관계를 찾아 적어 보세요.')}</div>
         <div class="line-box"></div>
       </div>
       <div class="sec">

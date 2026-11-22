@@ -60,6 +60,21 @@ FRONTEND_JS_FILES = [
     "mathedu-room.js",
     "mathedu-report.js",
     "mathedu-search-logger.js",
+    "mathedu-skills-suite.js",
+    "mathedu-guide.js",
+    "mathedu-quest-game.js",
+    "mathedu-gamification.js",
+]
+CORE_WEBSITE_ENTRY_PAGES = [
+    "index.html",
+    "mathlab.html",
+    "dashboard.html",
+    "create.html",
+    "video_board.html",
+    "video_studio.html",
+    "live_board.html",
+    "game.html",
+    "csat2027.html",
 ]
 ISOLATED_RUNTIME_MODULES = [
     "mathedu_foundation_daemon.py",
@@ -296,6 +311,55 @@ def _check_s6_frontend_xss() -> list[dict]:
             violations.append(_make_violation("S6", "CRITICAL", rel_js, "javascript: URI 패턴 탐지"))
         if eval_re.search(txt):
             violations.append(_make_violation("S6", "CRITICAL", rel_js, "위험한 eval() 호출 탐지"))
+
+    mathlab_path = ROOT_DIR / "mathlab.html"
+    if mathlab_path.exists():
+        ml_txt = mathlab_path.read_text(encoding="utf-8", errors="ignore")
+        for req in ("sanitizeMathExpression", "isSafeMathExpr"):
+            if req not in ml_txt:
+                violations.append(_make_violation("S6", "CRITICAL", "mathlab.html", f"수식 화이트리스트 방어 누락: {req}"))
+
+    room_path = ROOT_DIR / "mathedu-room.js"
+    if room_path.exists():
+        rm_txt = room_path.read_text(encoding="utf-8", errors="ignore")
+        if "sendThankYouToGiver(\\'' + escapeHtml" in rm_txt:
+            violations.append(_make_violation("S6", "CRITICAL", "mathedu-room.js", "인라인 onclick giftFrom JS 탈출 취약점 잔존"))
+        if "/^[A-Za-z0-9_-]{1,80}$/" not in rm_txt:
+            violations.append(_make_violation("S6", "HIGH", "mathedu-room.js", "?pack= 슬러그 화이트리스트 정규식 누락"))
+        if "window.toggleMinGgb = function" not in rm_txt:
+            violations.append(_make_violation("S6", "HIGH", "mathedu-room.js", "전역 GeoGebra iframe 도메인 검증 오버라이드 누락"))
+
+    for redir_name in ("home2.html", "home_check.html"):
+        rp = ROOT_DIR / redir_name
+        if rp.exists():
+            r_txt = rp.read_text(encoding="utf-8", errors="ignore")
+            if "[A-Za-z0-9_-]{1,80}(?:\\.html)?" not in r_txt:
+                violations.append(_make_violation("S6", "HIGH", redir_name, "?goto= 오픈 리다이렉트 화이트리스트 검증 누락"))
+
+    target_blank_no_rel_re = re.compile(r"<a\b(?![^>]*noopener)[^>]*target=[\"']_blank[\"'][^>]*>", re.IGNORECASE)
+    insecure_http_re = re.compile(
+        r"""(?:src|href|action)\s*=\s*["']http://(?!localhost|127\.0\.0\.1|www\.w3\.org|schemas\.android\.com|ns\.adobe\.com)""",
+        re.IGNORECASE,
+    )
+    referrer_re = re.compile(r"""name=["']referrer["']\s+content=["']strict-origin-when-cross-origin["']""", re.IGNORECASE)
+    for page_name in CORE_WEBSITE_ENTRY_PAGES:
+        pg_path = ROOT_DIR / page_name
+        if not pg_path.exists():
+            continue
+        pg_txt = pg_path.read_text(encoding="utf-8", errors="ignore")
+        if not referrer_re.search(pg_txt):
+            violations.append(_make_violation("S6", "MEDIUM", page_name, "Referrer-Policy 메타태그(strict-origin-when-cross-origin) 누락"))
+        if target_blank_no_rel_re.search(pg_txt):
+            violations.append(_make_violation("S6", "MEDIUM", page_name, "rel=noopener 누락된 _blank 외부 링크 탐지"))
+        if insecure_http_re.search(pg_txt):
+            violations.append(_make_violation("S6", "HIGH", page_name, "비암호화 외부 http:// 리소스 URL 탐지"))
+
+    for ggb_rel in ("min7014_matcher.py", "board/archive.html", "offline/archive.html"):
+        gp = ROOT_DIR / ggb_rel
+        if gp.exists():
+            g_txt = gp.read_text(encoding="utf-8", errors="ignore")
+            if ": ggbUrl;" in g_txt:
+                violations.append(_make_violation("S6", "HIGH", ggb_rel, "무검증 GeoGebra iframe 폴백(: ggbUrl;) 잔존"))
     return violations
 
 

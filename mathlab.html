@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>MathLab v1.4</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
@@ -576,7 +577,7 @@
             <div id="obj-panel-list"></div>
         </div>
         <div id="props"></div>
-        <div id="link"><a href="https://min7014.github.io" target="_blank">min7014.github.io</a></div>
+        <div id="link"><a href="https://min7014.github.io" target="_blank" rel="noopener noreferrer">min7014.github.io</a></div>
         <div id="ver">v1.4</div>
     </div>
 
@@ -812,15 +813,50 @@
 
         // --- MATH ---
         const M = {
+            sanitizeMathExpression: (expr, allowY = false) => {
+                if (!expr || typeof expr !== 'string' || expr.length > 160) return null;
+                let s = expr.trim().toLowerCase();
+                if (!s) return null;
+                if (!/^[0-9a-z+\-*/^()=.,\s]+$/.test(s)) return null;
+                if (/\.\.|[a-z_]\s*\.|\.\s*[a-z_]/i.test(s)) return null;
+                if (!allowY && s.includes('=')) return null;
+                if (allowY && s.split('=').length > 2) return null;
+
+                const allowed = new Set([
+                    'x', 'sin', 'cos', 'tan', 'asin', 'acos', 'atan',
+                    'sqrt', 'abs', 'log', 'ln', 'exp', 'floor', 'ceil', 'round',
+                    'pow', 'min', 'max', 'pi', 'e'
+                ]);
+                if (allowY) allowed.add('y');
+
+                const ids = s.match(/[a-z_][a-z0-9_]*/g) || [];
+                for (let i = 0; i < ids.length; i++) {
+                    if (!allowed.has(ids[i])) return null;
+                }
+
+                s = s.replace(/\^/g, '**');
+                if (allowY && s.includes('=')) {
+                    const parts = s.split('=');
+                    if (!parts[0].trim() || !parts[1].trim()) return null;
+                    s = `(${parts[0]}) - (${parts[1]})`;
+                }
+
+                s = s.replace(/\b(sin|cos|tan|asin|acos|atan|sqrt|abs|log|exp|floor|ceil|round|pow|min|max)\b/g, 'Math.$1');
+                s = s.replace(/\bln\b/g, 'Math.log');
+                s = s.replace(/\bpi\b/g, 'Math.PI');
+                s = s.replace(/\be\b/g, 'Math.E');
+                return s;
+            },
+
+            isSafeMathExpr: (expr) => M.sanitizeMathExpression(expr, true) !== null,
+
             prepareFn: (expr) => {
-                const cacheKey = expr.toLowerCase();
+                const safeExpr = M.sanitizeMathExpression(expr, false);
+                if (!safeExpr) return null;
+                const cacheKey = safeExpr;
                 if (M._fnCache && M._fnCache[cacheKey]) return M._fnCache[cacheKey];
                 try {
-                    let s = expr.toLowerCase().replace(/\^/g, '**');
-                    s = s.replace(/sin/g, 'Math.sin').replace(/cos/g, 'Math.cos').replace(/tan/g, 'Math.tan');
-                    s = s.replace(/sqrt/g, 'Math.sqrt').replace(/abs/g, 'Math.abs').replace(/log/g, 'Math.log');
-                    s = s.replace(/exp/g, 'Math.exp').replace(/pi/g, 'Math.PI').replace(/e/g, 'Math.E');
-                    const f = new Function('x', 'return ' + s);
+                    const f = new Function('x', 'return ' + safeExpr);
                     if (!M._fnCache) M._fnCache = {};
                     M._fnCache[cacheKey] = f;
                     return f;
@@ -828,22 +864,12 @@
             },
 
             prepareImplicit: (expr) => {
-                const cacheKey = 'imp_' + expr.toLowerCase();
+                const safeExpr = M.sanitizeMathExpression(expr, true);
+                if (!safeExpr) return null;
+                const cacheKey = 'imp_' + safeExpr;
                 if (M._fnCache && M._fnCache[cacheKey]) return M._fnCache[cacheKey];
                 try {
-                    let s = expr.toLowerCase().replace(/\^/g, '**');
-                    // Split by =
-                    const parts = s.split('=');
-                    let finalExpr = s;
-                    if (parts.length === 2) {
-                        finalExpr = `(${parts[0]}) - (${parts[1]})`;
-                    }
-
-                    finalExpr = finalExpr.replace(/sin/g, 'Math.sin').replace(/cos/g, 'Math.cos').replace(/tan/g, 'Math.tan');
-                    finalExpr = finalExpr.replace(/sqrt/g, 'Math.sqrt').replace(/abs/g, 'Math.abs').replace(/log/g, 'Math.log');
-                    finalExpr = finalExpr.replace(/exp/g, 'Math.exp').replace(/pi/g, 'Math.PI').replace(/e/g, 'Math.E');
-
-                    const f = new Function('x', 'y', 'return ' + finalExpr);
+                    const f = new Function('x', 'y', 'return ' + safeExpr);
                     if (!M._fnCache) M._fnCache = {};
                     M._fnCache[cacheKey] = f;
                     return f;
@@ -4339,13 +4365,13 @@
             function loadFromUrlParams() {
                 const params = new URLSearchParams(window.location.search);
                 if (params.get('theme') === 'dark') toggleDarkTheme(true);
-                const presetParam = params.get('preset');
-                if (presetParam) {
+                const presetParam = (params.get('preset') || '').trim();
+                if (presetParam && /^[A-Za-z0-9_-]{1,64}$/.test(presetParam)) {
                     loadPreset(presetParam);
                     return;
                 }
-                const exprParam = params.get('expr');
-                if (exprParam) {
+                const exprParam = (params.get('expr') || '').trim();
+                if (exprParam && M.isSafeMathExpr(exprParam)) {
                     clearCanvasState();
                     const fnObj = createObj('fn', { x: 2, y: 2, expr: exprParam, col: '#2980b9' });
                     fnObj.fixedType = 'fn';
@@ -4355,7 +4381,7 @@
                     return;
                 }
                 const slug = (params.get('slug') || '').trim();
-                if (!slug) return;
+                if (!slug || !/^[A-Za-z0-9_-]{1,64}$/.test(slug)) return;
 
                 const slugToPreset = {
                     '2021042607': 'parabola_focus',

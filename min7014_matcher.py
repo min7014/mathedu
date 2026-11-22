@@ -911,10 +911,13 @@ if (!window.toggleMinGgb) {{
       wrap.innerHTML = '';
       btn.innerHTML = '📐 GeoGebra 조작 ▾';
     }} else {{
-      var m = ggbUrl.match(/geogebra\\.org\\/m\\/([a-zA-Z0-9]+)/);
+      var rawUrl = String(ggbUrl || '').trim();
+      var m = rawUrl.match(/geogebra\\.org\\/m\\/([a-zA-Z0-9]+)/);
       var id = m ? m[1] : '';
-      var src = id ? ('https://www.geogebra.org/material/iframe/id/' + id + '/width/740/height/480/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false') : ggbUrl;
-      wrap.innerHTML = '<iframe src="' + src + '" style="width:100%;height:480px;border:0;border-radius:10px;display:block;" allowfullscreen></iframe>';
+      var src = id ? ('https://www.geogebra.org/material/iframe/id/' + id + '/width/740/height/480/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false') : (/^https:\\/\\/(?:www\\.)?geogebra\\.org\\/[A-Za-z0-9_.\\/?=&%-]+$/.test(rawUrl) ? rawUrl : '');
+      if (!src) return;
+      var safeSrc = src.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      wrap.innerHTML = '<iframe src="' + safeSrc + '" style="width:100%;height:480px;border:0;border-radius:10px;display:block;" allowfullscreen></iframe>';
       wrap.classList.add('active');
       btn.innerHTML = '📐 GeoGebra 조작 닫기 ▴';
     }}

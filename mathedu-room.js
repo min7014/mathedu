@@ -716,7 +716,9 @@
     var packParam = (urlParams.get('pack') || '').trim();
     if (!packParam) return;
 
-    var slugs = packParam.split(',').map(function(s) { return s.trim().replace(/\.html$/, ''); }).filter(Boolean);
+    var slugs = packParam.split(',').map(function(s) { return s.trim().replace(/\.html$/, ''); }).filter(function(s) {
+      return /^[A-Za-z0-9_-]{1,80}$/.test(s);
+    });
     if (slugs.length <= 1) return;
 
     var curIdx = slugs.indexOf(currentSlug);
@@ -859,7 +861,9 @@
           // 수업 팩 연계 안내
           var packParam = (urlParams.get('pack') || '').trim();
           if (packParam) {
-            var slugs = packParam.split(',').map(function(s) { return s.trim(); });
+            var slugs = packParam.split(',').map(function(s) { return s.trim(); }).filter(function(s) {
+              return /^[A-Za-z0-9_-]{1,80}$/.test(s);
+            });
             var curIdx = slugs.indexOf(currentSlug);
             if (curIdx !== -1 && curIdx < slugs.length - 1) {
               var nextSlug = slugs[curIdx + 1];
@@ -1271,7 +1275,7 @@
       };
 
       document.getElementById('btnGoDashboard').onclick = function() {
-        window.open(dashboardUrl, '_blank');
+        window.open(dashboardUrl, '_blank', 'noopener');
       };
 
       document.getElementById('btnProjectorMode').onclick = function() {
@@ -1566,7 +1570,7 @@
             'window.continueCurrentVersion=function(){closeUpdateModal();try{sessionStorage.setItem("mathedu_update_dismissed_"+s,"true");}catch(e){}};' +
             'window.downloadLatestOfflineVersion=async function(){var b=document.getElementById("btnDownloadUpdate");if(b){b.innerHTML="' + (isEnMode() ? '⏳ Downloading latest version...' : '⏳ 최신 버전 다운로드 중...') + '";b.style.pointerEvents="none";}' +
             'try{var r=await fetch(du+"?_t="+Date.now());if(!r.ok)throw new Error("HTTP "+r.status);var bl=await r.blob();var u=URL.createObjectURL(bl);var a=document.createElement("a");a.href=u;a.download="mathedu_"+s+"_offline_latest.html";document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},500);if(b)b.innerHTML="' + (isEnMode() ? '✅ New version saved!' : '✅ 새 버전 저장 완료!') + '";var bx=document.getElementById("updateDownloadSuccess");if(bx)bx.style.display="block";}' +
-            'catch(e){alert("' + (isEnMode() ? 'Download failed: ' : '다운로드 실패: ') + '"+e.message);window.open(ou,"_blank");if(b){b.innerHTML="' + (isEnMode() ? '📥 Retry' : '📥 다시 시도') + '";b.style.pointerEvents="";}}};' +
+            'catch(e){alert("' + (isEnMode() ? 'Download failed: ' : '다운로드 실패: ') + '"+e.message);window.open(ou,"_blank","noopener");if(b){b.innerHTML="' + (isEnMode() ? '📥 Retry' : '📥 다시 시도') + '";b.style.pointerEvents="";}}};' +
             'window.checkUpdateManual=function(){var b=document.getElementById("btnManualCheckUpdate");if(b)b.innerHTML="' + (isEnMode() ? '⏳ Checking...' : '⏳ 확인 중...') + '";chk(true);};' +
             'function showUp(inf){window._serverUpdateInfo=inf;var sl=document.getElementById("matheduUpdateAlertSlot");if(sl)sl.style.display="flex";var bm=document.getElementById("btnManualCheckUpdate");if(bm){bm.innerHTML="' + (isEnMode() ? '✨ New version available!' : '✨ 새 버전 있음!') + '";bm.style.background="rgba(253,230,138,.25)";bm.style.color="#fde68a";bm.style.borderColor="#fde68a";}' +
             'var dis=false;try{dis=sessionStorage.getItem("mathedu_update_dismissed_"+s)==="true";}catch(e){}if(!dis)openUpdateModal();}' +
@@ -1842,7 +1846,7 @@
         '</div>' +
         '<div style="display:flex;flex-direction:column;gap:10px;text-align:left">' +
           (giftFrom ? 
-            '<button type="button" onclick="window.sendThankYouToGiver(\'' + escapeHtml(giftFrom) + '\')" style="background:linear-gradient(90deg,#ec4899,#f43f5e);color:#fff;border:none;border-radius:14px;padding:13px 18px;font-size:0.94rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:space-between;box-shadow:0 6px 20px rgba(236,72,153,.35);transition:transform .15s" onmouseover="this.style.transform=\'scale(1.02)\'" onmouseout="this.style.transform=\'none\'">' +
+            '<button type="button" data-gift-from="' + escapeHtml(giftFrom) + '" onclick="window.sendThankYouToGiver(this.getAttribute(\'data-gift-from\') || \'\')" style="background:linear-gradient(90deg,#ec4899,#f43f5e);color:#fff;border:none;border-radius:14px;padding:13px 18px;font-size:0.94rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:space-between;box-shadow:0 6px 20px rgba(236,72,153,.35);transition:transform .15s" onmouseover="this.style.transform=\'scale(1.02)\'" onmouseout="this.style.transform=\'none\'">' +
               '<div style="display:flex;align-items:center;gap:10px">' +
                 '<span style="font-size:1.3rem">💌</span>' +
                 '<div>' +
@@ -1897,7 +1901,7 @@
   function checkAndShowIncomingChallenge() {
     var challengerName = (urlParams.get('challenger') || '').trim();
     var giftFrom = (urlParams.get('gift_from') || urlParams.get('gift') || '').trim();
-    var steps = (urlParams.get('steps') || '').trim();
+    var steps = (urlParams.get('steps') || '').trim().replace(/[^0-9]/g, '').slice(0, 3);
 
     var trackFull = document.getElementById('trackFull');
 
@@ -3996,7 +4000,7 @@
                 } else if (targetYt && targetYt.indexOf('watch?v=') !== -1 && targetYt.indexOf('list=') === -1) {
                   targetYt = targetYt + '&list=UUSlqQfOEtRfJuMPyGMLgFYA';
                 }
-                window.open(targetYt || 'https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA', '_blank');
+                window.open(targetYt || 'https://www.youtube.com/watch?v=_NRQ5QO3PEY&list=UUSlqQfOEtRfJuMPyGMLgFYA', '_blank', 'noopener');
               };
               actDiv.insertBefore(vaultBtn, actDiv.firstChild);
             }
@@ -4028,6 +4032,30 @@
         .catch(function() { applyMinItemEnrichment({}); });
     }
   }
+
+  // [Policy 91 Web Defense] 전역 GeoGebra iframe URL 엄격 검증 오버라이드 (258+ 문항 페이지 보호)
+  window.toggleMinGgb = function(btn, ggbUrl) {
+    var item = btn && btn.closest ? btn.closest('.min-item, .min-tip-item') : (btn && btn.parentElement ? btn.parentElement.parentElement : null);
+    if (!item) return;
+    var wrap = item.querySelector('.min-ggb-frame-wrap');
+    if (!wrap) return;
+    if (wrap.classList.contains('active')) {
+      wrap.classList.remove('active');
+      wrap.innerHTML = '';
+      btn.innerHTML = '📐 GeoGebra 조작 ▾';
+    } else {
+      var rawUrl = String(ggbUrl || '').trim();
+      var m = rawUrl.match(/geogebra\.org\/m\/([a-zA-Z0-9]+)/);
+      var id = m ? m[1] : '';
+      var src = id
+        ? ('https://www.geogebra.org/material/iframe/id/' + id + '/width/740/height/480/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false')
+        : (/^https:\/\/(?:www\.)?geogebra\.org\/[A-Za-z0-9_./?=&%-]+$/.test(rawUrl) ? rawUrl : '');
+      if (!src) return;
+      wrap.innerHTML = '<iframe src="' + escapeHtml(src) + '" style="width:100%;height:480px;border:0;border-radius:10px;display:block;" allowfullscreen></iframe>';
+      wrap.classList.add('active');
+      btn.innerHTML = '📐 GeoGebra 조작 닫기 ▴';
+    }
+  };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initRoom);
