@@ -6,6 +6,8 @@ from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent
 TREND_FILE = ROOT_DIR / "youtube_uploads" / "strategy_v2_trend_history.json"
+STUDIO_SCRAPE_STATE = ROOT_DIR / ".agents" / "studio_kpi_scrape_state.json"
+STUDIO_SCRAPE_INTERVAL_SEC = 21600  # 6시간 간격 0-쿼터 Studio KPI 자동 갱신
 
 BASELINE_V2 = {
     "label": "Strategy v2.0 Launch Baseline (2026-11-14 10:55 KST)",
@@ -47,49 +49,71 @@ def load_trend_history() -> dict:
 def _scrape_studio_kpis_headless() -> dict:
     """API 쿼터 0으로 YouTube Studio [수익 창출] 및 [채널 분석] 실측 지표를 수집합니다."""
     res = {}
+    ycc = None
+    acquired = False
     try:
         import youtube_community_controller as ycc
         from playwright.sync_api import sync_playwright
 
+        acquired = bool(ycc._acquire_robot_lock())
+        if not acquired:
+            return res
+
         channel_id = "UCSlqQfOEtRfJuMPyGMLgFYA"
         with sync_playwright() as p:
-            ctx = ycc._launch_studio_context(p, headless=True)
+            ctx = ycc._launch_robot_context(p, headless=True)
             try:
                 page = ctx.pages[0] if ctx.pages else ctx.new_page()
-                page.goto(f"https://studio.youtube.com/channel/{channel_id}/monetization", wait_until="domcontentloaded", timeout=35000)
-                page.wait_for_timeout(4500)
+                page.goto(f"https://studio.youtube.com/channel/{channel_id}/monetization", wait_until="domcontentloaded", timeout=25000)
+                page.wait_for_timeout(3500)
                 earn_txt = page.inner_text("body")
-                m_wh = re.search(r"유효 공개 시청 시간\s*([\d,\.]+)\s*시간", earn_txt)
+                m_wh = re.search(
+                    r"(?:유효 공개 시청 시간\s*([\d,\.]+)\s*시간|([\d,\.]+)\s*valid public watch hours)",
+                    earn_txt,
+                    re.IGNORECASE,
+                )
                 if m_wh:
-                    res["studio_watch_hours"] = float(m_wh.group(1).replace(",", ""))
-                m_sv = re.search(r"유효 공개 Shorts 조회수\s*([\d,\.]+)\s*(만|천)?\s*회", earn_txt)
+                    raw_wh = (m_wh.group(1) or m_wh.group(2) or "0").replace(",", "")
+                    res["studio_watch_hours"] = float(raw_wh)
+
+                m_sv = re.search(
+                    r"(?:유효 공개 Shorts 조회수\s*([\d,\.]+)\s*(만|천)?\s*회|([\d,\.]+)\s*([KM])?\s*valid public Shorts views)",
+                    earn_txt,
+                    re.IGNORECASE,
+                )
                 if m_sv:
-                    val = float(m_sv.group(1).replace(",", ""))
-                    unit = m_sv.group(2) or ""
+                    raw_sv = (m_sv.group(1) or m_sv.group(3) or "0").replace(",", "")
+                    unit = (m_sv.group(2) or m_sv.group(4) or "").upper()
+                    val = float(raw_sv)
                     if unit == "만":
                         val *= 10000
-                    elif unit == "천":
+                    elif unit in ("천", "K"):
                         val *= 1000
+                    elif unit == "M":
+                        val *= 1000000
                     res["studio_valid_shorts_views"] = int(val)
 
-                page.goto(f"https://studio.youtube.com/channel/{channel_id}/analytics/tab-reach_viewers/period-default", wait_until="domcontentloaded", timeout=35000)
-                page.wait_for_timeout(5000)
+                page.goto(f"https://studio.youtube.com/channel/{channel_id}/analytics/tab-reach_viewers/period-default", wait_until="domcontentloaded", timeout=25000)
+                page.wait_for_timeout(3500)
                 reach_txt = page.inner_text("body")
-                m_stay = re.search(r"계속 시청함\s*([\d\.]+)%", reach_txt)
+                m_stay = re.search(r"(?:계속 시청함|Viewed|Stayed to watch)\s*([\d\.]+)%", reach_txt, re.IGNORECASE)
                 if m_stay:
                     stay = float(m_stay.group(1))
                     res["studio_shorts_stay_pct"] = stay
                     res["studio_shorts_swipe_pct"] = round(100.0 - stay, 1)
-                m_srch = re.search(r"YouTube 검색\s*([\d\.]+)%", reach_txt)
+                m_srch = re.search(r"(?:YouTube 검색|YouTube search)\s*([\d\.]+)%", reach_txt, re.IGNORECASE)
                 if m_srch:
                     res["studio_search_pct"] = float(m_srch.group(1))
-                m_brw = re.search(r"탐색 기능\s*([\d\.]+)%", reach_txt)
+                m_brw = re.search(r"(?:탐색 기능|Browse features)\s*([\d\.]+)%", reach_txt, re.IGNORECASE)
                 if m_brw:
                     res["studio_browse_pct"] = float(m_brw.group(1))
             finally:
                 ctx.close()
     except Exception:
         pass
+    finally:
+        if acquired and ycc is not None:
+            ycc._release_robot_lock()
     return res
 
 
@@ -156,13 +180,31 @@ def capture_trend_snapshot(include_studio: bool = False) -> dict:
         "post_v2_avg_views": post_v2_avg,
     }
 
-    if include_studio:
+    now_ts = datetime.now().timestamp()
+    scrape_state = {}
+    if STUDIO_SCRAPE_STATE.exists():
+        try:
+            scrape_state = json.loads(STUDIO_SCRAPE_STATE.read_text(encoding="utf-8"))
+        except Exception:
+            scrape_state = {}
+    last_scrape_ts = float(scrape_state.get("last_attempt_ts") or 0.0)
+    due_for_6h_scrape = (now_ts - last_scrape_ts) >= STUDIO_SCRAPE_INTERVAL_SEC
+
+    st_kpis = {}
+    if include_studio or due_for_6h_scrape:
+        scrape_state["last_attempt_ts"] = now_ts
+        STUDIO_SCRAPE_STATE.parent.mkdir(parents=True, exist_ok=True)
+        STUDIO_SCRAPE_STATE.write_text(json.dumps(scrape_state, ensure_ascii=False, indent=2), encoding="utf-8")
         st_kpis = _scrape_studio_kpis_headless()
-        snap.update(st_kpis)
+        if st_kpis:
+            snap.update(st_kpis)
+            scrape_state["last_success_ts"] = now_ts
+            scrape_state["last_kpis"] = st_kpis
+            STUDIO_SCRAPE_STATE.write_text(json.dumps(scrape_state, ensure_ascii=False, indent=2), encoding="utf-8")
 
     # 스냅샷 누적 저장 (최소 15분 간격 또는 수치 변동 시 추가, 최근 120개 보존)
     snapshots = hist.setdefault("snapshots", [])
-    if len(snapshots) <= 1 or snap["total_views_api"] != prev.get("total_views_api") or snap["subscribers"] != prev.get("subscribers") or include_studio:
+    if len(snapshots) <= 1 or snap["total_views_api"] != prev.get("total_views_api") or snap["subscribers"] != prev.get("subscribers") or bool(st_kpis):
         snapshots.append(snap)
         hist["snapshots"] = snapshots[-120:]
     else:

@@ -186,6 +186,10 @@ def _queued_spec_keys(state: dict) -> set[str]:
 
 
 def _ranked_script_paths() -> list[tuple[dict, Path]]:
+    try:
+        import youtube_self_evolving_engine as ysee
+    except Exception:
+        ysee = None
     ranked = []
     for sp in sorted(SCRIPTS_DIR.glob("*.json")):
         sdoc = _read_json(sp)
@@ -195,11 +199,13 @@ def _ranked_script_paths() -> list[tuple[dict, Path]]:
         if not (pdf_u.endswith(".pdf") and "min7014.github.io" in pdf_u):
             continue
         title = str(sdoc.get("title") or "")
+        title_en = str(sdoc.get("title_en") or "")
         hot = 1 if any(term in title for term in HIGH_SEARCH_TERMS) else 0
+        c_boost = float(ysee.get_slug_cluster_boost(f"{title} {title_en}")) if ysee else 1.0
         pages = int(sdoc.get("page_count") or len(sdoc.get("pages") or []))
-        ranked.append((-hot, -pages, sp.stem, sdoc, sp))
-    ranked.sort(key=lambda item: (item[0], item[1], item[2]))
-    return [(item[3], item[4]) for item in ranked]
+        ranked.append((-round((1 + hot) * c_boost, 2), -c_boost, -pages, sp.stem, sdoc, sp))
+    ranked.sort(key=lambda item: (item[0], item[1], item[2], item[3]))
+    return [(item[4], item[5]) for item in ranked]
 
 
 def _mc_sort_key(meta_p: Path, mdoc: dict) -> tuple:
@@ -213,7 +219,14 @@ def _mc_sort_key(meta_p: Path, mdoc: dict) -> tuple:
         tier = 2
     else:
         tier = 3
-    return (tier, -dur, stem)
+    c_boost = 1.0
+    try:
+        import youtube_self_evolving_engine as ysee
+        t_blob = f"{mdoc.get('title_ko', '')} {mdoc.get('title_en', '')}"
+        c_boost = float(ysee.get_slug_cluster_boost(t_blob))
+    except Exception:
+        pass
+    return (tier, -round(c_boost, 2), -dur, stem)
 
 
 def _sync_manual_subfolder(folder: Path, entries: list[tuple[Path, str]]) -> dict:

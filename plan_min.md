@@ -1028,3 +1028,11 @@ python -X utf8 pr.py status
      - **1단계(0 API 유닛)**: YouTube 채널 RSS 피드로 수동 업로드를 즉시 감지해 로컬 JSON에 URL을 바인딩하고 대기 폴더에서 해당 파일을 즉시 제거하며 `.agents/manual_upload_rewrite_state.json`에 큐잉한다.
      - **2단계(Priority #0 재작성 · 편당 100~150유닛)**: API 쿼터가 열리면(`17:00 KST` 리셋 또는 `!재작성` 명령) 신규 `videos.insert`(1,600유닛)보다 최우선으로 최근 업로드 목록(최대 150편)을 스캔해 `videos().update`(제목·설명·챕터·태그·다국어 `localizations`), `thumbnails().set`(커스텀 썸네일), `commentThreads().insert`(5초 유레카 퀴즈·본편/홈페이지 연결 고정 첫 댓글)를 일괄 완성해 단일 10,000유닛 토큰 풀로도 하루 **65~95편**까지 처리한다.
   3. **[텔레그램 0-크레딧 즉시 제어]**: `mathedu_telegram_bridge.py`에 `!재작성` (`/rewritemanual`) 및 `!수동폴더` (`/manualfolder`) 단축 명령을 탑재한다.
+
+### [Policy 90] 추이 분석 × 다윈식 승자 클러스터 자동 업로드 · 수동 대기 허브 폐루프 원칙 (`2026-11-22` 확정 · 회장님 텔레그램 지시)
+- **회장님(`min7014`) 원문 지시 (`2026-11-22`)**:
+  > *"계속 추이를 분석하며 올리도록 해라."*
+- **구현 및 운영 원칙**:
+  1. **[Studio 무쿼터 KPI 6시간 자동 갱신 (`youtube_trend_tracker.py`)]**: `_scrape_studio_kpis_headless()`가 `youtube_community_controller._launch_robot_context`와 `_acquire_robot_lock`을 사용해 한국어·영어 Studio 유효 공개 시청시간·유효 쇼츠 조회수·쇼츠 계속시청률·유입경로를 안정적으로 수집하며, 6시간 주기(`.agents/studio_kpi_scrape_state.json`)로 데몬 추이 스냅샷에 자동 반영한다.
+  2. **[학습 가중치 보호 & 업로드 직전 사전 갱신 (`youtube_self_evolving_engine.py` × `finance.py`)]**: API 쿼터 소진 시 `compute_winning_cluster_weights()`가 기존 `self_evolving_cluster_weights.json`을 0으로 덮어쓰지 않고 보존하며, `execute_youtube_cashflow_golden_wave()`는 4시간 주기 경과 시 후보 정렬 직전에 클러스터 가중치를 사전 갱신하고 Policy 89 재작성 완료 후에도 추이 스냅샷을 즉시 기록한다.
+  3. **[수동 업로드 대기 허브 고반응 우선 정렬 (`manual_upload_rewriter.py`)]**: `prepare_manual_upload_folders()`가 `get_slug_cluster_boost()` 가중치로 `01_장편_마스터클래스`, `03_1080p_시각증명_본편`, `04_시각증명_쇼츠`를 실시간 정렬해 고반응 클러스터가 항상 `001_`번부터 전면 배치되도록 유지한다.

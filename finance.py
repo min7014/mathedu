@@ -1658,6 +1658,11 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 3, force_immedi
             if (_mur_res.get("rewritten_count", 0) > 0) or (
                 _mur_res.get("pending_count", 0) > 0 and vmaker._LAST_UPLOAD_QUOTA_BLOCKED
             ):
+                try:
+                    import youtube_trend_tracker as _ytt_mur
+                    _ytt_mur.capture_trend_snapshot(include_studio=False)
+                except Exception:
+                    pass
                 return {
                     "status": "manual_rewrites_prioritized",
                     "manual_rewrites": _mur_res,
@@ -1681,6 +1686,15 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 3, force_immedi
             except Exception:
                 pass
             return {"status": "cooldown_wait", "total_uploaded": 0, "uploaded_items": []}
+
+        # [Policy 90] 업로드 큐 우선순위 정렬 직전 승자 클러스터 가중치 사전 갱신 (4시간 주기)
+        try:
+            cw_file = YT_UPLOADS_DIR / "self_evolving_cluster_weights.json"
+            if (not cw_file.exists()) or ((now_ts - cw_file.stat().st_mtime) >= 14400):
+                import youtube_self_evolving_engine as _ysee_pre
+                _ysee_pre.compute_winning_cluster_weights(yt_service=yt_test)
+        except Exception:
+            pass
 
         # 검색 수요가 가장 폭발적인 중·고등 핵심 기하·미적분·대수 키워드 가중치 부여
         high_search_terms = (

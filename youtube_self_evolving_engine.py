@@ -199,6 +199,17 @@ def compute_winning_cluster_weights(yt_service=None) -> dict:
     except Exception:
         pass
 
+    # API 쿼터 소진 등으로 실측 영상이 0건 수집된 경우 기존 학습 가중치를 0으로 초기화하지 않고 보존합니다.
+    total_sampled_videos = sum(d["videos"] for d in cluster_stats.values())
+    if total_sampled_videos == 0 and CLUSTER_WEIGHTS_FILE.exists():
+        try:
+            existing_weights = json.loads(CLUSTER_WEIGHTS_FILE.read_text(encoding="utf-8"))
+            existing_sampled = sum(int(v.get("videos", 0)) for v in (existing_weights.get("clusters") or {}).values())
+            if existing_sampled > 0:
+                return existing_weights
+        except Exception:
+            pass
+
     ranked = []
     for k, d in cluster_stats.items():
         cnt = max(1, d["videos"])
