@@ -7,6 +7,7 @@ http://localhost:8765 에서 동작하는 @min7014_ai 전용 로컬 웹 대시�
 """
 
 import json
+import re
 import subprocess
 import silent_subprocess  # noqa: F401 — Windows 백그라운드 완전 무창 강제
 import sys
@@ -20,6 +21,21 @@ import min7014_video_maker as maker
 
 ROOT_DIR = Path(__file__).resolve().parent
 PORT = 8765
+SAFE_SLUG_RE = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
+SAFE_LANGS = {"ko", "en"}
+ALLOWED_ORIGINS = {"http://127.0.0.1:8765", "http://localhost:8765", "https://min7014.github.io"}
+ALLOWED_HOSTS = {"127.0.0.1:8765", "localhost:8765"}
+
+
+def _is_safe_path_within(target: Path, base_dir: Path) -> bool:
+    try:
+        return target.resolve().is_relative_to(base_dir.resolve())
+    except Exception:
+        return False
+
+
+def _validate_slug_lang(slug: str, lang: str = "ko") -> bool:
+    return bool(SAFE_SLUG_RE.fullmatch(slug or "")) and (lang in SAFE_LANGS)
 
 STATE = {
     "status": "idle",
@@ -134,11 +150,16 @@ function downloadAllMp4s() {{
 
 class AutoUploadHandler(BaseHTTPRequestHandler):
     def _send_cors_headers(self, code=200, content_type="application/json; charset=utf-8"):
+        origin = (self.headers.get("Origin") or "").strip()
+        allow_origin = origin if origin in ALLOWED_ORIGINS else "http://127.0.0.1:8765"
         self.send_response(code)
         self.send_header("Content-Type", content_type)
-        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Origin", allow_origin)
+        self.send_header("Vary", "Origin")
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.send_header("X-Frame-Options", "DENY")
         self.end_headers()
 
     def do_OPTIONS(self):
@@ -158,11 +179,14 @@ class AutoUploadHandler(BaseHTTPRequestHandler):
             slug = qs.get("slug", ["math20250130001"])[0]
             lang = qs.get("lang", ["ko"])[0]
             mp4_p = maker.YT_UPLOADS_DIR / slug / f"{slug}_{lang}.mp4"
+            if not _validate_slug_lang(slug, lang) or not _is_safe_path_within(mp4_p, maker.YT_UPLOADS_DIR):
+                self._send_cors_headers(400)
+                self.wfile.write(json.dumps({"error": "invalid slug or lang"}).encode("utf-8"))
+                return
             meta_p = maker.YT_PKG_DIR / f"{slug}_youtube_meta.json"
             if mp4_p.exists():
                 mdata = json.loads(meta_p.read_text(encoding="utf-8")) if meta_p.exists() else {}
                 raw_title = mdata.get(lang, {}).get("title", f"{slug}_{lang}")
-                import re
                 safe_title = re.sub(r'[\\/:*?"<>|]', " ", raw_title).strip()
                 dl_name = f"{safe_title[:78]} [{slug}_{lang.upper()}].mp4"
                 encoded_name = urllib.parse.quote(dl_name)
@@ -179,6 +203,10 @@ class AutoUploadHandler(BaseHTTPRequestHandler):
             slug = qs.get("slug", ["math20250130001"])[0]
             lang = qs.get("lang", ["ko"])[0]
             p = maker.YT_PKG_DIR / f"{slug}_{lang}_thumb.png"
+            if not _validate_slug_lang(slug, lang) or not _is_safe_path_within(p, maker.YT_PKG_DIR):
+                self._send_cors_headers(400)
+                self.wfile.write(json.dumps({"error": "invalid slug or lang"}).encode("utf-8"))
+                return
             if p.exists():
                 data = p.read_bytes()
                 self.send_response(200)
@@ -192,6 +220,10 @@ class AutoUploadHandler(BaseHTTPRequestHandler):
             slug = qs.get("slug", ["math20250130001"])[0]
             lang = qs.get("lang", ["ko"])[0]
             p = maker.YT_PKG_DIR / f"{slug}_{lang}.srt"
+            if not _validate_slug_lang(slug, lang) or not _is_safe_path_within(p, maker.YT_PKG_DIR):
+                self._send_cors_headers(400)
+                self.wfile.write(json.dumps({"error": "invalid slug or lang"}).encode("utf-8"))
+                return
             if p.exists():
                 data = p.read_bytes()
                 self.send_response(200)
@@ -211,8 +243,23 @@ class AutoUploadHandler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps({"error": "not found"}).encode("utf-8"))
 
     def do_POST(self):
-        content_len = int(self.headers.get("Content-Length", 0) or 0)
-        raw_body = self.rfile.read(content_len).decode("utf-8") if content_len > 0 else "{}"
+        host = (self.headers.get("Host") or "").strip().lower()
+        origin = (self.headers.get("Origin") or "").strip()
+        if host not in ALLOWED_HOSTS or (origin and origin not in ALLOWED_ORIGINS):
+            self._send_cors_headers(403)
+            self.wfile.write(json.dumps({"ok": False, "error": "forbidden origin or host"}).encode("utf-8"))
+            return
+
+        try:
+            content_len = int(self.headers.get("Content-Length", 0) or 0)
+        except Exception:
+            content_len = -1
+        if content_len < 0 or content_len > 65536:
+            self._send_cors_headers(413)
+            self.wfile.write(json.dumps({"ok": False, "error": "payload too large"}).encode("utf-8"))
+            return
+
+        raw_body = self.rfile.read(content_len).decode("utf-8", errors="replace") if content_len > 0 else "{}"
         try:
             body_json = json.loads(raw_body) if raw_body.strip() else {}
         except Exception:
@@ -228,9 +275,9 @@ class AutoUploadHandler(BaseHTTPRequestHandler):
             slug = str(body_json.get("slug") or "").strip()
             yt_ko = body_json.get("youtube_ko")
             yt_en = body_json.get("youtube_en")
-            if not slug:
+            if not slug or not SAFE_SLUG_RE.fullmatch(slug):
                 self._send_cors_headers(400)
-                self.wfile.write(json.dumps({"ok": False, "error": "slug is required"}).encode("utf-8"))
+                self.wfile.write(json.dumps({"ok": False, "error": "valid slug is required"}).encode("utf-8"))
                 return
             maker.set_youtube_urls_for_slug(slug, yt_ko=yt_ko, yt_en=yt_en)
             append_log(f"✅ 게시판 링크 수동/직접 등록 완료: {slug} -> KO={yt_ko}, EN={yt_en}")
@@ -240,7 +287,14 @@ class AutoUploadHandler(BaseHTTPRequestHandler):
 
         if self.path.startswith("/api/produce_and_upload"):
             slug = str(body_json.get("slug") or "").strip() or None
-            count = int(body_json.get("count") or 1)
+            if slug and not SAFE_SLUG_RE.fullmatch(slug):
+                self._send_cors_headers(400)
+                self.wfile.write(json.dumps({"ok": False, "error": "invalid slug"}).encode("utf-8"))
+                return
+            try:
+                count = max(1, min(10, int(body_json.get("count") or 1)))
+            except Exception:
+                count = 1
             with STATE_LOCK:
                 if STATE["status"] == "running":
                     self._send_cors_headers(200)

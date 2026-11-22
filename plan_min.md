@@ -372,6 +372,8 @@ python -X utf8 pr.py status
 - ✅ **61. `mathedu` 홈페이지 × `@min7014_ai` 유튜브 채널 투트랙(Two-Track) 상호보완 마스터플랜 원칙 (Dual-Engine Flywheel Policy)**
 - ✅ **62. 유튜브 자료 시청자 댓글 상시 분석 및 수학적 오류·설명 결손 자동 보완 원칙 (`youtube_comment_math_auditor.py`)**
 - ✅ **63. 3D 입체 도형 Ray-Occlusion 은선(점선) 분리 및 원뿔·구 외접 정밀 작도 원칙 (`genie3_world_controller.py`)**
+- ✅ **64. 전 학습 자원 100% 무광고·무료 개방 및 유튜브(`@min7014_ai`) 단일 1차 수익원 집중 원칙 (`2026-11-19` 확정 · `Policy 77`)**
+- ✅ **65. 전담 사이버보안·계정인증·시크릿·인프라 방어 에이전트(`security`) 상시 가동 원칙 (`2026-11-23` 신설 · 8대 전문 에이전트 체제)**
 - ✅ **18. 8대 아키타입 맞춤 네온 시네마 썸네일(배너 블라인드니스 제거) & 5초 암산 챌린지 고정댓글(`build_viral_comment_puzzle`) & 마스터클래스 Vol.1~3 확장 정책**
 - ✅ **19. 비수학 공지/목차 페이지 영구 퍼지 및 350+ 전 주제 한/영 제목 단어·조사·전치사 절단 ZERO 전수 검증 정책**
 <!-- AUTO_SYNC_POLICY_REGISTRY_END -->
@@ -1036,3 +1038,16 @@ python -X utf8 pr.py status
   1. **[Studio 무쿼터 KPI 6시간 자동 갱신 (`youtube_trend_tracker.py`)]**: `_scrape_studio_kpis_headless()`가 `youtube_community_controller._launch_robot_context`와 `_acquire_robot_lock`을 사용해 한국어·영어 Studio 유효 공개 시청시간·유효 쇼츠 조회수·쇼츠 계속시청률·유입경로를 안정적으로 수집하며, 6시간 주기(`.agents/studio_kpi_scrape_state.json`)로 데몬 추이 스냅샷에 자동 반영한다.
   2. **[학습 가중치 보호 & 업로드 직전 사전 갱신 (`youtube_self_evolving_engine.py` × `finance.py`)]**: API 쿼터 소진 시 `compute_winning_cluster_weights()`가 기존 `self_evolving_cluster_weights.json`을 0으로 덮어쓰지 않고 보존하며, `execute_youtube_cashflow_golden_wave()`는 4시간 주기 경과 시 후보 정렬 직전에 클러스터 가중치를 사전 갱신하고 Policy 89 재작성 완료 후에도 추이 스냅샷을 즉시 기록한다.
   3. **[수동 업로드 대기 허브 고반응 우선 정렬 (`manual_upload_rewriter.py`)]**: `prepare_manual_upload_folders()`가 `get_slug_cluster_boost()` 가중치로 `01_장편_마스터클래스`, `03_1080p_시각증명_본편`, `04_시각증명_쇼츠`를 실시간 정렬해 고반응 클러스터가 항상 `001_`번부터 전면 배치되도록 유지한다.
+
+### [Policy 91] 전담 보안 담당 에이전트(`security`) 신설 및 7계층 사이버보안·계정인증·원격제어 상시 방어 원칙 (`2026-11-23` 확정 · 회장님 텔레그램 지시)
+- **회장님(`min7014`) 원문 지시 (`2026-11-23`)**:
+  > *"보안 담앙 에이전트를 둔다."*
+- **구현 및 운영 원칙**:
+  1. **[제8 핵심 에이전트 `security` 신설 (`.agents/agents/security.md`, `.agents/skills/security/SKILL.md`, `security.py`)]**: 저작권·상표권·YPP 전담 감사관(`auditor`)과 역할을 명확히 분리하여, 시크릿/Git(`S1`) · 텔레그램 원격 ACL(`S2`) · 로컬 서버(`S3`) · 무료 정식회원 인증(`S4`) · Apps Script 인젝션/메일 릴레이(`S5`) · 프론트 XSS(`S6`) · 런타임 격리(`S7`) 7계층을 AI 크레딧 0원으로 상시 점검·차단한다.
+  2. **[5대 핵심 보안 취약점 즉시 보강 및 무료 정회원 전용 정책 보존]**:
+     - `mathedu_telegram_bridge.py`: `DEFAULT_ALLOWED_CHAT_ID = "43453234"` Fail-Closed 핀닝으로 임의 채팅방 탈취 차단 및 `!보안` (`/security`) 0-크레딧 명령 탑재.
+     - `min7014_ai_server.py`: 와일드카드 CORS(`*`) 제거 및 `ALLOWED_ORIGINS`·`ALLOWED_HOSTS` CSRF 검증, `SAFE_SLUG_RE`·`_is_safe_path_within` 경로탐색 차단 적용.
+     - `mathedu-auth.js`: `DEFAULT_SEED_USERS = []`로 시드 백도어·평문비번 제거, Google JWT 발급자·만료·이메일 검증 및 아바타 URL 화이트리스트 적용(100% 무료 정식회원 전용 `requireAuth` 규율은 그대로 보존).
+     - `sheets-script.gs`: `sanitizeSheetText` · `escapeHtmlServer` · `sanitizeSafeQuizUrl` 적용 및 `FIX_REPORT_TOKEN`/시트 저장 이메일 우선 발송으로 오픈 메일 릴레이 차단.
+     - `.gitignore`: `*.pem`, `*.key`, `*.pfx`, `*.p12`, `*.sqlite*`, `.agents/latest_security_report.json` 차단 패턴 보강.
+  3. **[24/7 데몬 및 수석 비서 통합 관제]**: `mathedu_foundation_daemon.py` 매 하트비트마다 `security.run_full_security_audit(auto_fix=True)`를 실행해 `.agents/latest_security_report.json` 및 `foundation_daemon_status.json`에 기록하고, `secretary.py` 정례 브리핑에 통합 보고한다.

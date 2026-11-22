@@ -28,22 +28,8 @@
                          localStorage.getItem('mathedu_google_client_id') || 
                          '457819875143-min7014mathedu.apps.googleusercontent.com';
 
-  // 기본 시드 계정 (시연 및 테스트용)
-  var DEFAULT_SEED_USERS = [
-    {
-      username: 'teacher',
-      passwordHash: '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', // 'math1234'
-      authProvider: 'local',
-      name: '선생님',
-      email: 'min7014@mathedu.kr',
-      picture: 'assets/favicon.png',
-      org: '수학교육 자료실',
-      role: 'teacher',
-      roleLabel: '수학교사',
-      createdAt: '2026-09-01T00:00:00.000Z',
-      solvedProblems: {}
-    }
-  ];
+  // 시드 백도어 계정 제거 (Policy 91 보안 강화: 공개 시드 비밀번호/관리자 계정 미보관)
+  var DEFAULT_SEED_USERS = [];
 
   // SHA-256 암호화 해시 함수 (비회원 간편 비밀번호용)
   async function sha256(message) {
@@ -64,6 +50,15 @@
       hash |= 0;
     }
     return 'fallback_' + Math.abs(hash).toString(16);
+  }
+
+  // 아바타 URL 화이트리스트 검증 (https:// 또는 안전한 assets/ 경로만 허용)
+  function sanitizeAvatarUrl(url) {
+    var u = String(url || '').trim();
+    if (/^https:\/\/[^\s"'<>]+$/i.test(u) || /^assets\/[A-Za-z0-9_./-]+$/.test(u)) {
+      return u;
+    }
+    return '';
   }
 
   // Google JWT 디코더
@@ -120,7 +115,7 @@
         authProvider: user.authProvider || 'local',
         name: user.name || user.username,
         email: user.email || '',
-        picture: user.picture || '',
+        picture: sanitizeAvatarUrl(user.picture),
         org: user.org || '',
         role: user.role || 'member',
         roleLabel: user.roleLabel || '회원',
@@ -627,7 +622,7 @@
       var email = (googleProfile.email || '').trim().toLowerCase();
       var name = (googleProfile.name || googleProfile.given_name || email.split('@')[0]).trim();
       var sub = googleProfile.sub || ('google_sub_' + Math.random().toString(36).substring(2, 10));
-      var picture = googleProfile.picture || '';
+      var picture = sanitizeAvatarUrl(googleProfile.picture);
 
       var users = getUsers();
       var matched = users.find(function(u) {
@@ -745,11 +740,18 @@
         showToast('구글 인증 정보를 확인할 수 없습니다.', '⚠️');
         return;
       }
+      var validIssuer = (payload.iss === 'https://accounts.google.com' || payload.iss === 'accounts.google.com');
+      var notExpired = !payload.exp || (Number(payload.exp) * 1000 > Date.now());
+      var emailVerified = (payload.email_verified !== false);
+      if (!validIssuer || !notExpired || !emailVerified) {
+        showToast('유효하지 않거나 만료된 구글 인증 토큰입니다.', '⚠️');
+        return;
+      }
       var googleProfile = {
         sub: payload.sub,
         email: payload.email,
         name: payload.name || payload.given_name || payload.email.split('@')[0],
-        picture: payload.picture || '',
+        picture: sanitizeAvatarUrl(payload.picture),
         email_verified: payload.email_verified
       };
       MatheduAuth.loginWithGoogle(googleProfile);
@@ -762,8 +764,8 @@
       if (existing) existing.remove();
 
       var guest = getCurrentGuest();
-      var defaultName = (additionalInfo.name || (guest ? guest.name : '') || '선생님').trim();
-      var defaultEmail = (additionalInfo.email || (guest ? (guest.name + '@gmail.com') : 'min7014@mathedu.kr')).trim();
+      var defaultName = (additionalInfo.name || (guest ? guest.name : '') || '').trim();
+      var defaultEmail = (additionalInfo.email || '').trim();
       var defaultRole = additionalInfo.role || 'teacher';
 
       var modal = document.createElement('div');
@@ -864,7 +866,7 @@
 
       var matched = users.find(function(u) {
         return (u.username === username || (u.email && u.email.toLowerCase() === username)) &&
-               (u.passwordHash === pwdHash || (u.password && u.password === password));
+               Boolean(u.passwordHash && u.passwordHash === pwdHash);
       });
 
       if (!matched) {

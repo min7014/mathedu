@@ -183,6 +183,14 @@ def format_executive_briefing(metrics: dict) -> str:
     except Exception:
         aud_line = "점검 생략"
 
+    sec_line = ""
+    try:
+        import security as _sec
+        sec_rep = _sec.run_full_security_audit(auto_fix=True)
+        sec_line = f"위반 {sec_rep.get('total_violations', 0)}건 ({sec_rep.get('status', '')})"
+    except Exception:
+        sec_line = "점검 생략"
+
     rep_line = ""
     try:
         import _antigravity_report_watcher as _arw_sec
@@ -197,7 +205,7 @@ def format_executive_briefing(metrics: dict) -> str:
         f"• 데몬·최근 주제: 가동 중 (`{dm.get('last_topic', '-')}`) | 금일 발행: {bal_txt} (Policy 83 일 36~48편)",
         f"• 영상·마스터클래스: {vc['completed_6ed_topics']}/{vc['target_total_topics']}주제 ({vc['progress_pct']}%) | 누적 MP4 {vc['total_mp4_files']:,}편 | 8분+ 합본 {vc['masterclasses_8min_plus']}편",
         f"• 수학교육·도구: 6대 교육모듈 {mt['pedagogy_engine_topics']}주제 | 공학도구 {vc['math_engineering_tools_rendered']}/{vc['math_engineering_tools_total']}편",
-        f"• 무결성 감사: {aud_line}",
+        f"• 무결성·보안 관제: 감사 {aud_line} | 보안 {sec_line}",
     ]
     if rep_line:
         lines.append(f"• 오류신고: {rep_line}")

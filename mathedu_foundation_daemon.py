@@ -233,9 +233,23 @@ def write_daemon_heartbeat(last_completed_slug="", last_audited_videos=0, last_a
         auto_sync_policies_to_plan_min()
     except Exception:
         pass
+    sec_summary = {}
     try:
+        import importlib as _il_aud
         import auditor as _auditor
+        _il_aud.reload(_auditor)
         _auditor.run_full_audit(auto_fix=True, check_live_youtube=False)
+    except Exception:
+        pass
+    try:
+        import importlib as _il_sec
+        import security as _security
+        _il_sec.reload(_security)
+        _sec_rep = _security.run_full_security_audit(auto_fix=True)
+        sec_summary = {
+            "status": _sec_rep.get("status", ""),
+            "total_violations": _sec_rep.get("total_violations", 0),
+        }
     except Exception:
         pass
     try:
@@ -283,6 +297,7 @@ def write_daemon_heartbeat(last_completed_slug="", last_audited_videos=0, last_a
                 "passed_topics": last_audit_passed or len(cat),
                 "personal_name_zero_verified": True,
             },
+            "security_audit": sec_summary,
             "flow_motion_retrofit": flow_summary,
             "finance_10m_krw_engine": {
                 "monthly_target_krw": 10000000,

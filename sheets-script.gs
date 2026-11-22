@@ -1,6 +1,35 @@
 // Google Apps Script — mathedu 학습 진행 저장
 // 사용법: 새 시트 → 확장 프로그램 → Apps Script → 붙여넣기 → 배포 → 웹 앱 → 모든 사용자
 
+function sanitizeSheetText(val, maxLen) {
+  var s = (val === null || val === undefined) ? '' : String(val);
+  var limit = maxLen || 2000;
+  if (s.length > limit) {
+    s = s.substring(0, limit);
+  }
+  if (s.length > 0 && /^[=+\-@\t\r]/.test(s)) {
+    return "'" + s;
+  }
+  return s;
+}
+
+function escapeHtmlServer(val) {
+  return String(val === null || val === undefined ? '' : val)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function sanitizeSafeQuizUrl(url) {
+  var u = String(url === null || url === undefined ? '' : url).trim();
+  if (/^https:\/\/min7014\.github\.io\/[A-Za-z0-9_./?=&%#-]*$/i.test(u)) {
+    return u;
+  }
+  return 'https://min7014.github.io/mathedu/';
+}
+
 function doPost(e) {
   try {
     var data = JSON.parse(e.postData.contents);
@@ -17,8 +46,8 @@ function doPost(e) {
     
     var sheet = getOrCreateSheet();
     
-    var quizSlug = (data.quiz_slug || '').toString();
-    var studentName = (data.student_name || '').toString();
+    var quizSlug = sanitizeSheetText(data.quiz_slug || '', 120);
+    var studentName = sanitizeSheetText(data.student_name || '', 80);
     var currentStep = parseInt(data.current_step) || 0;
     var totalSteps = parseInt(data.total_steps) || 0;
     var correct = parseInt(data.correct) || 0;
@@ -78,6 +107,14 @@ function formatLocalTs(date) {
 
 function updateReportFix(data) {
   try {
+    var expectedToken = '';
+    try {
+      expectedToken = PropertiesService.getScriptProperties().getProperty('FIX_REPORT_TOKEN') || '';
+    } catch (propErr) {}
+    if (expectedToken && String(data.auth_token || '') !== expectedToken) {
+      return jsonOutput({ ok: false, error: 'unauthorized' });
+    }
+
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var sheet = ss.getSheetByName('reports');
     if (!sheet) {
@@ -101,46 +138,48 @@ function updateReportFix(data) {
       
       if (rowTs === targetTs && rowQuiz === targetQuiz && (rowQ === targetQ || targetQ === '')) {
         // Update columns 6 (fix_timestamp) and 7 (fix_result)
-        sheet.getRange(i + 1, 6, 1, 2).setValues([[fixTimeStr, (data.result || '').toString()]]);
+        sheet.getRange(i + 1, 6, 1, 2).setValues([[fixTimeStr, sanitizeSheetText(data.result || '', 1000)]]);
         
-        // 📧 문제 제작 완료 이메일 발송 처리
-        var email = (data.email || '').toString().trim();
+        // 📧 문제 제작 완료 이메일 발송 처리 (오픈 메일 릴레이 차단: 시트 저장 이메일 우선, 외부 email 필드는 FIX_REPORT_TOKEN 일치 시에만 허용)
+        var email = '';
         var reportText = (sheetData[i][4] || '').toString();
-        if (!email) {
-          var emailMatch = reportText.match(/이메일:\s*([^\s\n\r]+@[^\s\n\r]+)/);
-          if (emailMatch) {
-            email = emailMatch[1].trim();
-          }
+        var emailMatch = reportText.match(/이메일:\s*([^\s\n\r<>,"']+@[^\s\n\r<>,"']+)/);
+        if (emailMatch) {
+          email = emailMatch[1].trim();
+        } else if (expectedToken && String(data.auth_token || '') === expectedToken) {
+          email = (data.email || '').toString().trim();
         }
 
         var emailSent = false;
         if (email && email.indexOf('@') > 0) {
           try {
-            var quizUrl = (data.quiz_url || data.result || '').toString();
-            var urlMatch = quizUrl.match(/https?:\/\/[^\s]+/);
-            if (urlMatch) quizUrl = urlMatch[0];
+            var quizUrl = sanitizeSafeQuizUrl(data.quiz_url || data.result || '');
+            var safeQuizUrlHtml = escapeHtmlServer(quizUrl);
 
             var title = (data.title || '').toString();
             if (!title) {
               var titleMatch = reportText.match(/제목:\s*(.*?)(?=\n내용:|\n정답|\n이메일|\Z)/);
               title = titleMatch ? titleMatch[1].trim() : '신규 출제 수학 퀴즈';
             }
+            var safeTitleHtml = escapeHtmlServer(title);
 
             var reporter = (sheetData[i][3] || '선생님').toString();
-            var subject = '[mathedu] 요청하신 수학 퀴즈(' + title + ')가 제작 완료되었습니다!';
+            var safeReporterHtml = escapeHtmlServer(reporter);
+            var safeSubjectTitle = String(title).replace(/[\r\n]/g, ' ').substring(0, 80);
+            var subject = '[mathedu] 요청하신 수학 퀴즈(' + safeSubjectTitle + ')가 제작 완료되었습니다!';
             var htmlBody = '<div style="font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,sans-serif;line-height:1.7;color:#1e293b;max-width:620px;margin:20px auto;padding:28px;border:1px solid #e2e8f0;border-radius:16px;background:#ffffff;box-shadow:0 4px 20px rgba(0,0,0,0.05);">'
               + '<div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">'
               + '  <span style="font-size:28px;">🎉</span>'
               + '  <h2 style="color:#1d4ed8;margin:0;font-size:20px;font-weight:700;">요청하신 수학 퀴즈가 제작 완료되었습니다!</h2>'
               + '</div>'
-              + '<p style="font-size:15px;color:#334155;">안녕하세요, <b>' + reporter + '</b>님!<br>'
+              + '<p style="font-size:15px;color:#334155;">안녕하세요, <b>' + safeReporterHtml + '</b>님!<br>'
               + 'mathedu 안티그래비티 AI가 요청하신 문제의 단계별 인터랙티브 퀴즈 제작 및 배포를 완료하였습니다.</p>'
               + '<div style="background:#f8fafc;border:1px solid #cbd5e1;border-left:5px solid #2563eb;padding:16px 20px;margin:22px 0;border-radius:8px;">'
               + '  <div style="font-size:14px;color:#64748b;margin-bottom:6px;">📌 <b>문제 제목</b></div>'
-              + '  <div style="font-size:16px;font-weight:700;color:#0f172a;margin-bottom:14px;">' + title + '</div>'
+              + '  <div style="font-size:16px;font-weight:700;color:#0f172a;margin-bottom:14px;">' + safeTitleHtml + '</div>'
               + '  <div style="font-size:14px;color:#64748b;margin-bottom:6px;">🔗 <b>완성된 퀴즈 바로가기</b></div>'
-              + '  <a href="' + quizUrl + '" style="display:inline-block;background:#2563eb;color:#ffffff;text-decoration:none;padding:10px 20px;border-radius:8px;font-weight:700;font-size:14px;">👉 퀴즈 풀러 가기 / 수업 열기</a>'
-              + '  <div style="margin-top:10px;font-size:12px;color:#64748b;word-break:break-all;">URL: <a href="' + quizUrl + '" style="color:#2563eb;">' + quizUrl + '</a></div>'
+              + '  <a href="' + safeQuizUrlHtml + '" style="display:inline-block;background:#2563eb;color:#ffffff;text-decoration:none;padding:10px 20px;border-radius:8px;font-weight:700;font-size:14px;">👉 퀴즈 풀러 가기 / 수업 열기</a>'
+              + '  <div style="margin-top:10px;font-size:12px;color:#64748b;word-break:break-all;">URL: <a href="' + safeQuizUrlHtml + '" style="color:#2563eb;">' + safeQuizUrlHtml + '</a></div>'
               + '</div>'
               + '<div style="background:#eff6ff;padding:14px 18px;border-radius:8px;font-size:13px;color:#1e40af;margin-bottom:20px;">'
               + '💡 <b>수업 활용 팁:</b><br>'
@@ -218,10 +257,10 @@ function handleReport(params) {
     var now = new Date();
     sheet.appendRow([
       formatLocalTs(now),
-      (params.quiz || '').toString(),
-      (params.q || '').toString(),
-      (params.name || '익명').toString(),
-      (params.text || '').toString(),
+      sanitizeSheetText(params.quiz || '', 120),
+      sanitizeSheetText(params.q || '', 32),
+      sanitizeSheetText(params.name || '익명', 80),
+      sanitizeSheetText(params.text || '', 4000),
       '',  // fix_timestamp
       ''   // fix_result
     ]);
@@ -246,10 +285,10 @@ function handleReportPost(data) {
     }
     sheet.appendRow([
       formatLocalTs(now),
-      (data.quiz || data.quiz_slug || '_request_new').toString(),
-      (data.q || data.question_num || '0').toString(),
-      (data.name || '선생님').toString(),
-      payloadText,
+      sanitizeSheetText(data.quiz || data.quiz_slug || '_request_new', 120),
+      sanitizeSheetText(data.q || data.question_num || '0', 32),
+      sanitizeSheetText(data.name || '선생님', 80),
+      sanitizeSheetText(payloadText, 30000),
       '',
       ''
     ]);

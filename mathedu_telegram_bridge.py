@@ -42,6 +42,7 @@ HISTORY_FILE = ROOT_DIR / ".agents" / "telegram_history.json"
 PID_FILE = ROOT_DIR / ".agents" / "telegram_daemon.pid"
 LISTENER_PID_FILE = ROOT_DIR / ".agents" / "telegram_listener.pid"
 LIVE_TURN_LOCK_FILE = ROOT_DIR / ".agents" / "telegram_live_turn.lock"
+DEFAULT_ALLOWED_CHAT_ID = "43453234"
 
 
 def _is_pid_alive(pid_file: Path) -> bool:
@@ -350,6 +351,8 @@ def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec:
     offset = int(state.get("offset", 0))
     if not allowed_chat_id and state.get("chat_id"):
         allowed_chat_id = str(state["chat_id"])
+    if not allowed_chat_id:
+        allowed_chat_id = DEFAULT_ALLOWED_CHAT_ID
 
     start_ts = time.time()
     last_report_poll_ts = 0.0
@@ -391,8 +394,8 @@ def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec:
                     cb_data = str(cb.get("data") or "")
                     cb_msg = cb.get("message") or {}
                     cb_chat_id = str((cb_msg.get("chat") or {}).get("id", ""))
-                    save_offset_state(offset, allowed_chat_id or cb_chat_id)
-                    if allowed_chat_id and cb_chat_id != str(allowed_chat_id):
+                    save_offset_state(offset, allowed_chat_id)
+                    if cb_chat_id != str(allowed_chat_id):
                         answer_callback_query(token, cb_id, "권한이 없습니다.")
                         continue
                     if cb_data.startswith(("err_approve_auto:", "err_approve_once:", "err_reject:")):
@@ -438,12 +441,8 @@ def listen_once_for_live_session(token: str, allowed_chat_id: str, max_wait_sec:
                 chat_id = str(chat.get("id", ""))
                 text = (msg.get("text") or "").strip()
                 if not chat_id or not text:
-                    save_offset_state(offset, allowed_chat_id or chat_id)
+                    save_offset_state(offset, allowed_chat_id)
                     continue
-
-                if not allowed_chat_id:
-                    allowed_chat_id = chat_id
-                    save_env_chat_id(chat_id)
 
                 if str(chat_id) != str(allowed_chat_id):
                     save_offset_state(offset, allowed_chat_id)
@@ -629,6 +628,7 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
             "• !검색어 (또는 !검색수요 / /searches) : [크레딧 0] 사용자 검색어 분리 수집 현황 및 자료부재(0건) 제작 대기 큐 조회\n"
             "• !자료제작 [수학주제] (또는 /makelesson) : [즉시 착수] 지정 수학 주제의 6단계 디딤돌+SVG 수업자료 즉시 생성·배포\n"
             "• !감사 (또는 !저작권 / !상표권) : [크레딧 0] 독립 감사관(auditor) 7계층 저작권·상표권·라이브 유튜브 전수 감사\n"
+            "• !보안 (또는 !보안점검 / /security) : [크레딧 0] 보안 담당관(security) 7계층 시크릿·인증·서버·XSS·인젝션 전수 점검\n"
             "• !점검 (또는 /audit) : 전 문항·전 시스템 무결성 고속 스캔\n"
             "• !브리핑 (또는 /briefing) : 수석 비서 정례 종합 브리핑\n\n"
             "※ 일반 대화나 새로운 개발·수정 지시는 평소처럼 편하게 말씀하시면 AI가 즉시 깨어나 수행합니다."
@@ -768,6 +768,11 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
         sys.path.insert(0, str(ROOT_DIR))
         import auditor
         return auditor.build_telegram_audit_summary(check_live=True, auto_fix=True)
+
+    if low in ("!보안", "!보안점검", "!보안감사", "/security", "!security"):
+        sys.path.insert(0, str(ROOT_DIR))
+        import security
+        return security.build_telegram_security_summary(auto_fix=True)
 
     if low in ("!추이", "!트렌드", "/trend", "!trend"):
         sys.path.insert(0, str(ROOT_DIR))
@@ -1090,6 +1095,8 @@ async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
     offset = int(state.get("offset", 0))
     if not allowed_chat_id and state.get("chat_id"):
         allowed_chat_id = str(state["chat_id"])
+    if not allowed_chat_id:
+        allowed_chat_id = DEFAULT_ALLOWED_CHAT_ID
 
     print(f"🚀 [Antigravity Telegram 무충돌 상시 워치독 가동 중 | PID={os.getpid()} | {datetime.datetime.now().isoformat()}]", flush=True)
     last_wd_report_poll = 0.0
@@ -1144,8 +1151,8 @@ async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
                     cb_data = str(cb.get("data") or "")
                     cb_msg = cb.get("message") or {}
                     cb_chat_id = str((cb_msg.get("chat") or {}).get("id", ""))
-                    save_offset_state(offset, allowed_chat_id or cb_chat_id)
-                    if allowed_chat_id and cb_chat_id != str(allowed_chat_id):
+                    save_offset_state(offset, allowed_chat_id)
+                    if cb_chat_id != str(allowed_chat_id):
                         await asyncio.to_thread(answer_callback_query, token, cb_id, "권한이 없습니다.")
                         continue
                     if cb_data.startswith(("err_approve_auto:", "err_approve_once:", "err_reject:")):
@@ -1197,12 +1204,8 @@ async def run_daemon_with_sdk(token: str, allowed_chat_id: str) -> None:
                 chat_id = str(chat.get("id", ""))
                 text = (msg.get("text") or "").strip()
                 if not chat_id or not text:
-                    save_offset_state(offset, allowed_chat_id or chat_id)
+                    save_offset_state(offset, allowed_chat_id)
                     continue
-
-                if not allowed_chat_id:
-                    allowed_chat_id = chat_id
-                    save_env_chat_id(chat_id)
 
                 if str(chat_id) != str(allowed_chat_id):
                     save_offset_state(offset, allowed_chat_id)

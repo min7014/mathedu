@@ -459,3 +459,21 @@
 
 ## 63. 3D 입체 도형 Ray-Occlusion 은선(점선) 분리 및 원뿔·구 외접 정밀 작도 원칙 (`genie3_world_controller.py`)
 - **입체기하·원뿔곡선 3D 렌더링 시 평면 덧그리기 절대 금지**: 구(원)·원뿔·평면 판·다면체 뒤에 가려지는 타원 호(단델린 단면 타원의 구 뒤편 호, 구 위 수평 접원의 뒷면 반구 호, 원뿔 밑면 뒷면 호) 및 후면 모서리는 반드시 3D 시선 차폐 판정(`_ray_occluded_by_sphere`, `_ray_occluded_by_convex_quad`, 외향 법선 내적)을 거쳐 **전면 가시 구간은 선명한 실선, 가려지는 구간은 정통 기하학 점선(은선, `Dashed Hidden Line`)**으로 서브픽셀 경계에서 정확히 분리 작도합니다. 또한 원뿔의 외곽 윤곽 모선은 카메라 시점에서 구의 겉보기 원근 윤곽(`_sphere_limb_ring_3d`)에 `0.000px` 오차로 외접해야 합니다(`auditor.py` L7 상시 검증).
+
+## 64. 전 학습 자원 100% 무광고·무료 개방 및 유튜브(`@min7014_ai`) 단일 1차 수익원 집중 원칙 (`2026-11-19` 확정 · `Policy 77`)
+- **3대 운영 원칙**:
+  1. **[전 학습 자원 100% 무료·무과금 개방]**: `min7014.github.io` 847+ 시각 증명 PDF·3,400+ 자료, `mathedu` 16,548문항 디딤돌·단독 수업, `MathLab`, `live_board.html`, `create.html`, `/offline/`, `/en/proofs/` 전 영역에서 유료 결제·구독 잠금·교사용 유료 팩·기관 유료 SaaS 과금을 일체 배제합니다(`Policy 68` Step 2·3 유료 구상 유보).
+  2. **[웹사이트 광고 비활성화(`ad_config.json` `enabled: false`) & 유튜브 시청시간 발전소 전념]**: 학습 사이트 내 웹 광고 송출을 중단(`DOM 0개 · 외부 광고 요청 0건`, `ca-pub-4433368698941458` 및 `ads.txt`는 비활성 보존)하여 100% 청정 무료 학습 환경을 유지하고, 홈페이지는 무료 학습자를 `@min7014_ai` 유튜브 본편 시청·구독(`Rule 61` 새 탭 직결)으로 연결하는 역할에 전념합니다.
+  3. **[유튜브(`@min7014_ai` × `@min7014`) 단일 1차 수익원 집중 & 고정비 규율(`Rule 50`)]**: 수익화 역량을 `@min7014_ai` 한·영 `3~10분` 검색형 1080p 본편 + 하단 `관련 동영상` 직결 `Q-#Shorts`를 통한 YPP(구독자 1,000명 · 유효 시청시간 4,000시간) 돌파에 집중하며, 실수령 월 45만 원 달성 전까지 월 11만 원 고정비 상한을 엄수합니다.
+
+## 65. 전담 사이버보안·계정인증·시크릿·인프라 방어 에이전트(`security`) 상시 가동 원칙 (`2026-11-23` 신설 · 8대 전문 에이전트 체제)
+- **설립 목적 (회장님 텔레그램 지시 `"보안 담앙 에이전트를 둔다."`)**: 기존 7대 전문 에이전트(`mathteacher`, `Video_Creator`, `gamemaker`, `designer`, `pr`, `finance`, `auditor`)와 함께 사이버보안·시크릿·원격제어 ACL·계정인증·XSS·인프라 방어를 전담하는 제8 핵심 에이전트 **`security`**(`.agents/agents/security.md`, `.agents/skills/security/SKILL.md`, `security.py`)를 상시 가동합니다.
+- **0-크레딧 7계층 사이버보안 방어 체계(`security.py`)**:
+  1. **[S1 시크릿·Git·DB PII 방어]**: `.env*`, `*client_secret*`, `*token*.json`, `*.pem/*.key`, `_local_*`, `board/private_index.json`의 Git 추적 ZERO, `.gitignore` 필수 패턴 자동 보강, 추적 `.db` 내 개인정보/토큰 0건, 소스 내 라이브 키 하드코딩 0건 검증.
+  2. **[S2 텔레그램 Fail-Closed ACL]**: `mathedu_telegram_bridge.py`에 `DEFAULT_ALLOWED_CHAT_ID = "43453234"`를 상시 핀닝하여 미인가 채팅방의 원격 제어 탈취를 원천 차단.
+  3. **[S3 로컬 웹서버 방어]**: `min7014_ai_server.py` 루프백 `127.0.0.1` 바인딩, 와일드카드 CORS(`*`) 금지, `Host`/`Origin` CSRF 검증, `SAFE_SLUG_RE`·`_is_safe_path_within` 경로탐색 차단.
+  4. **[S4 무료 정식회원 인증 무결성]**: `mathedu-auth.js`의 백도어 시드 계정(`DEFAULT_SEED_USERS = []`)과 평문 비밀번호 fallback 제거, Google JWT 발급자·만료·이메일 검증 및 아바타 URL 필터링 강화, 비용 0원 무료 정식 회원 전용 가드(`requireAuth`) 및 `ad_config.json` 무광고(`Policy 78`) 보존.
+  5. **[S5 Apps Script 인젝션·오픈 메일 릴레이 차단]**: `sheets-script.gs`의 스프레드시트 수식 인젝션 방어(`sanitizeSheetText`), HTML 이스케이프(`escapeHtmlServer`), 공식 도메인 URL 검증(`sanitizeSafeQuizUrl`), `FIX_REPORT_TOKEN` 및 시트 저장 이메일 우선 발송으로 오픈 메일 릴레이 차단.
+  6. **[S6 프론트엔드 XSS 방어]**: 핵심 프론트 JS 내 `javascript:` URI 및 URL 기반 `eval()` 호출 ZERO 보장.
+  7. **[S7 런타임 격리 & 시크릿 보호]**: 백그라운드 데몬·서버 모듈의 `silent_subprocess`(`Rule 48`) 무창 격리 및 로컬 OAuth 토큰 미추적 재검증.
+- **24/7 상시 연동**: `mathedu_foundation_daemon.py` 매 하트비트 자동 실행, `secretary.py` 정례 브리핑 보고, 텔레그램 0-크레딧 `!보안`(`!보안점검`, `/security`) 단축 명령으로 즉시 관제합니다.
