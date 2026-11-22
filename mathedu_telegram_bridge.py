@@ -620,6 +620,8 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
             "• !지니 (또는 !공간시네마 / /spatial) : [크레딧 0] 공간기하·원뿔곡선 1인칭 3D 카메라 마스터링(1080p 30fps) 현황\n"
             "• !고품질화실행 (또는 /retrofit) : [크레딧 0] 유휴 고품질화 1주제 백그라운드 즉시 실행\n"
             "• !업로드 (또는 /wave) : 전략 v2.0(시각통찰·3~10분 본편 3 + 한/영 Q-#Shorts 3) 업로드 웨이브 즉시 실행\n"
+            "• !재작성 (또는 !수동동기화 / /rewritemanual) : [Policy 89] 수동 업로드 영상 RSS·API 감지 후 제목·설명·댓글 즉시 일괄 재작성\n"
+            "• !수동폴더 (또는 !수동업로드 / /manualfolder) : [Policy 89] 0-바이트 미업로드 수동 대기 폴더 갱신·수량 조회\n"
             "• !현황 (또는 /status) : 24/7 데몬 상태·금일 업로드 밸런스·최근 커밋 확인\n"
             "• !신고 (또는 !오류신고 / /reports) : [크레딧 0] mathedu 홈페이지 실시간 오류신고 접수·수리 현황 조회\n"
             "• !신고화면 [번호] (또는 !오류화면) : [크레딧 0] 최근(또는 지정 번호) 오류신고 실제 화면 스크린샷 즉시 전송\n"
@@ -944,6 +946,18 @@ def _handle_zero_credit_quick_command(raw_text: str) -> str | None:
     if low in ("!업로드", "/wave", "!wave"):
         out = run_shell([sys.executable, "-X", "utf8", "finance.py", "cashflow-wave"], timeout=300)
         return f"🚀 [크레딧 0원 · 황금비 업로드 웨이브 실행 완료]\n{out[-1800:]}"
+
+    if low in ("!재작성", "!수동동기화", "/rewritemanual", "!rewritemanual"):
+        sys.path.insert(0, str(ROOT_DIR))
+        import manual_upload_rewriter as _mur
+        res = _mur.sync_and_rewrite_manual_uploads(max_rewrites=40, notify_telegram=False)
+        return _mur.format_status_message(res)
+
+    if low in ("!수동폴더", "!수동업로드", "/manualfolder", "!manualfolder"):
+        sys.path.insert(0, str(ROOT_DIR))
+        import manual_upload_rewriter as _mur
+        _mur.prepare_manual_upload_folders()
+        return _mur.format_status_message()
 
     if low in ("!점검", "/audit", "!audit"):
         out1 = run_shell([sys.executable, "-X", "utf8", "audit_engine.py"], timeout=120)

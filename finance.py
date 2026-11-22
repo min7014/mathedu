@@ -1651,6 +1651,22 @@ def execute_youtube_cashflow_golden_wave(max_wave_uploads: int = 3, force_immedi
         clear_stale_upload_flags_on_live_videos()
         vmaker._LAST_UPLOAD_QUOTA_BLOCKED = False
 
+        # [Policy 89 Priority #0] 수동 업로드된 영상 0-쿼터 RSS 감지 및 내용·썸네일·첫댓글 일괄 재작성 (100~150유닛/편)
+        try:
+            import manual_upload_rewriter as _mur
+            _mur_res = _mur.sync_and_rewrite_manual_uploads(max_rewrites=40, notify_telegram=True)
+            if (_mur_res.get("rewritten_count", 0) > 0) or (
+                _mur_res.get("pending_count", 0) > 0 and vmaker._LAST_UPLOAD_QUOTA_BLOCKED
+            ):
+                return {
+                    "status": "manual_rewrites_prioritized",
+                    "manual_rewrites": _mur_res,
+                    "total_uploaded": int(_mur_res.get("rewritten_count", 0)),
+                    "uploaded_items": _mur_res.get("rewritten_items") or [],
+                }
+        except Exception as _mur_err:
+            print(f"⚠️ [Policy 89 Manual Rewrite Notice] {_mur_err}", flush=True)
+
         yt_test, _ = vmaker.get_available_youtube_upload_service()
         if yt_test is None:
             # [0-Quota Studio + Idle Flow Retrofit Engine] API 쿼터 대기 시간에도 스튜디오 바인딩·커뮤니티 퀴즈 + 기존 자료 Flow 고품질화는 무중단 가동!
