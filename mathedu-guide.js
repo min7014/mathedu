@@ -500,17 +500,28 @@
     { match: '#headerGlobalSearchInput, #quizSearchInput', topicId: 'search' }
   ];
 
+  var STORAGE_TIMER_KEY = 'mathedu_star_timer_v1';
+  var STORAGE_PAD_KEY = 'mathedu_star_pad_v1';
+
   var COPY = {
     ko: {
-      orbLabel: '사용법 안내 (별 클릭 시 자세한 내용 열기 · 드래그하여 이동)',
-      dragPill: '드래그 · 자세히',
-      badgePrefix: '상황별 안내',
+      orbLabel: '유클리드 별 성좌 허브 (클릭 시 4탭 도크·자세한 안내 열기 · 드래그 이동)',
+      dragPill: '드래그 · 별 허브',
+      badgePrefix: '성좌 허브',
+      tabs: { guide: '✨ 안내', tools: '🛠️ 툴', study: '📊 내 학습', pad: '✏️ 연습장' },
+      tierNames: ['Lv.1 샛별', 'Lv.2 아쿠아 성좌', 'Lv.3 인디고 탐구별', 'Lv.4 프리즘 별', 'Lv.5 황금 성좌'],
+      quickLangBtn: '한/영',
+      quickLangTitle: '한국어 / English 언어 전환',
+      quickThemeTitle: '다크 / 라이트 테마 전환',
+      quickVoiceTitle: '음성 도슨트로 듣기 / 멈추기',
+      quickTuckTitle: '화면 가장자리로 반접기',
+      tuckedToast: '✨ 별을 가장자리에 접었어요. 누르면 다시 열립니다!',
       detailHeading: '📖 자세한 사용 방법',
       detailOpenBtn: '📖 자세히 보기',
       detailCloseBtn: '간략히 ▴',
-      dragHandleTitle: '드래그하여 아이콘과 안내 창 이동',
+      dragHandleTitle: '드래그하여 아이콘과 창 이동',
       resetPosTitle: '기본 위치로 되돌리기',
-      closeTitle: '아이콘으로 접기',
+      closeTitle: '별 아이콘으로 접기',
       locateBtn: '📍 위치 보기',
       quickLabel: '필요한 사용법 바로 보기',
       relatedLabel: '이어서 보기',
@@ -519,20 +530,65 @@
       autoOnLabel: '🔔 자동 안내 ON',
       autoOffLabel: '🔕 자동 안내 OFF',
       autoOnTitle: '새 기능을 처음 누를 때 자동으로 한 개씩 안내합니다 (클릭하여 끄기)',
-      autoOffTitle: '자동 팝업을 껐습니다. 필요할 때 아이콘을 눌러 확인하세요 (클릭하여 켜기)',
-      posSavedToast: '✓ 위치가 저장되었어요! 별을 누르면 자세한 안내가 열립니다',
-      seenCountUnit: '개 확인됨'
+      autoOffTitle: '자동 팝업을 껐습니다. 필요할 때 별을 눌러 확인하세요 (클릭하여 켜기)',
+      posSavedToast: '✓ 위치가 저장되었어요! 별을 누르면 언제든 열립니다',
+      seenCountUnit: '개 확인됨',
+      dailyBadge: '🌟 오늘의 1분 시각 유레카',
+      dailyPdfBtn: '📄 증명 PDF',
+      dailyYtBtn: '🎬 영상 보기',
+      dailyVoiceBtn: '🔊 음성 해설',
+      launcherTitle: '6대 핵심 기능 1초 실행',
+      toolsGrid: [
+        { act: 'omni-search', icon: '🔍', label: '통합 검색' },
+        { act: 'mathlab', icon: '🛠️', label: 'MathLab' },
+        { act: 'explorer', icon: '📐', label: '3,400+ 증명' },
+        { act: 'random-quiz', icon: '🎲', label: '랜덤 1문제' },
+        { act: 'lesson-pack', icon: '🎒', label: '수업 팩' },
+        { act: 'invite-qr', icon: '✉️', label: '무료 초대·QR' }
+      ],
+      inviteCopiedToast: '✓ 무료 학습 초대 문구가 복사되었어요! (+15 XP)',
+      inviteMsg: '📐 공식 암기 없이 눈으로 깨우치는 수학! 민은기 선생님의 수학자료실(https://min7014.github.io/) × mathedu (16,594+ 디딤돌 문항·회원가입 100% 무료): https://min7014.github.io/mathedu/',
+      studyKpis: { streak: '🔥 연속 스트릭', solved: '✅ 해결 문항', wrong: '⚡ 오답 노트', saved: '⭐ 즐겨찾기' },
+      studyActions: {
+        revenge: '⚡ 오답 리벤지 출격',
+        clinic: '🩺 오답 클리닉',
+        quest: '🎮 3D 성전'
+      },
+      noWrongToast: '👍 현재 오답이 없어요! 랜덤 1문제나 3D 성전에 도전해 보세요.',
+      timerHeading: '🧘 유레카 사색 결계 타이머',
+      timerSub: '찍지 않고 차분히 생각하며 완주하면 +50 XP 보상!',
+      timer15: '15분 사색',
+      timer25: '25분 몰입',
+      timerPause: '⏸ 일시정지',
+      timerResume: '▶ 재개',
+      timerReset: '↺ 초기화',
+      timerDoneToast: '🎉 사색 결계 완주! +50 XP 유레카 보상이 지급되었습니다!',
+      padHeading: '✏️ 미니 보조선 연습장 (Pocket Scratchpad)',
+      padSub: '계산 전 보조선·대칭선을 먼저 그려 보세요.',
+      padEraser: '지우개',
+      padUndo: '↶ 되돌리기',
+      padClear: '🗑️ 지우기',
+      padMathLab: '🛠️ MathLab 확장 ➔',
+      padClearedToast: '연습장을 깨끗이 지웠습니다.'
     },
     en: {
-      orbLabel: 'Interactive Guide (Click star for detailed guide, drag to move)',
-      dragPill: 'Drag · Details',
-      badgePrefix: 'Quick Tip',
+      orbLabel: 'Euclid Star Hub (Click for 4-Tab Dock & Detailed Guide, drag to move)',
+      dragPill: 'Drag · Star Hub',
+      badgePrefix: 'Star Hub',
+      tabs: { guide: '✨ Guide', tools: '🛠️ Tools', study: '📊 Study', pad: '✏️ Sketch' },
+      tierNames: ['Lv.1 Nova Star', 'Lv.2 Aqua Star', 'Lv.3 Indigo Star', 'Lv.4 Prism Star', 'Lv.5 Golden Constellation'],
+      quickLangBtn: 'KO/EN',
+      quickLangTitle: 'Switch Korean / English language',
+      quickThemeTitle: 'Toggle Dark / Light theme',
+      quickVoiceTitle: 'Listen / Stop Voice Docent',
+      quickTuckTitle: 'Tuck star orb to screen edge',
+      tuckedToast: '✨ Tucked to screen edge. Tap anytime to reopen!',
       detailHeading: '📖 Detailed Walkthrough',
       detailOpenBtn: '📖 Details',
       detailCloseBtn: 'Compact ▴',
       dragHandleTitle: 'Drag to reposition orb and card',
       resetPosTitle: 'Reset to default spot',
-      closeTitle: 'Collapse to orb',
+      closeTitle: 'Collapse to star orb',
       locateBtn: '📍 Locate',
       quickLabel: 'Jump to what you need',
       relatedLabel: 'Related',
@@ -542,26 +598,80 @@
       autoOffLabel: '🔕 Auto tips OFF',
       autoOnTitle: 'Shows one tip automatically the first time you touch a feature (Click to mute)',
       autoOffTitle: 'Quiet mode: tap the floating star whenever you need detailed steps (Click to enable)',
-      posSavedToast: '✓ Position saved! Tap star anytime for detailed guide',
-      seenCountUnit: 'seen'
+      posSavedToast: '✓ Position saved! Tap star anytime',
+      seenCountUnit: 'seen',
+      dailyBadge: '🌟 Daily 1-Min Visual Eureka',
+      dailyPdfBtn: '📄 Proof PDF',
+      dailyYtBtn: '🎬 Watch Video',
+      dailyVoiceBtn: '🔊 Voice Guide',
+      launcherTitle: '6 Core Tools · 1-Click Launch',
+      toolsGrid: [
+        { act: 'omni-search', icon: '🔍', label: 'Omni-Search' },
+        { act: 'mathlab', icon: '🛠️', label: 'MathLab' },
+        { act: 'explorer', icon: '📐', label: '3,400+ Proofs' },
+        { act: 'random-quiz', icon: '🎲', label: 'Random Quiz' },
+        { act: 'lesson-pack', icon: '🎒', label: 'Lesson Pack' },
+        { act: 'invite-qr', icon: '✉️', label: 'Free Invite & QR' }
+      ],
+      inviteCopiedToast: '✓ Free math invite copied! (+15 XP)',
+      inviteMsg: '📐 Visual Intuition Beyond Rote Formulas! 3,400+ Dynamic Proofs & 16,594+ Stepping-Stone Math Quizzes—100% Free Forever: https://min7014.github.io/mathedu/?lang=en',
+      studyKpis: { streak: '🔥 Streak', solved: '✅ Solved', wrong: '⚡ Review Vault', saved: '⭐ Bookmarks' },
+      studyActions: {
+        revenge: '⚡ Weak-Point Revenge',
+        clinic: '🩺 Step Clinic',
+        quest: '🎮 3D Quest'
+      },
+      noWrongToast: '👍 Zero missed problems! Try a Random Quiz or 3D Quest.',
+      timerHeading: '🧘 Deep Eureka Contemplation Timer',
+      timerSub: 'Think deeply without guessing—complete a focus block for +50 XP!',
+      timer15: '15m Focus',
+      timer25: '25m Deep',
+      timerPause: '⏸ Pause',
+      timerResume: '▶ Resume',
+      timerReset: '↺ Reset',
+      timerDoneToast: '🎉 Deep Eureka session complete! +50 XP awarded!',
+      padHeading: '✏️ Pocket Auxiliary-Line Scratchpad',
+      padSub: 'Sketch auxiliary lines and symmetry before computing.',
+      padEraser: 'Eraser',
+      padUndo: '↶ Undo',
+      padClear: '🗑️ Clear',
+      padMathLab: '🛠️ Expand in MathLab ➔',
+      padClearedToast: 'Scratchpad cleared.'
     }
   };
 
   var state = {
     open: true,
     detailed: false,
+    activeTab: 'guide', // 'guide' | 'tools' | 'study' | 'pad'
     activeTopicId: 'welcome',
     seenTopics: {},
     autoTips: true,
     hasDraggedOnce: false,
     showAllTopics: false,
+    edgeTucked: null, // null | 'left' | 'right'
     customPos: null, // { rx, ry } normalized [0..1]
     left: null,
     top: null
   };
 
+  var timerState = {
+    durationSec: 900,
+    remainingSec: 900,
+    running: false,
+    endAtMs: 0
+  };
+  var timerInterval = null;
+
+  var padStrokes = [];
+  var padColor = '#0284c7';
+  var padEraser = false;
+  var isDrawingPad = false;
+  var inviteRewardedSession = false;
+
   var rootEl = null;
   var orbEl = null;
+  var orbTimerBadgeEl = null;
   var dragHintEl = null;
   var toastPillEl = null;
   var progressCircleEl = null;
@@ -620,6 +730,9 @@
         if (p && typeof p === 'object') {
           if (typeof p.open === 'boolean') state.open = p.open;
           if (typeof p.detailed === 'boolean') state.detailed = p.detailed;
+          if (p.activeTab && ['guide', 'tools', 'study', 'pad'].indexOf(p.activeTab) !== -1) {
+            state.activeTab = p.activeTab;
+          }
           if (typeof p.activeTopicId === 'string' && TOPIC_MAP[p.activeTopicId]) {
             state.activeTopicId = p.activeTopicId;
           }
@@ -628,6 +741,9 @@
           }
           if (typeof p.autoTips === 'boolean') state.autoTips = p.autoTips;
           if (p.hasDraggedOnce) state.hasDraggedOnce = true;
+          if (p.edgeTucked === 'left' || p.edgeTucked === 'right') {
+            state.edgeTucked = p.edgeTucked;
+          }
         }
       }
       var rawPos = localStorage.getItem(STORAGE_POS_KEY);
@@ -641,6 +757,8 @@
         }
       }
     } catch (e) {}
+    loadTimerState();
+    loadPadStrokes();
   }
 
   function saveState() {
@@ -648,10 +766,12 @@
       localStorage.setItem(STORAGE_STATE_KEY, JSON.stringify({
         open: !!state.open,
         detailed: !!state.detailed,
+        activeTab: state.activeTab,
         activeTopicId: state.activeTopicId,
         seenTopics: state.seenTopics,
         autoTips: !!state.autoTips,
-        hasDraggedOnce: !!state.hasDraggedOnce
+        hasDraggedOnce: !!state.hasDraggedOnce,
+        edgeTucked: state.edgeTucked
       }));
     } catch (e) {}
   }
@@ -664,6 +784,212 @@
         localStorage.removeItem(STORAGE_POS_KEY);
       }
     } catch (e) {}
+  }
+
+  function formatTimerMMSS(sec) {
+    var s = Math.max(0, Math.floor(sec));
+    var m = Math.floor(s / 60);
+    var r = s % 60;
+    return (m < 10 ? '0' : '') + m + ':' + (r < 10 ? '0' : '') + r;
+  }
+
+  function saveTimerState() {
+    try {
+      localStorage.setItem(STORAGE_TIMER_KEY, JSON.stringify({
+        durationSec: timerState.durationSec,
+        remainingSec: timerState.remainingSec,
+        running: timerState.running,
+        endAtMs: timerState.endAtMs
+      }));
+    } catch (e) {}
+  }
+
+  function syncTimerVisualsOnly() {
+    var txt = formatTimerMMSS(timerState.remainingSec);
+    if (orbTimerBadgeEl) {
+      if (timerState.running && !state.open) {
+        orbTimerBadgeEl.textContent = txt;
+        orbTimerBadgeEl.style.display = 'block';
+      } else {
+        orbTimerBadgeEl.style.display = 'none';
+      }
+    }
+    var clk = document.getElementById('mgTimerClock');
+    if (clk) clk.textContent = txt;
+    var pauseBtn = document.getElementById('mgTimerPauseBtn');
+    if (pauseBtn) {
+      var c = COPY[getLang()];
+      pauseBtn.textContent = timerState.running ? c.timerPause : c.timerResume;
+    }
+  }
+
+  function handleTimerComplete() {
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+    timerState.running = false;
+    timerState.remainingSec = 0;
+    timerState.endAtMs = 0;
+    saveTimerState();
+
+    var lang = getLang();
+    var c = COPY[lang];
+    try {
+      if (window.MatheduGame && typeof window.MatheduGame.addXP === 'function') {
+        window.MatheduGame.addXP(50, lang === 'en' ? 'Deep Eureka Focus Complete' : '유레카 사색 결계 완주');
+      }
+      if (window.MatheduGame && typeof window.MatheduGame.triggerConfetti === 'function') {
+        window.MatheduGame.triggerConfetti(2500);
+      }
+    } catch (e) {}
+    pulseOrbBriefly();
+    showMiniToast(c.timerDoneToast);
+    syncTimerVisualsOnly();
+    updateOrbStarTier();
+    if (state.open && state.activeTab === 'study') {
+      renderCardContent(false);
+    }
+  }
+
+  function ensureTimerTicker() {
+    if (timerInterval) clearInterval(timerInterval);
+    if (!timerState.running) return;
+    timerInterval = setInterval(function () {
+      if (!timerState.running) return;
+      var rem = Math.max(0, Math.ceil((timerState.endAtMs - Date.now()) / 1000));
+      timerState.remainingSec = rem;
+      syncTimerVisualsOnly();
+      if (rem <= 0) {
+        handleTimerComplete();
+      }
+    }, 500);
+  }
+
+  function startTimer(seconds) {
+    var sec = Math.max(1, parseInt(seconds, 10) || 900);
+    timerState.durationSec = sec;
+    timerState.remainingSec = sec;
+    timerState.running = true;
+    timerState.endAtMs = Date.now() + sec * 1000;
+    saveTimerState();
+    ensureTimerTicker();
+    syncTimerVisualsOnly();
+    if (state.open && state.activeTab === 'study') renderCardContent(false);
+  }
+
+  function toggleTimerPause() {
+    if (timerState.running) {
+      timerState.remainingSec = Math.max(0, Math.ceil((timerState.endAtMs - Date.now()) / 1000));
+      timerState.running = false;
+      timerState.endAtMs = 0;
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+    } else {
+      var base = timerState.remainingSec > 0 ? timerState.remainingSec : timerState.durationSec;
+      timerState.remainingSec = base;
+      timerState.running = true;
+      timerState.endAtMs = Date.now() + base * 1000;
+      ensureTimerTicker();
+    }
+    saveTimerState();
+    syncTimerVisualsOnly();
+  }
+
+  function resetTimer() {
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+    timerState.running = false;
+    timerState.remainingSec = timerState.durationSec || 900;
+    timerState.endAtMs = 0;
+    saveTimerState();
+    syncTimerVisualsOnly();
+  }
+
+  function loadTimerState() {
+    try {
+      var raw = localStorage.getItem(STORAGE_TIMER_KEY);
+      if (!raw) return;
+      var t = JSON.parse(raw);
+      if (!t || typeof t !== 'object') return;
+      if (typeof t.durationSec === 'number') timerState.durationSec = t.durationSec;
+      if (t.running && typeof t.endAtMs === 'number') {
+        var rem = Math.max(0, Math.ceil((t.endAtMs - Date.now()) / 1000));
+        if (rem > 0) {
+          timerState.running = true;
+          timerState.endAtMs = t.endAtMs;
+          timerState.remainingSec = rem;
+          ensureTimerTicker();
+        } else {
+          timerState.running = false;
+          timerState.remainingSec = timerState.durationSec;
+          timerState.endAtMs = 0;
+        }
+      } else if (typeof t.remainingSec === 'number') {
+        timerState.remainingSec = t.remainingSec;
+      }
+    } catch (e) {}
+  }
+
+  function loadPadStrokes() {
+    try {
+      var raw = sessionStorage.getItem(STORAGE_PAD_KEY);
+      if (raw) {
+        var arr = JSON.parse(raw);
+        if (Array.isArray(arr)) padStrokes = arr;
+      }
+    } catch (e) {}
+  }
+
+  function savePadStrokes() {
+    try {
+      sessionStorage.setItem(STORAGE_PAD_KEY, JSON.stringify(padStrokes.slice(-120)));
+    } catch (e) {}
+  }
+
+  function getStudySnapshot() {
+    var streak = 0;
+    var xp = 0;
+    var wrongs = [];
+    var bookmarks = [];
+    var solved = [];
+    try {
+      if (window.MatheduGame) {
+        if (typeof window.MatheduGame.getStreak === 'function') streak = (window.MatheduGame.getStreak() || {}).count || 0;
+        if (typeof window.MatheduGame.getXP === 'function') xp = window.MatheduGame.getXP() || 0;
+        if (typeof window.MatheduGame.getWrongAnswers === 'function') wrongs = window.MatheduGame.getWrongAnswers() || [];
+        if (typeof window.MatheduGame.getBookmarks === 'function') bookmarks = window.MatheduGame.getBookmarks() || [];
+      }
+      if (window.MatheduAuth && typeof window.MatheduAuth.getSolvedProblems === 'function') {
+        solved = window.MatheduAuth.getSolvedProblems() || [];
+      }
+    } catch (e) {}
+    return {
+      streak: streak,
+      xp: xp,
+      wrongs: wrongs,
+      bookmarks: bookmarks,
+      solved: solved
+    };
+  }
+
+  function computeStarTier() {
+    var snap = getStudySnapshot();
+    var score = snap.solved.length * 2 + countSeenTopics() + snap.streak + Math.floor(snap.xp / 50);
+    if (score >= 35) return 5;
+    if (score >= 20) return 4;
+    if (score >= 10) return 3;
+    if (score >= 4) return 2;
+    return 1;
+  }
+
+  function updateOrbStarTier() {
+    if (!orbEl) return;
+    orbEl.setAttribute('data-star-tier', String(computeStarTier()));
   }
 
   function clampCoords(left, top) {
@@ -692,7 +1018,6 @@
       state.left = clamped.left;
       state.top = clamped.top;
     } else {
-      // Default spot: lower-right above the 64px fixed bottom dock, well clear of top-right Siren FAB
       var defL = window.innerWidth - sz - 20;
       var defT = window.innerHeight - sz - 86;
       var defClamped = clampCoords(defL, defT);
@@ -703,10 +1028,14 @@
       orbEl.style.left = state.left + 'px';
       orbEl.style.top = state.top + 'px';
       orbEl.classList.toggle('mg-orb-left', (state.left || 0) < window.innerWidth / 2);
+      orbEl.classList.toggle('mg-edge-tuck-left', !state.open && state.edgeTucked === 'left');
+      orbEl.classList.toggle('mg-edge-tuck-right', !state.open && state.edgeTucked === 'right');
+      updateOrbStarTier();
     }
     if (dragHintEl) {
-      dragHintEl.style.display = (state.hasDraggedOnce || state.open) ? 'none' : '';
+      dragHintEl.style.display = (state.hasDraggedOnce || state.edgeTucked) ? 'none' : '';
     }
+    syncTimerVisualsOnly();
     positionCardNearOrb();
   }
 
@@ -717,7 +1046,7 @@
     var vh = window.innerHeight;
     var padX = 12;
     var padY = 14;
-    var maxTargetW = state.detailed ? 388 : 332;
+    var maxTargetW = (state.activeTab !== 'guide' || state.detailed) ? 388 : 344;
     var cardW = Math.min(maxTargetW, vw - padX * 2);
     cardEl.style.width = cardW + 'px';
 
@@ -809,8 +1138,16 @@
       '  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease, border-color 0.22s ease;',
       '}',
       '#matheduGuideOrb:hover { transform: scale(1.06); animation-play-state: paused; border-color: #0284c7; box-shadow: 0 12px 32px rgba(2, 132, 199, 0.28); }',
+      '#matheduGuideOrb[data-star-tier="2"] { color: #0d9488; border-color: rgba(13, 148, 136, 0.36); }',
+      '#matheduGuideOrb[data-star-tier="3"] { color: #4f46e5; border-color: rgba(79, 70, 229, 0.38); }',
+      '#matheduGuideOrb[data-star-tier="4"] { color: #7c3aed; border-color: rgba(124, 58, 237, 0.42); }',
+      '#matheduGuideOrb[data-star-tier="5"] { color: #d97706; border-color: rgba(217, 119, 6, 0.50); box-shadow: 0 10px 28px rgba(217, 119, 6, 0.22); }',
+      '#matheduGuideOrb.mg-edge-tuck-left { transform: translateX(-52%); opacity: 0.88; }',
+      '#matheduGuideOrb.mg-edge-tuck-right { transform: translateX(52%); opacity: 0.88; }',
+      '#matheduGuideOrb.mg-edge-tuck-left:hover, #matheduGuideOrb.mg-edge-tuck-right:hover { transform: translateX(0) scale(1.06); opacity: 1; }',
       '#matheduGuideOrb.mg-dragging { cursor: grabbing !important; transform: scale(1.08) !important; animation: none !important; transition: none !important; box-shadow: 0 18px 40px rgba(2, 132, 199, 0.36) !important; }',
       '#matheduGuideOrb.mg-pulse { border-color: #10B981 !important; box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.22), 0 12px 28px rgba(16, 185, 129, 0.32) !important; }',
+      '#mgOrbTimerBadge { position: absolute; top: -8px; right: -6px; display: none; padding: 1px 6px; border-radius: 999px; font-size: 9.5px; font-weight: 800; background: #0f172a; color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.55); box-shadow: 0 3px 8px rgba(0,0,0,0.28); pointer-events: none; font-variant-numeric: tabular-nums; }',
       '.mg-orb-icon { display: inline-flex; align-items: center; justify-content: center; animation: mgIconFloat 3.4s ease-in-out infinite; pointer-events: none; }',
       '#matheduGuideOrb.mg-dragging .mg-orb-icon { animation: none !important; }',
       '@keyframes mgOrbAura {',
@@ -825,7 +1162,7 @@
       '#matheduGuideOrb.mg-orb-left .mg-drag-pill { right: auto; left: calc(100% + 8px); }',
       '#mgOrbToast { position: fixed; display: none; pointer-events: none; white-space: nowrap; font-size: 11px; font-weight: 800; padding: 5px 10px; border-radius: 999px; background: rgba(15, 23, 42, 0.92); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.45); box-shadow: 0 8px 22px rgba(15, 23, 42, 0.28); z-index: 999992; }',
       '#matheduGuideCard {',
-      '  position: fixed; pointer-events: auto; border-radius: 18px; padding: 13px 15px;',
+      '  position: fixed; pointer-events: auto; border-radius: 18px; padding: 12px 14px;',
       '  max-height: calc(100vh - 28px); overflow-y: auto; box-sizing: border-box;',
       '  background: rgba(255, 255, 255, 0.96); color: #0f172a;',
       '  border: 1px solid rgba(203, 213, 225, 0.85);',
@@ -834,19 +1171,23 @@
       '  animation: mgCardPop 0.2s cubic-bezier(0.22, 1, 0.36, 1);',
       '  transition: border-color 0.2s ease;',
       '}',
-      '#matheduGuideCard.mg-card-detailed { padding: 15px 16px; }',
+      '#matheduGuideCard.mg-card-detailed { padding: 13px 15px; }',
       '#matheduGuideRoot.mg-dragging-root #matheduGuideCard { transition: none !important; }',
       '@keyframes mgCardPop { from { opacity: 0; transform: scale(0.94) translateY(4px); } to { opacity: 1; transform: scale(1) translateY(0); } }',
-      '.mg-card-head { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 8px; }',
-      '.mg-drag-handle { display: inline-flex; align-items: center; gap: 5px; cursor: grab; touch-action: none; user-select: none; }',
+      '.mg-card-head { display: flex; align-items: center; justify-content: space-between; gap: 4px; margin-bottom: 8px; flex-wrap: nowrap; }',
+      '.mg-drag-handle { display: inline-flex; align-items: center; gap: 4px; cursor: grab; touch-action: none; user-select: none; min-width: 0; }',
       '.mg-drag-handle:active { cursor: grabbing; }',
-      '.mg-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 800; background: rgba(0, 99, 152, 0.11); color: #006398; }',
-      '.mg-count-tag { font-size: 10.5px; font-weight: 700; color: #64748b; }',
-      '.mg-head-btns { display: inline-flex; align-items: center; gap: 2px; }',
-      '.mg-icon-btn { border: 0; background: transparent; color: #64748b; cursor: pointer; font-size: 12.5px; font-weight: 800; padding: 3px 6px; border-radius: 8px; line-height: 1.2; }',
+      '.mg-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 999px; font-size: 10.5px; font-weight: 800; background: rgba(0, 99, 152, 0.11); color: #006398; white-space: nowrap; }',
+      '.mg-tier-pill { font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 999px; background: rgba(245, 158, 11, 0.14); color: #b45309; white-space: nowrap; }',
+      '.mg-head-btns { display: inline-flex; align-items: center; gap: 2px; shrink: 0; }',
+      '.mg-icon-btn { border: 0; background: transparent; color: #64748b; cursor: pointer; font-size: 11.5px; font-weight: 800; padding: 3px 5px; border-radius: 7px; line-height: 1.2; white-space: nowrap; }',
       '.mg-icon-btn:hover { background: rgba(148, 163, 184, 0.18); color: #0f172a; }',
+      '.mg-tab-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; padding: 3px; border-radius: 12px; background: rgba(241, 245, 249, 0.9); border: 1px solid rgba(203, 213, 225, 0.7); margin-bottom: 10px; }',
+      '.mg-tab-btn { border: 0; border-radius: 9px; padding: 5px 4px; font-size: 11px; font-weight: 800; cursor: pointer; background: transparent; color: #475569; transition: all 0.15s ease; white-space: nowrap; text-align: center; }',
+      '.mg-tab-btn:hover { color: #006398; background: rgba(255, 255, 255, 0.6); }',
+      '.mg-tab-btn.active { background: #ffffff; color: #006398; box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08); }',
       '.mg-title { font-size: 14.5px; font-weight: 800; line-height: 1.35; margin: 0 0 5px 0; color: inherit; }',
-      '.mg-body { font-size: 12.5px; line-height: 1.55; margin: 0 0 8px 0; color: #475569; }',
+      '.mg-body { font-size: 12.2px; line-height: 1.52; margin: 0 0 8px 0; color: #475569; }',
       '.mg-tip { display: flex; align-items: flex-start; gap: 6px; font-size: 11.5px; font-weight: 700; line-height: 1.45; padding: 7px 10px; border-radius: 10px; margin-bottom: 9px; background: rgba(2, 132, 199, 0.08); color: #0369a1; border: 1px dashed rgba(2, 132, 199, 0.34); }',
       '.mg-details-box { padding: 9px 11px; border-radius: 12px; margin-bottom: 9px; background: rgba(248, 250, 252, 0.92); border: 1px solid rgba(203, 213, 225, 0.85); }',
       '.mg-details-title { font-size: 11.5px; font-weight: 800; color: #006398; margin-bottom: 7px; display: flex; align-items: center; gap: 5px; }',
@@ -860,6 +1201,21 @@
       '.mg-chip:hover { border-color: #0284c7; color: #0284c7; background: rgba(224, 242, 254, 0.7); }',
       '.mg-chip.active { background: linear-gradient(135deg, #006398, #4f46e5); color: #ffffff; border-color: transparent; }',
       '.mg-chip.seen { border-color: rgba(16, 185, 129, 0.45); }',
+      '.mg-daily-card { padding: 10px 11px; border-radius: 12px; background: linear-gradient(135deg, rgba(224,242,254,0.65), rgba(238,242,255,0.65)); border: 1px solid rgba(2, 132, 199, 0.25); margin-bottom: 9px; }',
+      '.mg-tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 6px; }',
+      '.mg-tool-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 8px 4px; border-radius: 11px; border: 1px solid rgba(148, 163, 184, 0.32); background: rgba(248, 250, 252, 0.9); color: #0f172a; font-size: 10.5px; font-weight: 800; cursor: pointer; text-align: center; transition: all 0.15s ease; }',
+      '.mg-tool-btn:hover { border-color: #0284c7; color: #0284c7; transform: translateY(-1px); }',
+      '.mg-kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-bottom: 8px; }',
+      '.mg-kpi-btn { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; border-radius: 11px; border: 1px solid rgba(148, 163, 184, 0.3); background: rgba(248, 250, 252, 0.9); color: #0f172a; cursor: pointer; font-size: 11px; font-weight: 700; }',
+      '.mg-kpi-btn:hover { border-color: #0284c7; }',
+      '.mg-kpi-val { font-size: 14px; font-weight: 900; color: #006398; }',
+      '.mg-timer-box { padding: 9px 11px; border-radius: 12px; background: rgba(248, 250, 252, 0.92); border: 1px solid rgba(203, 213, 225, 0.85); margin-top: 8px; }',
+      '.mg-timer-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; }',
+      '.mg-timer-clock { font-size: 20px; font-weight: 900; font-variant-numeric: tabular-nums; color: #006398; letter-spacing: 0.5px; }',
+      '.mg-pad-canvas { width: 100%; height: 184px; display: block; border-radius: 12px; border: 1.5px solid rgba(148, 163, 184, 0.45); background-color: #ffffff; background-image: radial-gradient(rgba(100, 116, 139, 0.25) 1px, transparent 1px); background-size: 14px 14px; cursor: crosshair; touch-action: none; }',
+      '.mg-pad-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-top: 8px; flex-wrap: wrap; }',
+      '.mg-color-dot { width: 18px; height: 18px; border-radius: 999px; border: 2px solid rgba(255,255,255,0.9); box-shadow: 0 0 0 1px rgba(15,23,42,0.2); cursor: pointer; padding: 0; }',
+      '.mg-color-dot.active { transform: scale(1.18); box-shadow: 0 0 0 2px #0f172a; }',
       '.mg-actions { display: flex; align-items: center; justify-content: space-between; gap: 6px; flex-wrap: wrap; padding-top: 8px; border-top: 1px solid rgba(148, 163, 184, 0.22); }',
       '.mg-btn-primary { border: 0; border-radius: 9px; padding: 5px 10px; font-size: 11px; font-weight: 800; cursor: pointer; background: linear-gradient(135deg, #006398, #4f46e5); color: #ffffff; box-shadow: 0 3px 10px rgba(0, 99, 152, 0.22); }',
       '.mg-btn-primary:hover { opacity: 0.94; }',
@@ -869,14 +1225,26 @@
       '.mg-btn-ghost.active-detail { background: rgba(0, 99, 152, 0.10); color: #006398; border-color: rgba(0, 99, 152, 0.36); }',
       '.mg-spotlight { outline: 2.5px solid #0284c7 !important; outline-offset: 4px !important; box-shadow: 0 0 0 6px rgba(2, 132, 199, 0.20) !important; border-radius: 12px; transition: box-shadow 0.25s ease !important; }',
       '#matheduGuideRoot.mg-dark #matheduGuideOrb { background: rgba(15, 23, 42, 0.94); color: #38bdf8; border-color: rgba(56, 189, 248, 0.38); box-shadow: 0 10px 30px rgba(0,0,0,0.48), 0 0 18px rgba(56,189,248,0.22); }',
+      '#matheduGuideRoot.mg-dark #matheduGuideOrb[data-star-tier="2"] { color: #2dd4bf; border-color: rgba(45, 212, 191, 0.45); }',
+      '#matheduGuideRoot.mg-dark #matheduGuideOrb[data-star-tier="3"] { color: #818cf8; border-color: rgba(129, 140, 248, 0.48); }',
+      '#matheduGuideRoot.mg-dark #matheduGuideOrb[data-star-tier="4"] { color: #c084fc; border-color: rgba(192, 132, 252, 0.50); }',
+      '#matheduGuideRoot.mg-dark #matheduGuideOrb[data-star-tier="5"] { color: #fbbf24; border-color: rgba(251, 191, 36, 0.62); }',
       '#matheduGuideRoot.mg-dark #matheduGuideCard { background: rgba(15, 23, 42, 0.95); color: #f8fafc; border-color: rgba(56, 189, 248, 0.30); box-shadow: 0 22px 52px rgba(0,0,0,0.62); }',
       '#matheduGuideRoot.mg-dark .mg-body { color: #cbd5e1; }',
       '#matheduGuideRoot.mg-dark .mg-badge { background: rgba(56, 189, 248, 0.16); color: #7dd3fc; }',
-      '#matheduGuideRoot.mg-dark .mg-count-tag, #matheduGuideRoot.mg-dark .mg-sub-label { color: #94a3b8; }',
+      '#matheduGuideRoot.mg-dark .mg-tier-pill { background: rgba(251, 191, 36, 0.16); color: #fde68a; }',
+      '#matheduGuideRoot.mg-dark .mg-sub-label { color: #94a3b8; }',
+      '#matheduGuideRoot.mg-dark .mg-tab-bar { background: rgba(30, 41, 59, 0.85); border-color: rgba(56, 189, 248, 0.22); }',
+      '#matheduGuideRoot.mg-dark .mg-tab-btn { color: #94a3b8; }',
+      '#matheduGuideRoot.mg-dark .mg-tab-btn:hover { color: #e2e8f0; background: rgba(51, 65, 85, 0.55); }',
+      '#matheduGuideRoot.mg-dark .mg-tab-btn.active { background: #0f172a; color: #38bdf8; }',
       '#matheduGuideRoot.mg-dark .mg-icon-btn { color: #94a3b8; }',
       '#matheduGuideRoot.mg-dark .mg-icon-btn:hover { background: rgba(148, 163, 184, 0.16); color: #f8fafc; }',
       '#matheduGuideRoot.mg-dark .mg-tip { background: rgba(56, 189, 248, 0.12); color: #7dd3fc; border-color: rgba(56, 189, 248, 0.35); }',
-      '#matheduGuideRoot.mg-dark .mg-details-box { background: rgba(30, 41, 59, 0.72); border-color: rgba(56, 189, 248, 0.24); }',
+      '#matheduGuideRoot.mg-dark .mg-details-box, #matheduGuideRoot.mg-dark .mg-timer-box { background: rgba(30, 41, 59, 0.72); border-color: rgba(56, 189, 248, 0.24); }',
+      '#matheduGuideRoot.mg-dark .mg-daily-card { background: rgba(30, 41, 59, 0.82); border-color: rgba(56, 189, 248, 0.32); }',
+      '#matheduGuideRoot.mg-dark .mg-tool-btn, #matheduGuideRoot.mg-dark .mg-kpi-btn { background: rgba(30, 41, 59, 0.85); color: #e2e8f0; border-color: rgba(56, 189, 248, 0.24); }',
+      '#matheduGuideRoot.mg-dark .mg-kpi-val, #matheduGuideRoot.mg-dark .mg-timer-clock { color: #38bdf8; }',
       '#matheduGuideRoot.mg-dark .mg-details-title { color: #38bdf8; }',
       '#matheduGuideRoot.mg-dark .mg-step-row { color: #cbd5e1; }',
       '#matheduGuideRoot.mg-dark .mg-step-label { color: #f8fafc; }',
@@ -884,6 +1252,8 @@
       '#matheduGuideRoot.mg-dark .mg-chip { background: rgba(30, 41, 59, 0.88); color: #e2e8f0; border-color: rgba(148, 163, 184, 0.28); }',
       '#matheduGuideRoot.mg-dark .mg-chip:hover { border-color: #38bdf8; color: #38bdf8; }',
       '#matheduGuideRoot.mg-dark .mg-chip.active { background: linear-gradient(135deg, #0284c7, #6366f1); color: #ffffff; border-color: transparent; }',
+      '#matheduGuideRoot.mg-dark .mg-pad-canvas { background-color: #090d16; background-image: radial-gradient(rgba(148, 163, 184, 0.25) 1px, transparent 1px); border-color: rgba(56, 189, 248, 0.35); }',
+      '#matheduGuideRoot.mg-dark .mg-color-dot.active { box-shadow: 0 0 0 2px #38bdf8; }',
       '#matheduGuideRoot.mg-dark .mg-btn-ghost { color: #cbd5e1; border-color: rgba(148, 163, 184, 0.35); }',
       '#matheduGuideRoot.mg-dark .mg-btn-ghost:hover { background: rgba(148, 163, 184, 0.14); color: #ffffff; }',
       '#matheduGuideRoot.mg-dark .mg-btn-ghost.active-detail { background: rgba(56, 189, 248, 0.16); color: #7dd3fc; border-color: rgba(56, 189, 248, 0.42); }',
@@ -981,39 +1351,69 @@
     return state.activeTopicId || 'welcome';
   }
 
-  function renderCardContent(reposition) {
-    if (!rootEl || !orbEl || !cardEl) return;
-    var lang = getLang();
-    var dark = isDark();
-    var c = COPY[lang];
+  function getSafeFeaturedProof() {
+    var fallback = {
+      title: {
+        ko: '피타고라스 나무 (프랙탈 기하와 면적 보존의 기적)',
+        en: 'Pythagoras Tree (Fractal Geometry & Area Invariance)'
+      },
+      desc: {
+        ko: '직각삼각형의 세 변 위에 정사각형을 올려 각 단계별 넓이 합 보존 원리를 관찰해 보세요.',
+        en: 'Attach squares onto a right triangle to see why area invariance holds at every fractal stage.'
+      },
+      pdf: 'https://min7014.github.io/2025/2025013001.pdf#toolbar=0&view=Fit&scrollbar=0',
+      yt: 'https://youtu.be/DSgUHigl82o'
+    };
+    try {
+      if (typeof window.getTodayFeaturedProof === 'function') {
+        var p = window.getTodayFeaturedProof();
+        if (p && p.title) return p;
+      }
+    } catch (e) {}
+    return fallback;
+  }
 
-    lastRenderedLang = lang;
-    lastRenderedDark = dark;
+  function stripLatexInline(str) {
+    return String(str || '').replace(/\$([^$]+)\$/g, function (_, inner) {
+      return inner
+        .replace(/\\?overline\s*\{([^}]*)\}/g, '$1')
+        .replace(/\\?frac\s*\{([^}]*)\}\s*\{([^}]*)\}/g, '$1/$2')
+        .replace(/\\?sqrt\s*\{([^}]*)\}/g, '√$1')
+        .replace(/\\?cdot/g, '·')
+        .replace(/\\?times/g, '×')
+        .replace(/\^2\b/g, '²')
+        .replace(/\^3\b/g, '³')
+        .replace(/\\[a-zA-Z]+/g, '')
+        .replace(/[\t\f\r\n]+/g, ' ')
+        .replace(/[{}]/g, '')
+        .replace(/\s*([=+])\s*/g, ' $1 ')
+        .trim();
+    }).replace(/\(\s*\)/g, '').replace(/\s{2,}/g, ' ').trim();
+  }
 
-    rootEl.classList.toggle('mg-dark', dark);
-    orbEl.classList.toggle('mg-orb-left', (state.left || 0) < window.innerWidth / 2);
-    orbEl.setAttribute('aria-label', c.orbLabel);
-    orbEl.title = c.orbLabel;
-    if (dragHintEl) {
-      dragHintEl.textContent = c.dragPill;
-      dragHintEl.style.display = state.hasDraggedOnce ? 'none' : '';
+  function speakTextClean(text, title, lang) {
+    try {
+      if (window.speechSynthesis && window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+        return;
+      }
+    } catch (e) {}
+    if (lang === 'ko' && window.MatheduVoiceTeacher && typeof window.MatheduVoiceTeacher.speakRaw === 'function') {
+      try {
+        window.MatheduVoiceTeacher.speakRaw(text, title);
+        return;
+      } catch (e) {}
     }
-    updateOrbProgressRing();
+    try {
+      if (window.speechSynthesis && typeof window.SpeechSynthesisUtterance !== 'undefined') {
+        var u = new window.SpeechSynthesisUtterance(text);
+        u.lang = lang === 'en' ? 'en-US' : 'ko-KR';
+        window.speechSynthesis.speak(u);
+      }
+    } catch (e) {}
+  }
 
-    if (!state.open || isInspectorActive()) {
-      cardEl.style.display = 'none';
-      return;
-    }
-
-    var topic = TOPIC_MAP[state.activeTopicId] || TOPICS[0];
-    var seenCnt = countSeenTopics();
-    cardEl.style.display = 'block';
-    cardEl.classList.toggle('mg-card-detailed', !!state.detailed);
-
-    var resetBtn = state.customPos
-      ? '<button type="button" class="mg-icon-btn" data-mg-act="reset-pos" title="' + c.resetPosTitle + '" aria-label="' + c.resetPosTitle + '">↺</button>'
-      : '';
-
+  function renderGuideTabBody(topic, lang, c) {
     var chipIds = (topic.id === 'welcome') ? INTENT_PICK_IDS : (topic.relatedIds || QUICK_PICK_IDS);
     var chipLabelText = (topic.id === 'welcome') ? c.quickLabel : c.relatedLabel;
 
@@ -1035,6 +1435,7 @@
       detailsHtml = '<div class="mg-details-box" id="mgDetailsBox"><div class="mg-details-title">' + c.detailHeading + '</div><div class="mg-details-list">' + rowsHtml + '</div></div>';
     }
 
+    var seenCnt = countSeenTopics();
     var allListHtml = '';
     if (state.showAllTopics) {
       allListHtml += '<div class="mg-sub-label" style="margin-top:2px;">' + c.quickLabel + ' (' + seenCnt + '/' + TOPICS.length + ' ' + c.seenCountUnit + ')</div>';
@@ -1058,12 +1459,7 @@
     var autoTitle = state.autoTips ? c.autoOnTitle : c.autoOffTitle;
     var allLabel = state.showAllTopics ? c.allToggleOpen : c.allToggleClosed;
 
-    cardEl.innerHTML = [
-      '<div class="mg-card-head">',
-      '  <span class="mg-drag-handle mg-badge" title="' + c.dragHandleTitle + '">⠿ ' + c.badgePrefix + '</span>',
-      '  <span class="mg-count-tag">' + seenCnt + ' / ' + TOPICS.length + '</span>',
-      '  <div class="mg-head-btns">' + resetBtn + '<button type="button" class="mg-icon-btn" data-mg-act="close" title="' + c.closeTitle + '" aria-label="' + c.closeTitle + '">✕</button></div>',
-      '</div>',
+    return [
       '<h3 class="mg-title">' + topic.title[lang] + '</h3>',
       '<p class="mg-body">' + topic.body[lang] + '</p>',
       '<div class="mg-tip"><span>💡</span><span>' + topic.tipLine[lang] + '</span></div>',
@@ -1080,9 +1476,263 @@
       '  ' + locateHtml,
       '</div>'
     ].join('');
+  }
+
+  function renderToolsTabBody(lang, c) {
+    var p = getSafeFeaturedProof();
+    var pTitle = (p.title && (p.title[lang] || p.title.ko)) || '';
+    var pDesc = stripLatexInline((p.desc && (p.desc[lang] || p.desc.ko)) || '');
+
+    var gridHtml = '';
+    for (var i = 0; i < c.toolsGrid.length; i++) {
+      var t = c.toolsGrid[i];
+      gridHtml += '<button type="button" class="mg-tool-btn" data-mg-tool="' + t.act + '"><span style="font-size:15px;">' + t.icon + '</span><span>' + t.label + '</span></button>';
+    }
+
+    return [
+      '<div class="mg-daily-card" id="mgDailyEurekaCard">',
+      '  <div class="mg-sub-label" style="color:#0284c7;margin-bottom:3px;">' + c.dailyBadge + '</div>',
+      '  <div class="mg-title" style="font-size:13.5px;margin-bottom:4px;">' + pTitle + '</div>',
+      '  <p class="mg-body" style="font-size:11.5px;margin-bottom:8px;">' + pDesc + '</p>',
+      '  <div style="display:flex;gap:5px;flex-wrap:wrap;">',
+      '    <button type="button" class="mg-btn-ghost" data-mg-tool="daily-pdf">' + c.dailyPdfBtn + '</button>',
+      '    <button type="button" class="mg-btn-ghost" data-mg-tool="daily-yt">' + c.dailyYtBtn + '</button>',
+      '    <button type="button" class="mg-btn-primary" data-mg-tool="daily-voice">' + c.dailyVoiceBtn + '</button>',
+      '  </div>',
+      '</div>',
+      '<div class="mg-sub-label">' + c.launcherTitle + '</div>',
+      '<div class="mg-tool-grid">' + gridHtml + '</div>'
+    ].join('');
+  }
+
+  function renderStudyTabBody(lang, c) {
+    var snap = getStudySnapshot();
+    var pauseLabel = timerState.running ? c.timerPause : c.timerResume;
+
+    return [
+      '<div class="mg-kpi-grid">',
+      '  <button type="button" class="mg-kpi-btn" data-mg-study="badges"><span>' + c.studyKpis.streak + '</span><span class="mg-kpi-val">' + snap.streak + '</span></button>',
+      '  <button type="button" class="mg-kpi-btn" data-mg-study="history"><span>' + c.studyKpis.solved + '</span><span class="mg-kpi-val">' + snap.solved.length + '</span></button>',
+      '  <button type="button" class="mg-kpi-btn" data-mg-study="revenge"><span>' + c.studyKpis.wrong + '</span><span class="mg-kpi-val">' + snap.wrongs.length + '</span></button>',
+      '  <button type="button" class="mg-kpi-btn" data-mg-study="bookmarks"><span>' + c.studyKpis.saved + '</span><span class="mg-kpi-val">' + snap.bookmarks.length + '</span></button>',
+      '</div>',
+      '<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:4px;">',
+      '  <button type="button" class="mg-btn-primary" data-mg-study="revenge">' + c.studyActions.revenge + '</button>',
+      '  <button type="button" class="mg-btn-ghost" data-mg-study="clinic">' + c.studyActions.clinic + '</button>',
+      '  <button type="button" class="mg-btn-ghost" data-mg-study="quest">' + c.studyActions.quest + '</button>',
+      '</div>',
+      '<div class="mg-timer-box" id="mgEurekaTimerBox">',
+      '  <div class="mg-sub-label" style="margin-bottom:2px;">' + c.timerHeading + '</div>',
+      '  <div style="font-size:11px;color:#64748b;margin-bottom:6px;">' + c.timerSub + '</div>',
+      '  <div class="mg-timer-row">',
+      '    <span class="mg-timer-clock" id="mgTimerClock">' + formatTimerMMSS(timerState.remainingSec) + '</span>',
+      '    <div style="display:flex;gap:4px;flex-wrap:wrap;">',
+      '      <button type="button" class="mg-btn-ghost" data-mg-timer="preset-15">' + c.timer15 + '</button>',
+      '      <button type="button" class="mg-btn-ghost" data-mg-timer="preset-25">' + c.timer25 + '</button>',
+      '    </div>',
+      '  </div>',
+      '  <div style="display:flex;gap:5px;">',
+      '    <button type="button" class="mg-btn-primary" id="mgTimerPauseBtn" data-mg-timer="toggle-pause">' + pauseLabel + '</button>',
+      '    <button type="button" class="mg-btn-ghost" data-mg-timer="reset">' + c.timerReset + '</button>',
+      '  </div>',
+      '</div>'
+    ].join('');
+  }
+
+  function renderPadTabBody(lang, c) {
+    var colors = ['#0284c7', '#ef4444', '#10b981', '#f59e0b'];
+    var dotsHtml = '';
+    for (var i = 0; i < colors.length; i++) {
+      var col = colors[i];
+      var actCls = (!padEraser && padColor === col) ? ' active' : '';
+      dotsHtml += '<button type="button" class="mg-color-dot' + actCls + '" style="background:' + col + ';" data-mg-pad-color="' + col + '" aria-label="Ink ' + (i + 1) + '"></button>';
+    }
+    var eraserCls = 'mg-btn-ghost' + (padEraser ? ' active-detail' : '');
+
+    return [
+      '<div class="mg-sub-label" style="margin-bottom:2px;">' + c.padHeading + '</div>',
+      '<div class="mg-body" style="font-size:11.5px;margin-bottom:7px;">' + c.padSub + '</div>',
+      '<canvas id="mgScratchCanvas" class="mg-pad-canvas"></canvas>',
+      '<div class="mg-pad-toolbar">',
+      '  <div style="display:flex;align-items:center;gap:6px;">' + dotsHtml + '</div>',
+      '  <div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;">',
+      '    <button type="button" class="' + eraserCls + '" data-mg-pad="eraser">' + c.padEraser + '</button>',
+      '    <button type="button" class="mg-btn-ghost" data-mg-pad="undo">' + c.padUndo + '</button>',
+      '    <button type="button" class="mg-btn-ghost" data-mg-pad="clear">' + c.padClear + '</button>',
+      '  </div>',
+      '</div>',
+      '<div class="mg-actions" style="margin-top:8px;">',
+      '  <span></span>',
+      '  <button type="button" class="mg-btn-primary" data-mg-tool="mathlab">' + c.padMathLab + '</button>',
+      '</div>'
+    ].join('');
+  }
+
+  function redrawPadCanvas() {
+    var canvas = document.getElementById('mgScratchCanvas');
+    if (!canvas || !canvas.getContext) return;
+    var ctx = canvas.getContext('2d');
+    var dpr = Math.max(1, window.devicePixelRatio || 1);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+
+    for (var i = 0; i < padStrokes.length; i++) {
+      var st = padStrokes[i];
+      if (!st || !st.points || !st.points.length) continue;
+      ctx.save();
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.lineWidth = st.width || 2.4;
+      if (st.eraser) {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.strokeStyle = 'rgba(0,0,0,1)';
+      } else {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.strokeStyle = st.color || '#0284c7';
+      }
+      ctx.beginPath();
+      ctx.moveTo(st.points[0][0], st.points[0][1]);
+      for (var k = 1; k < st.points.length; k++) {
+        ctx.lineTo(st.points[k][0], st.points[k][1]);
+      }
+      if (st.points.length === 1) {
+        ctx.lineTo(st.points[0][0] + 0.1, st.points[0][1] + 0.1);
+      }
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  function setupScratchCanvas() {
+    var canvas = document.getElementById('mgScratchCanvas');
+    if (!canvas) return;
+    var rect = canvas.getBoundingClientRect();
+    var cssW = Math.max(240, Math.round(rect.width || 352));
+    var cssH = Math.max(140, Math.round(rect.height || 184));
+    var dpr = Math.max(1, window.devicePixelRatio || 1);
+    canvas.width = Math.round(cssW * dpr);
+    canvas.height = Math.round(cssH * dpr);
+    redrawPadCanvas();
+
+    var curStroke = null;
+    function ptFromEvent(ev) {
+      var r = canvas.getBoundingClientRect();
+      return [Math.round((ev.clientX - r.left) * 10) / 10, Math.round((ev.clientY - r.top) * 10) / 10];
+    }
+
+    canvas.addEventListener('pointerdown', function (ev) {
+      ev.stopPropagation();
+      if (ev.pointerType === 'mouse' && ev.button !== 0) return;
+      isDrawingPad = true;
+      curStroke = {
+        color: padColor,
+        width: padEraser ? 14 : 2.6,
+        eraser: !!padEraser,
+        points: [ptFromEvent(ev)]
+      };
+      padStrokes.push(curStroke);
+      try { canvas.setPointerCapture(ev.pointerId); } catch (e) {}
+      redrawPadCanvas();
+    });
+
+    canvas.addEventListener('pointermove', function (ev) {
+      if (!isDrawingPad || !curStroke) return;
+      ev.stopPropagation();
+      curStroke.points.push(ptFromEvent(ev));
+      redrawPadCanvas();
+    });
+
+    function endPadStroke(ev) {
+      if (!isDrawingPad) return;
+      isDrawingPad = false;
+      curStroke = null;
+      savePadStrokes();
+      try { canvas.releasePointerCapture(ev.pointerId); } catch (e) {}
+    }
+
+    canvas.addEventListener('pointerup', endPadStroke);
+    canvas.addEventListener('pointercancel', endPadStroke);
+  }
+
+  function renderCardContent(reposition) {
+    if (!rootEl || !orbEl || !cardEl) return;
+    var lang = getLang();
+    var dark = isDark();
+    var c = COPY[lang];
+
+    lastRenderedLang = lang;
+    lastRenderedDark = dark;
+
+    rootEl.classList.toggle('mg-dark', dark);
+    orbEl.classList.toggle('mg-orb-left', (state.left || 0) < window.innerWidth / 2);
+    orbEl.classList.toggle('mg-edge-tuck-left', !state.open && state.edgeTucked === 'left');
+    orbEl.classList.toggle('mg-edge-tuck-right', !state.open && state.edgeTucked === 'right');
+    orbEl.setAttribute('aria-label', c.orbLabel);
+    orbEl.title = c.orbLabel;
+    updateOrbStarTier();
+    if (dragHintEl) {
+      dragHintEl.textContent = c.dragPill;
+      dragHintEl.style.display = (state.hasDraggedOnce || state.edgeTucked) ? 'none' : '';
+    }
+    updateOrbProgressRing();
+    syncTimerVisualsOnly();
+
+    if (!state.open || isInspectorActive()) {
+      cardEl.style.display = 'none';
+      return;
+    }
+
+    var topic = TOPIC_MAP[state.activeTopicId] || TOPICS[0];
+    var tierIdx = computeStarTier() - 1;
+    var tierLabel = c.tierNames[tierIdx] || c.tierNames[0];
+    cardEl.style.display = 'block';
+    cardEl.classList.toggle('mg-card-detailed', !!(state.detailed || state.activeTab !== 'guide'));
+
+    var resetBtn = state.customPos
+      ? '<button type="button" class="mg-icon-btn" data-mg-act="reset-pos" title="' + c.resetPosTitle + '" aria-label="' + c.resetPosTitle + '">↺</button>'
+      : '';
+    var themeIcon = dark ? '☀️' : '🌙';
+
+    var tabOrder = ['guide', 'tools', 'study', 'pad'];
+    var tabsHtml = '';
+    for (var ti = 0; ti < tabOrder.length; ti++) {
+      var tk = tabOrder[ti];
+      tabsHtml += '<button type="button" class="mg-tab-btn' + (state.activeTab === tk ? ' active' : '') + '" data-mg-tab="' + tk + '">' + c.tabs[tk] + '</button>';
+    }
+
+    var bodyHtml = '';
+    if (state.activeTab === 'tools') {
+      bodyHtml = renderToolsTabBody(lang, c);
+    } else if (state.activeTab === 'study') {
+      bodyHtml = renderStudyTabBody(lang, c);
+    } else if (state.activeTab === 'pad') {
+      bodyHtml = renderPadTabBody(lang, c);
+    } else {
+      bodyHtml = renderGuideTabBody(topic, lang, c);
+    }
+
+    cardEl.innerHTML = [
+      '<div class="mg-card-head">',
+      '  <span class="mg-drag-handle mg-badge" title="' + c.dragHandleTitle + '">⠿ ' + c.badgePrefix + '</span>',
+      '  <span class="mg-tier-pill">' + tierLabel + '</span>',
+      '  <div class="mg-head-btns">',
+      '    <button type="button" class="mg-icon-btn" data-mg-act="quick-lang" title="' + c.quickLangTitle + '" aria-label="' + c.quickLangTitle + '">' + c.quickLangBtn + '</button>',
+      '    <button type="button" class="mg-icon-btn" data-mg-act="quick-theme" title="' + c.quickThemeTitle + '" aria-label="' + c.quickThemeTitle + '">' + themeIcon + '</button>',
+      '    <button type="button" class="mg-icon-btn" data-mg-act="quick-voice" title="' + c.quickVoiceTitle + '" aria-label="' + c.quickVoiceTitle + '">🔊</button>',
+      '    <button type="button" class="mg-icon-btn" data-mg-act="edge-tuck" title="' + c.quickTuckTitle + '" aria-label="' + c.quickTuckTitle + '">⇥</button>',
+      '    ' + resetBtn,
+      '    <button type="button" class="mg-icon-btn" data-mg-act="close" title="' + c.closeTitle + '" aria-label="' + c.closeTitle + '">✕</button>',
+      '  </div>',
+      '</div>',
+      '<div class="mg-tab-bar" id="mgTabBar">' + tabsHtml + '</div>',
+      bodyHtml
+    ].join('');
 
     if (reposition !== false) {
       positionCardNearOrb();
+    }
+    if (state.activeTab === 'pad') {
+      setupScratchCanvas();
     }
   }
 
@@ -1096,13 +1746,18 @@
     if (source === 'auto') {
       if (!state.autoTips) return false;
       if (state.seenTopics[topicId]) return false;
+      if (isDrawingPad || (state.open && state.activeTab === 'pad')) return false;
       var now = Date.now();
       if (now - lastAutoTriggerAt < 250) return false;
       lastAutoTriggerAt = now;
+      state.activeTab = 'guide';
       if (typeof opts.detailed !== 'boolean') state.detailed = false;
       pulseOrbBriefly();
+    } else if (opts.keepTab !== true) {
+      state.activeTab = 'guide';
     }
 
+    state.edgeTucked = null;
     state.seenTopics[topicId] = true;
     state.activeTopicId = topicId;
     state.open = true;
@@ -1110,6 +1765,7 @@
       state.detailed = opts.detailed;
     }
     saveState();
+    syncCoordsToViewport();
     renderCardContent(true);
 
     if (opts.spotlight) {
@@ -1120,6 +1776,7 @@
 
   function openCard(topicId, withDetails) {
     if (isInspectorActive()) return;
+    state.edgeTucked = null;
     var targetId = (topicId && TOPIC_MAP[topicId]) ? topicId : pickContextualTopicForScroll();
     state.open = true;
     if (typeof withDetails === 'boolean') {
@@ -1128,6 +1785,7 @@
     state.activeTopicId = targetId;
     state.seenTopics[targetId] = true;
     saveState();
+    syncCoordsToViewport();
     renderCardContent(true);
   }
 
@@ -1136,17 +1794,40 @@
     state.open = false;
     state.showAllTopics = false;
     saveState();
+    syncCoordsToViewport();
     renderCardContent(false);
   }
 
+  function edgeTuckOrb() {
+    clearSpotlight();
+    var sz = getOrbSize();
+    var vw = window.innerWidth;
+    var bounds = clampCoords(state.left || 0, state.top || 0);
+    var isLeft = ((state.left || 0) + sz / 2) < vw / 2;
+    state.open = false;
+    state.showAllTopics = false;
+    state.edgeTucked = isLeft ? 'left' : 'right';
+    state.customPos = {
+      rx: isLeft ? 0 : 1,
+      ry: Math.max(0, Math.min(1, (bounds.top - bounds.minY) / Math.max(1, bounds.maxY - bounds.minY)))
+    };
+    savePos();
+    saveState();
+    syncCoordsToViewport();
+    showMiniToast(COPY[getLang()].tuckedToast);
+  }
+
   function onOrbSelected() {
-    if (!state.open) {
-      openCard(null, true);
+    if (state.edgeTucked || !state.open) {
+      state.edgeTucked = null;
+      openCard(null, state.activeTab === 'guide' ? true : state.detailed);
       var openTopic = TOPIC_MAP[state.activeTopicId];
-      if (openTopic && openTopic.id !== 'welcome') spotlightTopic(openTopic, false);
+      if (state.activeTab === 'guide' && openTopic && openTopic.id !== 'welcome') {
+        spotlightTopic(openTopic, false);
+      }
       return;
     }
-    if (!state.detailed) {
+    if (state.activeTab === 'guide' && !state.detailed) {
       state.detailed = true;
       saveState();
       renderCardContent(true);
@@ -1165,6 +1846,17 @@
     }
   }
 
+  function setTab(tabName) {
+    if (['guide', 'tools', 'study', 'pad'].indexOf(tabName) === -1) return;
+    if (tabName !== 'guide') clearSpotlight();
+    state.edgeTucked = null;
+    state.activeTab = tabName;
+    state.open = true;
+    saveState();
+    syncCoordsToViewport();
+    renderCardContent(true);
+  }
+
   function setAutoTips(enabled) {
     state.autoTips = !!enabled;
     saveState();
@@ -1173,7 +1865,9 @@
 
   function resetPosition() {
     state.customPos = null;
+    state.edgeTucked = null;
     savePos();
+    saveState();
     syncCoordsToViewport();
     renderCardContent(false);
   }
@@ -1201,11 +1895,158 @@
     }
   }
 
+  function handleToolsAction(act) {
+    var lang = getLang();
+    var c = COPY[lang];
+    var p = getSafeFeaturedProof();
+
+    if (act === 'daily-pdf') {
+      window.open(p.pdf || 'https://min7014.github.io/', '_blank', 'noopener');
+    } else if (act === 'daily-yt') {
+      window.open(p.yt || 'video_board.html', '_blank', 'noopener');
+    } else if (act === 'daily-voice') {
+      if (lang === 'ko' && typeof window.speakTodayGeoGebra === 'function') {
+        try { window.speakTodayGeoGebra(); return; } catch (e) {}
+      }
+      var scriptTxt = stripLatexInline(((p.title && (p.title[lang] || p.title.ko)) || '') + '. ' + ((p.desc && (p.desc[lang] || p.desc.ko)) || ''));
+      speakTextClean(scriptTxt, (p.title && p.title[lang]) || '', lang);
+    } else if (act === 'omni-search') {
+      var inp = document.getElementById('headerGlobalSearchInput') || document.getElementById('quizSearchInput');
+      if (inp) {
+        try { inp.focus(); inp.click(); } catch (e) {}
+      }
+    } else if (act === 'mathlab') {
+      window.location.href = 'mathlab.html';
+    } else if (act === 'explorer') {
+      if (typeof window.openMin7014ExplorerModal === 'function') window.openMin7014ExplorerModal();
+    } else if (act === 'random-quiz') {
+      if (typeof window.startRandomQuiz === 'function') window.startRandomQuiz();
+    } else if (act === 'lesson-pack') {
+      if (typeof window.toggleLessonPackMode === 'function') {
+        window.toggleLessonPackMode(true);
+        var qBar = document.getElementById('quizFilterBar');
+        if (qBar && qBar.scrollIntoView) qBar.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    } else if (act === 'invite-qr') {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(c.inviteMsg).catch(function () {});
+        }
+      } catch (e) {}
+      if (!inviteRewardedSession) {
+        inviteRewardedSession = true;
+        try {
+          if (window.MatheduGame && typeof window.MatheduGame.addXP === 'function') {
+            window.MatheduGame.addXP(15, lang === 'en' ? 'Free Invite Shared' : '100% 무료 학습 초대 공유');
+          }
+        } catch (e) {}
+      }
+      showMiniToast(c.inviteCopiedToast);
+      if (typeof window.openYoutubeSeedIgniteModal === 'function') {
+        try { window.openYoutubeSeedIgniteModal(); } catch (e) {}
+      }
+    }
+  }
+
+  function handleStudyAction(act) {
+    var lang = getLang();
+    var c = COPY[lang];
+    var snap = getStudySnapshot();
+    if (act === 'badges') {
+      if (window.MatheduGame && typeof window.MatheduGame.showBadgesModal === 'function') window.MatheduGame.showBadgesModal();
+    } else if (act === 'history') {
+      if (window.MatheduAuth) {
+        if (typeof window.MatheduAuth.isLoggedIn === 'function' && window.MatheduAuth.isLoggedIn()) {
+          window.MatheduAuth.showMyProblemsModal();
+        } else if (typeof window.MatheduAuth.showAuthModal === 'function') {
+          window.MatheduAuth.showAuthModal();
+        }
+      }
+    } else if (act === 'bookmarks') {
+      if (typeof window.switchFilterMode === 'function') {
+        window.switchFilterMode('bookmarks');
+        var qBar = document.getElementById('quizFilterBar');
+        if (qBar && qBar.scrollIntoView) qBar.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    } else if (act === 'revenge') {
+      if (snap.wrongs && snap.wrongs.length > 0 && snap.wrongs[0].slug) {
+        window.location.href = 'board/' + encodeURIComponent(snap.wrongs[0].slug) + '.html';
+      } else {
+        if (typeof window.switchFilterMode === 'function') window.switchFilterMode('wrong');
+        showMiniToast(c.noWrongToast);
+      }
+    } else if (act === 'clinic') {
+      if (typeof window.openMathClinicModal === 'function') window.openMathClinicModal();
+    } else if (act === 'quest') {
+      window.location.href = 'game.html';
+    }
+  }
+
   function handleCardClick(ev) {
+    var lang = getLang();
+    var c = COPY[lang];
+
+    var tabBtn = ev.target && ev.target.closest ? ev.target.closest('[data-mg-tab]') : null;
+    if (tabBtn) {
+      setTab(tabBtn.getAttribute('data-mg-tab'));
+      return;
+    }
+
     var topicBtn = ev.target && ev.target.closest ? ev.target.closest('[data-mg-topic]') : null;
     if (topicBtn) {
       var tid = topicBtn.getAttribute('data-mg-topic');
       showTopic(tid, { source: 'manual', spotlight: true, scroll: false });
+      return;
+    }
+
+    var toolBtn = ev.target && ev.target.closest ? ev.target.closest('[data-mg-tool]') : null;
+    if (toolBtn) {
+      handleToolsAction(toolBtn.getAttribute('data-mg-tool'));
+      return;
+    }
+
+    var studyBtn = ev.target && ev.target.closest ? ev.target.closest('[data-mg-study]') : null;
+    if (studyBtn) {
+      handleStudyAction(studyBtn.getAttribute('data-mg-study'));
+      return;
+    }
+
+    var timerBtn = ev.target && ev.target.closest ? ev.target.closest('[data-mg-timer]') : null;
+    if (timerBtn) {
+      var ta = timerBtn.getAttribute('data-mg-timer');
+      if (ta === 'preset-15') startTimer(900);
+      else if (ta === 'preset-25') startTimer(1500);
+      else if (ta === 'toggle-pause') toggleTimerPause();
+      else if (ta === 'reset') resetTimer();
+      return;
+    }
+
+    var colDot = ev.target && ev.target.closest ? ev.target.closest('[data-mg-pad-color]') : null;
+    if (colDot) {
+      padColor = colDot.getAttribute('data-mg-pad-color') || '#0284c7';
+      padEraser = false;
+      renderCardContent(false);
+      return;
+    }
+
+    var padBtn = ev.target && ev.target.closest ? ev.target.closest('[data-mg-pad]') : null;
+    if (padBtn) {
+      var pa = padBtn.getAttribute('data-mg-pad');
+      if (pa === 'eraser') {
+        padEraser = !padEraser;
+        renderCardContent(false);
+      } else if (pa === 'undo') {
+        if (padStrokes.length > 0) {
+          padStrokes.pop();
+          savePadStrokes();
+          redrawPadCanvas();
+        }
+      } else if (pa === 'clear') {
+        padStrokes = [];
+        savePadStrokes();
+        redrawPadCanvas();
+        showMiniToast(c.padClearedToast);
+      }
       return;
     }
 
@@ -1214,6 +2055,27 @@
     var act = actEl.getAttribute('data-mg-act');
     if (act === 'close') {
       closeCard();
+    } else if (act === 'edge-tuck') {
+      edgeTuckOrb();
+    } else if (act === 'quick-lang') {
+      if (window.MatheduI18n && typeof window.MatheduI18n.toggleLanguage === 'function') {
+        window.MatheduI18n.toggleLanguage();
+      }
+      if (typeof window.syncSiteThemeUI === 'function') {
+        try { window.syncSiteThemeUI(); } catch (e) {}
+      }
+    } else if (act === 'quick-theme') {
+      if (typeof window.toggleSiteDarkMode === 'function') {
+        window.toggleSiteDarkMode();
+      }
+    } else if (act === 'quick-voice') {
+      if (state.activeTab === 'tools') {
+        handleToolsAction('daily-voice');
+      } else {
+        var tObj = TOPIC_MAP[state.activeTopicId] || TOPICS[0];
+        var vText = (tObj.title[lang] || '') + '. ' + (tObj.body[lang] || '') + ' ' + (tObj.tipLine[lang] || '');
+        speakTextClean(vText, tObj.title[lang] || '', lang);
+      }
     } else if (act === 'reset-pos') {
       resetPosition();
     } else if (act === 'toggle-detail') {
@@ -1256,7 +2118,9 @@
 
     if (!dragSession.moved && dist >= DRAG_THRESHOLD_PX) {
       dragSession.moved = true;
+      state.edgeTucked = null;
       if (orbEl) orbEl.classList.add('mg-dragging');
+      if (orbEl) orbEl.classList.remove('mg-edge-tuck-left', 'mg-edge-tuck-right');
       if (rootEl) rootEl.classList.add('mg-dragging-root');
       if (dragHintEl) dragHintEl.style.display = 'none';
     }
@@ -1291,10 +2155,18 @@
         rx: (bounds.left - bounds.minX) / spanX,
         ry: (bounds.top - bounds.minY) / spanY
       };
+      if (!state.open && bounds.left <= bounds.minX + 6) {
+        state.edgeTucked = 'left';
+      } else if (!state.open && bounds.left >= bounds.maxX - 6) {
+        state.edgeTucked = 'right';
+      } else {
+        state.edgeTucked = null;
+      }
       state.hasDraggedOnce = true;
       state.seenTopics.report_drag = true;
       savePos();
       saveState();
+      syncCoordsToViewport();
       renderCardContent(true);
       if (firstDragEver) {
         showMiniToast(COPY[getLang()].posSavedToast);
@@ -1316,6 +2188,15 @@
     document.addEventListener('input', function (ev) {
       onDocumentReaction(ev.target, INPUT_RULES);
     }, { passive: true });
+
+    window.addEventListener('mathedu:xp-updated', function () {
+      updateOrbStarTier();
+      if (state.open && state.activeTab === 'study') renderCardContent(false);
+    });
+    window.addEventListener('mathedu:streak-updated', function () {
+      updateOrbStarTier();
+      if (state.open && state.activeTab === 'study') renderCardContent(false);
+    });
 
     if (typeof IntersectionObserver !== 'undefined') {
       var deepEl = document.getElementById('deepMathLabsHub');
@@ -1365,6 +2246,7 @@
     orbEl.setAttribute('data-no-i18n', '1');
     orbEl.innerHTML = [
       '<span class="mg-orb-grip" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></span>',
+      '<span id="mgOrbTimerBadge" aria-hidden="true">15:00</span>',
       '<svg class="mg-orb-ring" viewBox="0 0 56 56" aria-hidden="true">',
       '  <circle cx="28" cy="28" r="26" fill="none" stroke="currentColor" stroke-opacity="0.22" stroke-width="1.5" stroke-dasharray="3 3"></circle>',
       '  <circle id="mgOrbProgressArc" cx="28" cy="28" r="26" fill="none" stroke="#10B981" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="163.4"></circle>',
@@ -1396,6 +2278,7 @@
     rootEl.appendChild(orbEl);
     document.body.appendChild(rootEl);
 
+    orbTimerBadgeEl = document.getElementById('mgOrbTimerBadge');
     dragHintEl = document.getElementById('mgOrbDragPill');
     progressCircleEl = document.getElementById('mgOrbProgressArc');
 
@@ -1446,12 +2329,21 @@
     open: openCard,
     close: closeCard,
     toggle: toggleCard,
+    setTab: setTab,
+    edgeTuck: edgeTuckOrb,
+    startTimer: startTimer,
+    pauseTimer: toggleTimerPause,
+    resetTimer: resetTimer,
+    getPadStrokes: function () { return padStrokes.slice(); },
     showTopic: function (topicId, opts) {
       return showTopic(topicId, opts || { source: 'manual', spotlight: true, scroll: false });
     },
     setDetailed: function (flag) {
       state.detailed = !!flag;
-      if (state.detailed) state.open = true;
+      if (state.detailed) {
+        state.open = true;
+        state.activeTab = 'guide';
+      }
       saveState();
       renderCardContent(true);
     },
@@ -1465,13 +2357,18 @@
       return {
         open: state.open,
         detailed: state.detailed,
+        activeTab: state.activeTab,
+        edgeTucked: state.edgeTucked,
+        starTier: computeStarTier(),
         activeTopicId: state.activeTopicId,
         seenTopics: Object.assign({}, state.seenTopics),
         autoTips: state.autoTips,
         hasDraggedOnce: state.hasDraggedOnce,
         left: state.left,
         top: state.top,
-        customPos: state.customPos
+        customPos: state.customPos,
+        timerRunning: timerState.running,
+        timerRemainingSec: timerState.remainingSec
       };
     }
   };
