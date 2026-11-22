@@ -35,8 +35,22 @@
         en: 'Because mathedu has many tools, I guide just one item at a time when needed. Pick below or interact anywhere.'
       },
       tipLine: {
-        ko: '이 아이콘은 원하는 곳으로 드래그해 옮길 수 있어요.',
-        en: 'You can drag this floating icon anywhere on screen.'
+        ko: '반짝이는 별 아이콘을 누르면 자세한 사용법이 열리고, 드래그해 옮길 수 있어요.',
+        en: 'Tap this glowing star anytime for detailed steps, or drag to reposition it.'
+      },
+      details: {
+        ko: [
+          ['통합 검색 ("/")', '상단 검색창에 개념·연도·문항(예: 피타고라스, 9월 미적분 30번)을 입력하면 기출과 시각 증명을 한 번에 찾습니다.'],
+          ['시각 증명 먼저 보기', '유형 암기보다 먼저 3,400+ 동적 기하 도형·영상 게시판·MathLab에서 보조선 원리를 눈으로 확인하세요.'],
+          ['초등~수능 디딤돌 풀이', '문제 카드를 열면 초등 눈높이 1단계 직관부터 최종 수능 문제까지 막힘없이 이어지는 단계로 풀립니다.'],
+          ['100% 무료 · 별 자유 이동', '모든 문제, 오답노트, 회원가입 및 교실 도구는 추가 비용이 전혀 없으며, 이 별을 드래그해 원하는 자리에 두실 수 있습니다.']
+        ],
+        en: [
+          ['Omni-Search ("/")', 'Press "/" or use the top bar (e.g., Pythagoras, Calculus) to search stepping-stone quizzes and visual proofs together.'],
+          ['Visual Intuition First', 'Before drilling formulas, open 3,400+ dynamic geometry proofs, the video board, or MathLab to see auxiliary lines move live.'],
+          ['Elementary-to-CSAT Steps', 'Every quiz opens with intuitive stepping stones from basic arithmetic and spatial ideas up to advanced problems.'],
+          ['100% Free & Draggable Star', 'All materials, history sync, and teacher tools are 100% free with zero fees—and this star orb can be dragged anywhere on screen.']
+        ]
       },
       selectors: ['#headerGlobalSearchInput', '#quizFilterBar'],
       relatedIds: ['search', 'visual_proofs', 'teacher_tools', 'deep_labs']
@@ -57,6 +71,18 @@
         ko: '키보드 "/" 키를 누르면 어느 위치에서든 바로 검색창이 열립니다.',
         en: 'Press "/" anywhere on the page to jump straight to Omni-Search.'
       },
+      details: {
+        ko: [
+          ['키보드 "/" 1초 포커스', '페이지를 내려 보다가도 "/" 키만 누르면 상단 통합 검색창에 즉시 커서가 잡힙니다.'],
+          ['복합 키워드 검색', '학년도·시행월·과목·단원명(예: "2027 6월 기하", "단델린 타원")을 조합해 입력해 보세요.'],
+          ['기출 + 원문 동시 추천', '입력 즉시 관련 기출문제와 시각 증명 아카이브가 드롭다운으로 함께 정리됩니다.']
+        ],
+        en: [
+          ['Instant "/" Shortcut', 'Press "/" from anywhere on the homepage to focus the global Omni-Search bar immediately.'],
+          ['Combine Keywords', 'Mix year, month, subject, or theorem names (e.g., "2027 Geometry", "Dandelin") to narrow results fast.'],
+          ['Unified Results Dropdown', 'Matching stepping-stone quizzes and 3,400+ visual proofs appear together as you type.']
+        ]
+      },
       selectors: ['#headerGlobalSearchInput', '#quizSearchInput', '#mobileHeaderSearchToggleBtn'],
       relatedIds: ['filters', 'visual_proofs', 'csat2027']
     },
@@ -75,6 +101,18 @@
       tipLine: {
         ko: '모든 문항은 초등 눈높이 1단계 직관부터 차근차근 시작합니다.',
         en: 'Every quiz builds step by step from elementary intuition.'
+      },
+      details: {
+        ko: [
+          ['과목·연도 빠른 알약', '"공통(수I·II) · 미적분 · 기하 · 확률과 통계" 및 최근 학년도 알약으로 범위를 1클릭으로 좁힙니다.'],
+          ['상세 조건 서랍 열기', '⚙️ "상세 조건"을 펼치면 대상 학년(고1~고3), 시행월(3/6/9/11월), 문항 번호별로 정확히 필터링됩니다.'],
+          ['🎲 랜덤 & 초기화', '가볍게 감각을 유지하고 싶다면 "🎲 랜덤"으로 즉시 출제하고, "초기화"로 전체 16,594+ 목록을 복원하세요.']
+        ],
+        en: [
+          ['Subject & Year Pills', 'Tap subject pills (Common, Calculus, Geometry, Prob & Stats) or recent years to narrow the list in one click.'],
+          ['Detailed Conditions', 'Expand "Detailed Filters" to select exact grade level, exam month, problem number, or curriculum tags.'],
+          ['Random & Reset', 'Hit "Random Quiz Challenge" for a fresh problem right away, or "Reset" to return to all 16,594+ items.']
+        ]
       },
       selectors: ['#stitchSubjectPills', '#stitchYearPills', '#btnRandomQuizChallenge', '#quizFilterBar'],
       relatedIds: ['search', 'wrong_bookmarks', 'lesson_pack']
@@ -95,6 +133,18 @@
         ko: '가입 없이 비회원 이름·비밀번호만으로도 바로 기록 저장이 가능합니다.',
         en: 'Works right in your browser or with a free account—zero fees ever.'
       },
+      details: {
+        ko: [
+          ['오답노트 자동 누적', '퀴즈 풀이 중 한 번이라도 틀린 문제는 자동으로 "오답노트" 탭에 모여 약점 복습을 도와줍니다.'],
+          ['★ 나만의 즐겨찾기', '중요하거나 다시 보고 싶은 문항 오른쪽의 별표(★)를 누르면 "즐겨찾기"와 마이룸에 저장됩니다.'],
+          ['100% 무료 계정 보관', '우측 상단 프로필(👤)에서 별도 비용 없는 무료 회원가입으로 기기 변경 후에도 학습 기록을 이어갈 수 있습니다.']
+        ],
+        en: [
+          ['Auto Review Vault', 'Any problem missed during practice is automatically collected under "Review Vault" for targeted retry.'],
+          ['★ Bookmark Favorites', 'Tap the star next to any item to save it into "Bookmarks" and your personal My Room shelf.'],
+          ['100% Free Cloud History', 'Use the top-right profile button to register free of charge and preserve your study records across devices.']
+        ]
+      },
       selectors: ['#tabBtnWrong', '#tabBtnBookmarks', '#studentLibraryQuickBar', 'button[onclick*="MatheduAuth"]'],
       relatedIds: ['filters', 'quest_streak', 'lesson_pack']
     },
@@ -113,6 +163,18 @@
       tipLine: {
         ko: '단 하나의 링크나 QR 공유만으로 학생들이 연속 풀이를 진행합니다.',
         en: 'Share one link or QR code so students complete the set in order.'
+      },
+      details: {
+        ko: [
+          ['수업 팩 모드 활성화', '문제 목록 상단 "수업 팩 선택" 탭을 누르면 각 문항 왼쪽에 다중 선택 체크박스가 열립니다.'],
+          ['문항 순서대로 선택', '오늘 수업할 문제들을 체크하면 화면 하단에 검은색 수업 팩 생성 플로팅 바가 나타납니다.'],
+          ['링크·칠판 QR 1초 공유', '"📋 링크 복사"로 단톡방에 올리거나 "🖥️ 칠판 QR"을 띄워 학생들이 1번부터 순서대로 풀게 하세요.']
+        ],
+        en: [
+          ['Enable Selection Mode', 'Click "Select Lesson Pack" to reveal multi-select checkboxes on every problem row.'],
+          ['Assemble Problem Set', 'Check the problems for today’s class—a dark Lesson Pack floating bar tracks your count at the bottom.'],
+          ['Copy Link or Show QR', 'Share a single sequenced study URL or classroom QR code so students solve the set in exact order.']
+        ]
       },
       selectors: ['#tabBtnLessonPack', '#filterModeTabBar'],
       relatedIds: ['teacher_tools', 'classroom_code', 'filters']
@@ -133,6 +195,18 @@
         ko: '특별관 안에서 과목·4점·단답형 필터를 눌러 약점 문항만 추려 보세요.',
         en: 'Use the subject, 4-point, and short-answer filters inside the hub.'
       },
+      details: {
+        ko: [
+          ['전 영역 46문항 완전 수록', '공통 22문항과 선택과목(확통·미적분·기하) 24문항 전체의 원문 분석과 정답표를 한눈에 봅니다.'],
+          ['4점·주관식 맞춤 필터', '특별관 상단에서 4점 고난도 문항이나 단답형(주관식) 문항만 골라 집중 훈련할 수 있습니다.'],
+          ['시각 도형·디딤돌 직결', '각 문항 카드를 클릭하면 초등 기초 직관부터 보조선 발상까지 단계별 퀴즈와 SVG 풀이가 열립니다.']
+        ],
+        en: [
+          ['All 46 Official Items', 'Browse the complete Common (1–22) plus Probability, Calculus, and Geometry sets on one structured page.'],
+          ['Point & Format Filters', 'Filter for 4-point high-difficulty or short-answer questions to focus on challenging topics.'],
+          ['Direct Stepping-Stone Quizzes', 'Open any card to work through visual SVG explanations and elementary-to-advanced steps.']
+        ]
+      },
       selectors: ['a[href="csat2027.html"]'],
       relatedIds: ['filters', 'search', 'visual_proofs']
     },
@@ -151,6 +225,18 @@
       tipLine: {
         ko: '"추천 영상 · #Shorts 극장" 서랍을 열면 대표 시각 증명을 바로 시청할 수 있습니다.',
         en: 'Open Featured Videos or the Video Board to watch visual proofs directly.'
+      },
+      details: {
+        ko: [
+          ['3,400+ 동적 기하 탐색관', '"📐 3,400+ 동적 기하·증명 검색"을 누르면 16대 영역 847+ 단계별 증명 PDF와 GeoGebra 앱렛을 바로 찾습니다.'],
+          ['@min7014_ai 영상 게시판', '표준 설명 1080p 본편, 질문하는 수학 수업 본편, 45초 핵심 #Shorts 영상을 단원별로 시청하세요.'],
+          ['이해 후 즉시 기출 실습', '각 증명 아래 링크로 방금 본 원리가 적용된 수능 기출 디딤돌 문제를 바로 풀어볼 수 있습니다.']
+        ],
+        en: [
+          ['3,400+ Dynamic Archive', 'Open the Visual Proofs Search modal to browse 847+ step-by-step proof PDFs and GeoGebra/AlgeoMath applets.'],
+          ['Video Proof Board', 'Watch 1080p standard explanations, Question-Asking Classroom editions, and concise #Shorts by topic.'],
+          ['Watch, Then Practice', 'Jump straight from any visual proof to interactive stepping-stone exam problems using that theorem.']
+        ]
       },
       selectors: ['a[href="video_board.html"]', 'a[onclick*="openMin7014ExplorerModal"]', '#btnQuickDrawerYt'],
       relatedIds: ['mathlab', 'deep_labs', 'search']
@@ -171,6 +257,18 @@
         ko: '내장된 대표 정리 프리셋을 불러오면 1초 만에 움직이는 증명을 실험합니다.',
         en: 'Load built-in proof presets to experiment immediately.'
       },
+      details: {
+        ko: [
+          ['유클리드 실시간 작도', '점·직선·원·수직이등분선·접선을 캔버스에 작도한 뒤 점을 드래그하면 길이와 각의 불변량이 즉시 갱신됩니다.'],
+          ['수식 그래프 동시 연동', '대수 입력창에 y=f(x) 함수나 원·이차곡선 식을 적으면 기하 도형과 교점이 실시간으로 함께 반응합니다.'],
+          ['대표 정리 프리셋 1초 실행', '피타고라스·원주각·체바 정리 등 내장 프리셋을 열어 곧바로 보조선을 실험해 보세요.']
+        ],
+        en: [
+          ['Live Euclidean Construction', 'Draw points, lines, circles, and tangents on the canvas and drag vertices live to observe geometric invariants.'],
+          ['Algebraic Curve Plotting', 'Enter functions or conics alongside geometry objects to inspect intersections and tangent behavior together.'],
+          ['1-Click Proof Presets', 'Load curated presets (Pythagoras, Inscribed Angles, Ceva) to experiment without drawing from scratch.']
+        ]
+      },
       selectors: ['a[href="mathlab.html"]'],
       relatedIds: ['visual_proofs', 'deep_labs', 'csat2027']
     },
@@ -189,6 +287,18 @@
       tipLine: {
         ko: '열려 있는 연구실 탭을 다시 누르면 화면이 깔끔하게 접힙니다.',
         en: 'Click an open lab tab again anytime to collapse it.'
+      },
+      details: {
+        ko: [
+          ['5개 연구실 탭 선택', '단원 도슨트 · 3분 유레카 · 교사 5대 스튜디오 · 프랙탈 · 글로벌 아카데미 탭 중 원하는 연구실을 엽니다.'],
+          ['Desmos 구슬 · Polypad 체험', '아카데미 탭에서 기울기·절편 슬라이더를 맞춰 구슬을 굴리거나 대수타일로 (x+a)(x+b) 넓이를 조립하세요.'],
+          ['사색 후 기출 문제 직결', '실험실 하단 "기출 도전하기" 버튼을 누르면 방금 이해한 원리가 쓰인 수능·모평 문항 목록으로 바로 이어집니다.']
+        ],
+        en: [
+          ['Switch 5 Specialized Labs', 'Select tabs for 16-Domain Proofs, Eureka Missions, Teacher Pedagogy Studio, Fractals, or Function/Tile Labs.'],
+          ['Interactive Sliders & Tiles', 'Tune slope/intercept sliders to launch marbles or assemble (x+a)(x+b) algebra tiles hands-on.'],
+          ['Connect to Exam Practice', 'Use the bottom action buttons in any lab to jump directly to matching stepping-stone exam questions.']
+        ]
       },
       selectors: ['#deepMathLabsTabBar', '#deepMathLabsHub'],
       relatedIds: ['mathlab', 'visual_proofs', 'quest_streak']
@@ -209,6 +319,18 @@
         ko: '수업 코드가 없어도 아래 모든 문제와 자료는 100% 자유롭게 풀 수 있습니다.',
         en: 'No code needed—every quiz and visual proof is freely open.'
       },
+      details: {
+        ko: [
+          ['교사 안내 코드 입력', '칠판이나 안내문으로 받은 수업 코드(예: MATH-A8F2)를 입력 칸에 그대로 적어 넣습니다.'],
+          ['1클릭 수업실 진입', '"입장" 버튼을 누르면 선생님이 배정한 오늘의 디딤돌 문제 세트와 제출 현황이 바로 열립니다.'],
+          ['코드 없는 자율 학습 가능', '개인 학습자는 수업 코드를 비워 둔 채 아래 16,594+ 문항과 모든 자료를 무료로 풀 수 있습니다.']
+        ],
+        en: [
+          ['Enter Class Code', 'Type the alphanumeric code shared by your instructor (e.g., MATH-A8F2) into the class code input field.'],
+          ['Instant Room Access', 'Click "Join" to jump straight to your teacher’s curated stepping-stone lesson set.'],
+          ['Freely Open Without Code', 'Studying independently? Leave the box blank and solve all 16,594+ quizzes and proofs anytime free.']
+        ]
+      },
       selectors: ['#inputRoomCode', 'button[onclick*="joinClassroom"]'],
       relatedIds: ['teacher_tools', 'lesson_pack', 'wrong_bookmarks']
     },
@@ -227,6 +349,18 @@
       tipLine: {
         ko: '"교사·출제·오프라인 도구 ▾" 서랍에서 출제·대시보드·오프라인 링크를 바로 엽니다.',
         en: 'Toggle the Teacher & Offline drawer to access every classroom utility.'
+      },
+      details: {
+        ko: [
+          ['교사·출제 서랍 펼치기', '"👩‍🏫 교사·출제·오프라인 도구 ▾" 버튼을 누르면 맞춤형 문제 출제, 교실 대시보드, 오프라인 보관함 메뉴가 열립니다.'],
+          ['칠판 QR · 교실 3초 개설', '우측 하단 "🚀 이 문제로 수업 열기"나 교사 대시보드로 학생 접속용 QR코드와 실시간 현황판을 3초 만에 엽니다.'],
+          ['오프라인 단독 HTML 패키지', '학교 방화벽이나 Wi-Fi 불안정 환경에서는 오프라인 보관함에서 단일 HTML 퀴즈 파일을 무료로 열어 수업하세요.']
+        ],
+        en: [
+          ['Expand Tools Drawer', 'Click "Teacher, Studio & Offline Tools" to reveal Authoring Studio, Classroom Dashboard, and Offline Vault links.'],
+          ['3-Second Class & QR', 'Open the bottom-right "Open Classroom" action or dashboard to display a scannable join QR on your board.'],
+          ['Standalone Offline Packs', 'Download or open self-contained offline quiz files for classrooms without reliable internet access.']
+        ]
       },
       selectors: ['#btnQuickDrawerTools', '#teacherQuickToolsDrawer', 'a[data-path="classroom-and-qr"]'],
       prepareAction: function () {
@@ -253,6 +387,18 @@
         ko: '매일 한 문제씩 풀면 연속 학습 불꽃과 경험치(XP)가 쌓입니다.',
         en: 'Solve a quiz or puzzle each day to keep your streak flame alive.'
       },
+      details: {
+        ko: [
+          ['3D 수학의 성전 탐험', '바로가기에서 "🎮 수학의 성전 3D 퀘스트"를 열면 3D 월드맵과 단원 보스 배틀을 통해 개념을 게임처럼 정복합니다.'],
+          ['깊은 사색 & 유레카 보상', '게임 내에서도 연습장·사색 결계 시간 정지를 지원하며, 차분히 추론해 맞히면 DEEP EUREKA 보너스를 받습니다.'],
+          ['불꽃 스트릭 & 성취 뱃지', '상단 주황색 불꽃(🔥) 배지를 누르면 누적 스트릭·레벨·획득 뱃지 현황을 언제든 확인할 수 있습니다.']
+        ],
+        en: [
+          ['Enter 3D Math Sanctuary', 'Click "3D Math Sanctuary Quest" to explore mathematical worlds and defeat concept bosses through real problem solving.'],
+          ['Deep Contemplation Time', 'Use in-game time-freeze scratchpads to reason carefully—deep contemplation earns extra Eureka bonuses.'],
+          ['Daily Streak & Badges', 'Click the top-right flame badge anytime to view your consecutive study streak, XP level, and earned badges.']
+        ]
+      },
       selectors: ['a[href="game.html"]', '#headerStreakCount'],
       relatedIds: ['wrong_bookmarks', 'deep_labs', 'mathlab']
     },
@@ -272,6 +418,18 @@
         ko: '선택한 테마와 언어는 다음 방문 시에도 자동으로 유지됩니다.',
         en: 'Your theme and language preference stay saved automatically.'
       },
+      details: {
+        ko: [
+          ['다크 / 라이트 즉시 전환', '야간 학습이나 칠판 프로젝터 환경에서는 상단 "🌙 다크 / ☀️ 라이트" 버튼으로 눈의 피로를 줄이세요.'],
+          ['완전 한·영 이중언어(KO | EN)', '"KO | EN" 전환 시 메뉴·검색 필터·문항·단계별 해설·수식 안내와 이 도우미까지 100% 영문으로 전환됩니다.'],
+          ['자동 브라우저 저장', '한 번 선택한 테마와 언어 설정은 브라우저에 안전하게 저장되어 다음 방문 시에도 그대로 적용됩니다.']
+        ],
+        en: [
+          ['Light & Dark Themes', 'Toggle the header sun/moon button to switch between crisp Light Atelier and Cosmic Dark modes.'],
+          ['Full KO / EN Bilingual UI', 'Switching "KO | EN" translates menus, filters, stepping-stone quizzes, solutions, and this guide seamlessly.'],
+          ['Persists Automatically', 'Your preferred theme and language are remembered across visits in browser storage.']
+        ]
+      },
       selectors: ['#themeToggleGlobalBtn', '#langToggleSingleBtn'],
       relatedIds: ['report_drag', 'search', 'welcome']
     },
@@ -280,16 +438,28 @@
       category: 'settings',
       chipLabel: { ko: '🚨 오류신고·이동', en: '🚨 Siren & Move' },
       title: {
-        ko: '오류 사이렌 신고 & 아이콘 이동',
-        en: 'Issue Siren & Drag Guide Anywhere'
+        ko: '오류 사이렌 신고 & 별 이동',
+        en: 'Issue Siren & Drag Star Orb'
       },
       body: {
-        ko: '수식이나 정답 이상은 우측 상단 빨간 사이렌("오류신고")을 눌러 해당 영역을 클릭해 제보하세요. 이 안내 아이콘은 어디든 드래그됩니다.',
-        en: 'Spot a typo or math bug? Tap the top-right Siren, then click the target area. Drag this floating orb anywhere you like.'
+        ko: '수식이나 정답 이상은 우측 상단 빨간 사이렌("오류신고")을 눌러 해당 영역을 클릭해 제보하세요. 이 별 아이콘은 어디든 드래그됩니다.',
+        en: 'Spot a typo or math bug? Tap the top-right Siren, then click the target area. Drag this floating star anywhere you like.'
       },
       tipLine: {
         ko: '위치를 옮긴 뒤 카드 상단 ↺ 버튼을 누르면 기본 자리로 돌아옵니다.',
         en: 'Tap ↺ in this card header anytime to return to the default corner.'
+      },
+      details: {
+        ko: [
+          ['영역 지정 오류 사이렌', '우측 상단 "오류신고" 버튼을 누른 뒤 이상이 보이는 문제·그림·수식을 직접 클릭하면 해당 요소가 자동 캡처되어 신고됩니다.'],
+          ['별 아이콘 & 창 자유 드래그', '반짝이는 별(✦)이나 안내 창 상단 "⠿" 손잡이를 드래그하면 가려지는 곳 없이 화면 어디든 옮길 수 있습니다.'],
+          ['기본 위치 복귀 & 음소거', '드래그 후 상단 ↺ 버튼으로 원위치 복귀가 가능하며, "🔔 자동 안내" 버튼으로 자동 팝업 여부를 제어할 수 있습니다.']
+        ],
+        en: [
+          ['Point-and-Click Siren Report', 'Click top-right "Report Issue" then tap any element on screen—the inspector automatically captures context for fast repair.'],
+          ['Freely Drag Star or Header', 'Grab the glowing star orb or the card "⠿" grip bar to move it anywhere clear of your active problem.'],
+          ['Reset Position or Mute Auto', 'Tap ↺ in the header bar to snap back to default position, or toggle "Auto tips" ON/OFF anytime.']
+        ]
       },
       selectors: ['#mathedu-report-fab', '#matheduGuideOrb'],
       relatedIds: ['theme_lang', 'search', 'welcome']
@@ -332,9 +502,12 @@
 
   var COPY = {
     ko: {
-      orbLabel: '사용법 안내 (클릭하여 열기 · 드래그하여 이동)',
-      dragPill: '드래그 이동',
+      orbLabel: '사용법 안내 (별 클릭 시 자세한 내용 열기 · 드래그하여 이동)',
+      dragPill: '드래그 · 자세히',
       badgePrefix: '상황별 안내',
+      detailHeading: '📖 자세한 사용 방법',
+      detailOpenBtn: '📖 자세히 보기',
+      detailCloseBtn: '간략히 ▴',
       dragHandleTitle: '드래그하여 아이콘과 안내 창 이동',
       resetPosTitle: '기본 위치로 되돌리기',
       closeTitle: '아이콘으로 접기',
@@ -347,13 +520,16 @@
       autoOffLabel: '🔕 자동 안내 OFF',
       autoOnTitle: '새 기능을 처음 누를 때 자동으로 한 개씩 안내합니다 (클릭하여 끄기)',
       autoOffTitle: '자동 팝업을 껐습니다. 필요할 때 아이콘을 눌러 확인하세요 (클릭하여 켜기)',
-      posSavedToast: '✓ 위치가 저장되었어요! 필요할 때 눌러 주세요',
+      posSavedToast: '✓ 위치가 저장되었어요! 별을 누르면 자세한 안내가 열립니다',
       seenCountUnit: '개 확인됨'
     },
     en: {
-      orbLabel: 'Usage Guide (Click to toggle, drag to move)',
-      dragPill: 'Drag me',
+      orbLabel: 'Interactive Guide (Click star for detailed guide, drag to move)',
+      dragPill: 'Drag · Details',
       badgePrefix: 'Quick Tip',
+      detailHeading: '📖 Detailed Walkthrough',
+      detailOpenBtn: '📖 Details',
+      detailCloseBtn: 'Compact ▴',
       dragHandleTitle: 'Drag to reposition orb and card',
       resetPosTitle: 'Reset to default spot',
       closeTitle: 'Collapse to orb',
@@ -365,14 +541,15 @@
       autoOnLabel: '🔔 Auto tips ON',
       autoOffLabel: '🔕 Auto tips OFF',
       autoOnTitle: 'Shows one tip automatically the first time you touch a feature (Click to mute)',
-      autoOffTitle: 'Quiet mode: tap the floating icon whenever you need a tip (Click to enable)',
-      posSavedToast: '✓ Position saved! Tap me anytime',
+      autoOffTitle: 'Quiet mode: tap the floating star whenever you need detailed steps (Click to enable)',
+      posSavedToast: '✓ Position saved! Tap star anytime for detailed guide',
       seenCountUnit: 'seen'
     }
   };
 
   var state = {
     open: true,
+    detailed: false,
     activeTopicId: 'welcome',
     seenTopics: {},
     autoTips: true,
@@ -442,6 +619,7 @@
         var p = JSON.parse(raw);
         if (p && typeof p === 'object') {
           if (typeof p.open === 'boolean') state.open = p.open;
+          if (typeof p.detailed === 'boolean') state.detailed = p.detailed;
           if (typeof p.activeTopicId === 'string' && TOPIC_MAP[p.activeTopicId]) {
             state.activeTopicId = p.activeTopicId;
           }
@@ -469,6 +647,7 @@
     try {
       localStorage.setItem(STORAGE_STATE_KEY, JSON.stringify({
         open: !!state.open,
+        detailed: !!state.detailed,
         activeTopicId: state.activeTopicId,
         seenTopics: state.seenTopics,
         autoTips: !!state.autoTips,
@@ -523,9 +702,10 @@
     if (orbEl) {
       orbEl.style.left = state.left + 'px';
       orbEl.style.top = state.top + 'px';
+      orbEl.classList.toggle('mg-orb-left', (state.left || 0) < window.innerWidth / 2);
     }
     if (dragHintEl) {
-      dragHintEl.style.display = (state.hasDraggedOnce || !state.open) ? 'none' : '';
+      dragHintEl.style.display = (state.hasDraggedOnce || state.open) ? 'none' : '';
     }
     positionCardNearOrb();
   }
@@ -537,7 +717,8 @@
     var vh = window.innerHeight;
     var padX = 12;
     var padY = 14;
-    var cardW = Math.min(332, vw - padX * 2);
+    var maxTargetW = state.detailed ? 388 : 332;
+    var cardW = Math.min(maxTargetW, vw - padX * 2);
     cardEl.style.width = cardW + 'px';
 
     // Measure natural height after applying width
@@ -640,7 +821,8 @@
       '.mg-orb-ring { position: absolute; inset: -4px; width: calc(100% + 8px); height: calc(100% + 8px); pointer-events: none; transform: rotate(-90deg); }',
       '.mg-orb-grip { position: absolute; top: 4px; left: 50%; transform: translateX(-50%); display: grid; grid-template-columns: repeat(3, 2.5px); gap: 2px; opacity: 0.45; pointer-events: none; }',
       '.mg-orb-grip span { width: 2.5px; height: 2.5px; border-radius: 99px; background: currentColor; }',
-      '.mg-drag-pill { position: absolute; bottom: -21px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 999px; background: rgba(15, 23, 42, 0.86); color: #f8fafc; pointer-events: none; opacity: 0.92; box-shadow: 0 4px 10px rgba(0,0,0,0.18); }',
+      '.mg-drag-pill { position: absolute; right: calc(100% + 8px); top: 50%; transform: translateY(-50%); white-space: nowrap; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 999px; background: rgba(15, 23, 42, 0.88); color: #f8fafc; pointer-events: none; opacity: 0.92; box-shadow: 0 4px 10px rgba(0,0,0,0.18); transition: opacity 0.18s ease; }',
+      '#matheduGuideOrb.mg-orb-left .mg-drag-pill { right: auto; left: calc(100% + 8px); }',
       '#mgOrbToast { position: fixed; display: none; pointer-events: none; white-space: nowrap; font-size: 11px; font-weight: 800; padding: 5px 10px; border-radius: 999px; background: rgba(15, 23, 42, 0.92); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.45); box-shadow: 0 8px 22px rgba(15, 23, 42, 0.28); z-index: 999992; }',
       '#matheduGuideCard {',
       '  position: fixed; pointer-events: auto; border-radius: 18px; padding: 13px 15px;',
@@ -649,9 +831,10 @@
       '  border: 1px solid rgba(203, 213, 225, 0.85);',
       '  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(0, 99, 152, 0.08);',
       '  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);',
-      '  animation: mgCardPop 0.22s cubic-bezier(0.22, 1, 0.36, 1);',
-      '  transition: left 0.2s cubic-bezier(0.22, 1, 0.36, 1), top 0.2s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease;',
+      '  animation: mgCardPop 0.2s cubic-bezier(0.22, 1, 0.36, 1);',
+      '  transition: border-color 0.2s ease;',
       '}',
+      '#matheduGuideCard.mg-card-detailed { padding: 15px 16px; }',
       '#matheduGuideRoot.mg-dragging-root #matheduGuideCard { transition: none !important; }',
       '@keyframes mgCardPop { from { opacity: 0; transform: scale(0.94) translateY(4px); } to { opacity: 1; transform: scale(1) translateY(0); } }',
       '.mg-card-head { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 8px; }',
@@ -665,6 +848,12 @@
       '.mg-title { font-size: 14.5px; font-weight: 800; line-height: 1.35; margin: 0 0 5px 0; color: inherit; }',
       '.mg-body { font-size: 12.5px; line-height: 1.55; margin: 0 0 8px 0; color: #475569; }',
       '.mg-tip { display: flex; align-items: flex-start; gap: 6px; font-size: 11.5px; font-weight: 700; line-height: 1.45; padding: 7px 10px; border-radius: 10px; margin-bottom: 9px; background: rgba(2, 132, 199, 0.08); color: #0369a1; border: 1px dashed rgba(2, 132, 199, 0.34); }',
+      '.mg-details-box { padding: 9px 11px; border-radius: 12px; margin-bottom: 9px; background: rgba(248, 250, 252, 0.92); border: 1px solid rgba(203, 213, 225, 0.85); }',
+      '.mg-details-title { font-size: 11.5px; font-weight: 800; color: #006398; margin-bottom: 7px; display: flex; align-items: center; gap: 5px; }',
+      '.mg-details-list { display: flex; flex-direction: column; gap: 6px; }',
+      '.mg-step-row { display: flex; align-items: flex-start; gap: 7px; font-size: 11.8px; line-height: 1.48; color: #334155; }',
+      '.mg-step-num { flex: 0 0 auto; width: 17px; height: 17px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; background: #006398; color: #ffffff; margin-top: 2px; }',
+      '.mg-step-label { font-weight: 800; color: #0f172a; }',
       '.mg-sub-label { font-size: 10.5px; font-weight: 800; color: #64748b; margin-bottom: 5px; }',
       '.mg-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 9px; }',
       '.mg-chip { border: 1px solid rgba(148, 163, 184, 0.38); border-radius: 999px; padding: 4px 9px; font-size: 11px; font-weight: 700; cursor: pointer; background: rgba(241, 245, 249, 0.85); color: #1e293b; transition: all 0.15s ease; }',
@@ -677,6 +866,7 @@
       '.mg-btn-ghost { border: 1px solid rgba(148, 163, 184, 0.38); border-radius: 9px; padding: 5px 9px; font-size: 11px; font-weight: 700; cursor: pointer; background: transparent; color: #475569; }',
       '.mg-btn-ghost:hover { background: rgba(148, 163, 184, 0.12); color: #0f172a; }',
       '.mg-btn-ghost.muted { opacity: 0.75; }',
+      '.mg-btn-ghost.active-detail { background: rgba(0, 99, 152, 0.10); color: #006398; border-color: rgba(0, 99, 152, 0.36); }',
       '.mg-spotlight { outline: 2.5px solid #0284c7 !important; outline-offset: 4px !important; box-shadow: 0 0 0 6px rgba(2, 132, 199, 0.20) !important; border-radius: 12px; transition: box-shadow 0.25s ease !important; }',
       '#matheduGuideRoot.mg-dark #matheduGuideOrb { background: rgba(15, 23, 42, 0.94); color: #38bdf8; border-color: rgba(56, 189, 248, 0.38); box-shadow: 0 10px 30px rgba(0,0,0,0.48), 0 0 18px rgba(56,189,248,0.22); }',
       '#matheduGuideRoot.mg-dark #matheduGuideCard { background: rgba(15, 23, 42, 0.95); color: #f8fafc; border-color: rgba(56, 189, 248, 0.30); box-shadow: 0 22px 52px rgba(0,0,0,0.62); }',
@@ -686,11 +876,17 @@
       '#matheduGuideRoot.mg-dark .mg-icon-btn { color: #94a3b8; }',
       '#matheduGuideRoot.mg-dark .mg-icon-btn:hover { background: rgba(148, 163, 184, 0.16); color: #f8fafc; }',
       '#matheduGuideRoot.mg-dark .mg-tip { background: rgba(56, 189, 248, 0.12); color: #7dd3fc; border-color: rgba(56, 189, 248, 0.35); }',
+      '#matheduGuideRoot.mg-dark .mg-details-box { background: rgba(30, 41, 59, 0.72); border-color: rgba(56, 189, 248, 0.24); }',
+      '#matheduGuideRoot.mg-dark .mg-details-title { color: #38bdf8; }',
+      '#matheduGuideRoot.mg-dark .mg-step-row { color: #cbd5e1; }',
+      '#matheduGuideRoot.mg-dark .mg-step-label { color: #f8fafc; }',
+      '#matheduGuideRoot.mg-dark .mg-step-num { background: #0284c7; color: #ffffff; }',
       '#matheduGuideRoot.mg-dark .mg-chip { background: rgba(30, 41, 59, 0.88); color: #e2e8f0; border-color: rgba(148, 163, 184, 0.28); }',
       '#matheduGuideRoot.mg-dark .mg-chip:hover { border-color: #38bdf8; color: #38bdf8; }',
       '#matheduGuideRoot.mg-dark .mg-chip.active { background: linear-gradient(135deg, #0284c7, #6366f1); color: #ffffff; border-color: transparent; }',
       '#matheduGuideRoot.mg-dark .mg-btn-ghost { color: #cbd5e1; border-color: rgba(148, 163, 184, 0.35); }',
       '#matheduGuideRoot.mg-dark .mg-btn-ghost:hover { background: rgba(148, 163, 184, 0.14); color: #ffffff; }',
+      '#matheduGuideRoot.mg-dark .mg-btn-ghost.active-detail { background: rgba(56, 189, 248, 0.16); color: #7dd3fc; border-color: rgba(56, 189, 248, 0.42); }',
       '@media (max-width: 639px) { #matheduGuideOrb { width: 46px; height: 46px; } }'
     ].join('\n');
     document.head.appendChild(style);
@@ -795,11 +991,12 @@
     lastRenderedDark = dark;
 
     rootEl.classList.toggle('mg-dark', dark);
+    orbEl.classList.toggle('mg-orb-left', (state.left || 0) < window.innerWidth / 2);
     orbEl.setAttribute('aria-label', c.orbLabel);
     orbEl.title = c.orbLabel;
     if (dragHintEl) {
       dragHintEl.textContent = c.dragPill;
-      dragHintEl.style.display = (state.hasDraggedOnce || !state.open) ? 'none' : '';
+      dragHintEl.style.display = state.hasDraggedOnce ? 'none' : '';
     }
     updateOrbProgressRing();
 
@@ -811,6 +1008,7 @@
     var topic = TOPIC_MAP[state.activeTopicId] || TOPICS[0];
     var seenCnt = countSeenTopics();
     cardEl.style.display = 'block';
+    cardEl.classList.toggle('mg-card-detailed', !!state.detailed);
 
     var resetBtn = state.customPos
       ? '<button type="button" class="mg-icon-btn" data-mg-act="reset-pos" title="' + c.resetPosTitle + '" aria-label="' + c.resetPosTitle + '">↺</button>'
@@ -824,6 +1022,17 @@
       var rt = TOPIC_MAP[chipIds[i]];
       if (!rt) continue;
       chipsHtml += '<button type="button" class="mg-chip' + (rt.id === topic.id ? ' active' : '') + '" data-mg-topic="' + rt.id + '">' + rt.chipLabel[lang] + '</button>';
+    }
+
+    var detailItems = (topic.details && topic.details[lang]) || [];
+    var detailsHtml = '';
+    if (state.detailed && detailItems.length) {
+      var rowsHtml = '';
+      for (var dIdx = 0; dIdx < detailItems.length; dIdx++) {
+        var pair = detailItems[dIdx];
+        rowsHtml += '<div class="mg-step-row"><span class="mg-step-num">' + (dIdx + 1) + '</span><div><span class="mg-step-label">' + pair[0] + '</span> · ' + pair[1] + '</div></div>';
+      }
+      detailsHtml = '<div class="mg-details-box" id="mgDetailsBox"><div class="mg-details-title">' + c.detailHeading + '</div><div class="mg-details-list">' + rowsHtml + '</div></div>';
     }
 
     var allListHtml = '';
@@ -842,6 +1051,8 @@
       ? '<button type="button" class="mg-btn-primary" data-mg-act="locate">' + c.locateBtn + '</button>'
       : '';
 
+    var detailBtnCls = 'mg-btn-ghost' + (state.detailed ? ' active-detail' : '');
+    var detailBtnLabel = state.detailed ? c.detailCloseBtn : c.detailOpenBtn;
     var autoBtnCls = state.autoTips ? 'mg-btn-ghost' : 'mg-btn-ghost muted';
     var autoLabel = state.autoTips ? c.autoOnLabel : c.autoOffLabel;
     var autoTitle = state.autoTips ? c.autoOnTitle : c.autoOffTitle;
@@ -856,11 +1067,13 @@
       '<h3 class="mg-title">' + topic.title[lang] + '</h3>',
       '<p class="mg-body">' + topic.body[lang] + '</p>',
       '<div class="mg-tip"><span>💡</span><span>' + topic.tipLine[lang] + '</span></div>',
+      detailsHtml,
       '<div class="mg-sub-label">' + chipLabelText + '</div>',
       '<div class="mg-chips">' + chipsHtml + '</div>',
       allListHtml,
       '<div class="mg-actions">',
       '  <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap;">',
+      '    <button type="button" class="' + detailBtnCls + '" data-mg-act="toggle-detail">' + detailBtnLabel + '</button>',
       '    <button type="button" class="mg-btn-ghost" data-mg-act="toggle-all">' + allLabel + '</button>',
       '    <button type="button" class="' + autoBtnCls + '" data-mg-act="toggle-auto" title="' + autoTitle + '">' + autoLabel + '</button>',
       '  </div>',
@@ -886,12 +1099,16 @@
       var now = Date.now();
       if (now - lastAutoTriggerAt < 250) return false;
       lastAutoTriggerAt = now;
+      if (typeof opts.detailed !== 'boolean') state.detailed = false;
       pulseOrbBriefly();
     }
 
     state.seenTopics[topicId] = true;
     state.activeTopicId = topicId;
     state.open = true;
+    if (typeof opts.detailed === 'boolean') {
+      state.detailed = opts.detailed;
+    }
     saveState();
     renderCardContent(true);
 
@@ -901,10 +1118,13 @@
     return true;
   }
 
-  function openCard(topicId) {
+  function openCard(topicId, withDetails) {
     if (isInspectorActive()) return;
     var targetId = (topicId && TOPIC_MAP[topicId]) ? topicId : pickContextualTopicForScroll();
     state.open = true;
+    if (typeof withDetails === 'boolean') {
+      state.detailed = withDetails;
+    }
     state.activeTopicId = targetId;
     state.seenTopics[targetId] = true;
     saveState();
@@ -917,6 +1137,24 @@
     state.showAllTopics = false;
     saveState();
     renderCardContent(false);
+  }
+
+  function onOrbSelected() {
+    if (!state.open) {
+      openCard(null, true);
+      var openTopic = TOPIC_MAP[state.activeTopicId];
+      if (openTopic && openTopic.id !== 'welcome') spotlightTopic(openTopic, false);
+      return;
+    }
+    if (!state.detailed) {
+      state.detailed = true;
+      saveState();
+      renderCardContent(true);
+      var curTopic = TOPIC_MAP[state.activeTopicId];
+      if (curTopic && curTopic.id !== 'welcome') spotlightTopic(curTopic, false);
+      return;
+    }
+    closeCard();
   }
 
   function toggleCard() {
@@ -978,6 +1216,10 @@
       closeCard();
     } else if (act === 'reset-pos') {
       resetPosition();
+    } else if (act === 'toggle-detail') {
+      state.detailed = !state.detailed;
+      saveState();
+      renderCardContent(true);
     } else if (act === 'toggle-all') {
       state.showAllTopics = !state.showAllTopics;
       renderCardContent(true);
@@ -1026,6 +1268,7 @@
     if (orbEl) {
       orbEl.style.left = c.left + 'px';
       orbEl.style.top = c.top + 'px';
+      orbEl.classList.toggle('mg-orb-left', c.left < window.innerWidth / 2);
     }
     positionCardNearOrb();
   }
@@ -1057,7 +1300,7 @@
         showMiniToast(COPY[getLang()].posSavedToast);
       }
     } else if (s.allowClickToggle) {
-      toggleCard();
+      onOrbSelected();
     }
   }
 
@@ -1162,7 +1405,7 @@
     orbEl.addEventListener('keydown', function (ev) {
       if (ev.key === 'Enter' || ev.key === ' ') {
         ev.preventDefault();
-        toggleCard();
+        onOrbSelected();
       }
     });
 
@@ -1206,6 +1449,12 @@
     showTopic: function (topicId, opts) {
       return showTopic(topicId, opts || { source: 'manual', spotlight: true, scroll: false });
     },
+    setDetailed: function (flag) {
+      state.detailed = !!flag;
+      if (state.detailed) state.open = true;
+      saveState();
+      renderCardContent(true);
+    },
     setAutoTips: setAutoTips,
     resetPosition: resetPosition,
     resetSeen: resetSeen,
@@ -1215,6 +1464,7 @@
     getState: function () {
       return {
         open: state.open,
+        detailed: state.detailed,
         activeTopicId: state.activeTopicId,
         seenTopics: Object.assign({}, state.seenTopics),
         autoTips: state.autoTips,
