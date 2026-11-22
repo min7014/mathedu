@@ -2131,7 +2131,7 @@ def upgrade_all_international_english_scripts() -> dict:
                 sdoc["youtube_packages"]["en"]["title"] = f"🔥 Stop Memorizing Formulas! {ct_en_long} Visual Proof | @min7014_ai"[:98]
         if "question_youtube_packages" in sdoc:
             if "ko" in sdoc["question_youtube_packages"]:
-                sdoc["question_youtube_packages"]["ko"]["title"] = f"❓ 99%가 공식만 외우다 놓치는 진짜 이유! 왜 성립할까? | {ct_ko_long} @min7014_ai"[:98]
+                sdoc["question_youtube_packages"]["ko"]["title"] = f"❓ 왜 항상 성립할까? 공식 너머의 필연적 이유 | {ct_ko_long} @min7014_ai"[:98]
             if "en" in sdoc["question_youtube_packages"]:
                 sdoc["question_youtube_packages"]["en"]["title"] = f"❓ Why Does This Hold? Pause & Think Before the Formula! | {ct_en_long} @min7014_ai"[:98]
         if "shorts_packages" in sdoc:
@@ -2923,8 +2923,8 @@ VIRAL_HOOK_DB = {
         "match_keywords": ["pythagoras", "피타고라스", "직각삼각형", "right triangle", "넓이 보존"],
         "thumb_hook_ko": ["보조선 딱 1줄!", "넓이가 똑같다?!"],
         "thumb_hook_en": ["JUST 1 LINE?!", "EXACT SAME AREA!"],
-        "badge_ko": "⚡ 99%가 공식만 외운 증명",
-        "badge_en": "⚡ 99% ONLY MEMORIZED THIS",
+        "badge_ko": "◆ 공식 너머의 시각적 증명",
+        "badge_en": "◆ VISUAL AREA CONSERVATION",
         "cold_open_ko": "직각삼각형 위에 정사각형을 무한히 쌓아 올리면 넓이가 어떻게 될까요? 놀랍게도 보조선과 직각삼각형 하나면 두 정사각형의 넓이 합이 아래 기둥과 완벽히 같다는 걸 단 30초 만에 눈으로 볼 수 있습니다!",
         "cold_open_en": "What happens when you stack squares infinitely on a right triangle? Shockingly, you can visually prove in 30 seconds why the two branch squares equal the exact area of the trunk!",
         "quiz_ko": "💬 10초 퀴즈: 밑변이 3, 높이가 4일 때 빗변 정사각형의 넓이는? 댓글로 남겨보세요!",
@@ -2934,8 +2934,8 @@ VIRAL_HOOK_DB = {
         "match_keywords": ["체바", "메넬라우스", "ceva", "menelaus", "넓이 비", "평행선"],
         "thumb_hook_ko": ["보조선 딱 1줄로", "전부 약분된다?!"],
         "thumb_hook_en": ["1 HIDDEN LINE", "CANCELS IT ALL!"],
-        "badge_ko": "⚡ 상위 1% 도형 원리 치트키",
-        "badge_en": "⚡ ADVANCED GEOMETRY SECRET",
+        "badge_ko": "◆ 도형 넓이 비의 조화로운 원리",
+        "badge_en": "◆ GEOMETRIC RATIO INVARIANT",
         "cold_open_ko": "복잡하게 얽힌 삼각형 선분 비율의 곱이 왜 언제나 정확히 1이 될까요? 보조선 딱 한 줄과 넓이 비를 연결하는 순간 모든 분수가 도미노처럼 약분되는 소름 돋는 증명을 확인해 보세요!",
         "cold_open_en": "Why does the product of these triangle segment ratios always equal 1? Draw one auxiliary line and watch every fraction cancel out like dominoes!",
         "quiz_ko": "💬 10초 퀴즈: 세 분수가 도미노처럼 약분되어 1이 되는 결정적 단계는 몇 번째인가요?",
@@ -2956,8 +2956,8 @@ VIRAL_HOOK_DB = {
         "match_keywords": ["inscribed", "원주각", "중심각", "thales", "탈레스", "톨레미", "현의 길이", "원의 접선"],
         "thumb_hook_ko": ["어디로 움직여도", "각도가 똑같다?!"],
         "thumb_hook_en": ["MOVE IT ANYWHERE", "ANGLE NEVER CHANGES!"],
-        "badge_ko": "⚡ 시험에 무조건 나오는 원의 성질",
-        "badge_en": "⚡ THE ULTIMATE CIRCLE HACK",
+        "badge_ko": "◆ 변치 않는 원의 대칭과 성질",
+        "badge_en": "◆ TIMELESS CIRCLE INVARIANT",
         "cold_open_ko": "원 위의 점을 아무리 이리저리 움직여도 이 각도와 비례 관계는 단 1도조차 흔들리지 않습니다! 중심과 꼭짓점을 잇는 보조선 한 줄로 원 속에 숨겨진 불변량을 지금 바로 확인해 보세요!",
         "cold_open_en": "No matter where you drag this point along the circle, the geometric invariant never changes! With one auxiliary line, watch the hidden circle theorem unlock!",
         "quiz_ko": "💬 10초 퀴즈: 지름을 마주 보는 원주각은 항상 몇 도일까요? 댓글로 정답을 남겨주세요!",
@@ -2978,8 +2978,8 @@ VIRAL_HOOK_DB = {
         "match_keywords": ["sin", "cos", "tan", "삼각함수", "사인", "코사인", "단위원", "덧셈정리"],
         "thumb_hook_ko": ["공식 외우지 마세요!", "직사각형 1개면 끝"],
         "thumb_hook_en": ["STOP MEMORIZING!", "1 BOX PROVES IT ALL"],
-        "badge_ko": "⚡ 수능 1등급의 시각적 직관",
-        "badge_en": "⚡ VISUAL TRIGONOMETRY HACK",
+        "badge_ko": "◆ 눈으로 만나는 삼각함수 직관",
+        "badge_en": "◆ VISUAL TRIGONOMETRY INSIGHT",
         "cold_open_ko": "복잡한 삼각함수 공식을 아직도 무작정 암기하고 계신가요? 직각삼각형을 직사각형 상자 안에 넣거나 원 위에 올리는 순간, 모든 사인 코사인 공식이 한눈에 퍼즐처럼 맞춰집니다!",
         "cold_open_en": "Still memorizing complicated trigonometry formulas by rote? Drop the triangles into a single bounding rectangle, and watch every sine and cosine identity snap together like LEGO!",
         "quiz_ko": "💬 10초 퀴즈: sin²θ + cos²θ 의 값은 각도에 상관없이 항상 얼마일까요?",
@@ -3000,8 +3000,8 @@ VIRAL_HOOK_DB = {
         "match_keywords": ["제곱근", "무리수", "유리수", "순환소수", "지수", "로그", "거듭제곱", "근호", "square root", "radical", "rational", "repeating decimal", "exponent", "logarithm"],
         "thumb_hook_ko": ["공식만 외우면", "무조건 헷갈린다!"],
         "thumb_hook_en": ["STOP ROTE MEMORIZING", "SEE WHY IT WORKS!"],
-        "badge_ko": "⚡ 99%가 헷갈리는 수체계 핵심",
-        "badge_en": "⚡ VISUAL ALGEBRA BREAKTHROUGH",
+        "badge_ko": "◆ 대수와 기하를 잇는 수체계 원리",
+        "badge_en": "◆ VISUAL ALGEBRA BREAKTHROUGH",
         "cold_open_ko": "기호와 공식만 외워서 풀다 보면 부호와 정의에서 반드시 함정에 빠집니다! 정사각형의 넓이와 수직선 원리부터 차근차근 연결하면 왜 이 성질이 성립하는지 단 1분 만에 완벽히 꿰뚫어 볼 수 있습니다!",
         "cold_open_en": "Relying on rote memorization leads straight into sign traps! Connect the geometric area and number line step by step to see why this identity must hold!",
         "quiz_ko": "💬 10초 퀴즈: 오늘 증명에서 가장 결정적인 부호·정의 판별 단계는 몇 번째였나요? 댓글로 남겨주세요!",
@@ -3022,8 +3022,8 @@ VIRAL_HOOK_DB = {
         "match_keywords": ["벡터", "내적", "외적", "정사영", "공간도형", "삼수선", "구면", "평면의 방정식", "vector", "dot product", "projection", "3d"],
         "thumb_hook_ko": ["빛을 수직으로 쏘면", "그림자가 답이다!"],
         "thumb_hook_en": ["DROP ONE SHADOW", "SOLVE THE VECTOR!"],
-        "badge_ko": "⚡ 기하·벡터 1등급 시각 치트키",
-        "badge_en": "⚡ VISUAL VECTOR & 3D HACK",
+        "badge_ko": "◆ 기하·벡터의 시각적 직관",
+        "badge_en": "◆ GEOMETRIC VECTOR INSIGHT",
         "cold_open_ko": "복잡한 좌표 계산 없이 화살표의 분해와 그림자 정사영 하나로 벡터 문제를 단번에 해결할 수 있다면 믿으시겠습니까? 시점과 종점의 기하학적 의미를 눈으로 직접 확인해 보세요!",
         "cold_open_en": "Forget messy coordinate algebra—see how vector decomposition and orthogonal shadows unlock the entire geometric relationship at a glance!",
         "quiz_ko": "💬 10초 퀴즈: 두 벡터가 서로 수직일 때 내적의 값은 항상 얼마가 될까요?",
@@ -3042,8 +3042,8 @@ VIRAL_HOOK_DB = {
     },
     "probability_combinatorics": {
         "match_keywords": ["확률", "경우의 수", "순열", "조합", "파스칼", "이항정리", "통계", "정규분포", "시행", "사건", "probability", "combination", "permutation", "pascal", "binomial"],
-        "thumb_hook_ko": ["복잡한 경우의 수,", "대칭 구조로 1초 컷!"],
-        "thumb_hook_en": ["1 SYMMETRIC GRID", "COUNTS IT ALL!"],
+        "thumb_hook_ko": ["복잡한 경우의 수,", "대칭 격자로 읽는다!"],
+        "thumb_hook_en": ["1 SYMMETRIC GRID", "ILLUMINATES IT ALL"],
         "badge_ko": "⚡ 직관을 깨는 확통 시각 해법",
         "badge_en": "⚡ COMBINATORICS MADE VISUAL",
         "cold_open_ko": "빠뜨리거나 중복해서 세기 쉬운 경우의 수와 확률! 대칭 격자와 일대일 대응 다이어그램으로 바꾸는 순간 모든 갈래가 오차 없이 한눈에 정리됩니다!",
@@ -3066,8 +3066,8 @@ VIRAL_HOOK_DB = {
         "match_keywords": [],
         "thumb_hook_ko": ["보조선 딱 1줄!", "소름 돋는 증명"],
         "thumb_hook_en": ["JUST 1 HIDDEN LINE", "BLOWS YOUR MIND!"],
-        "badge_ko": "⚡ 99%가 몰랐던 시각적 증명",
-        "badge_en": "⚡ 99% NEVER SAW THIS PROOF",
+        "badge_ko": "◆ 공식 너머의 시각적 증명",
+        "badge_en": "◆ PURE VISUAL GEOMETRY PROOF",
         "cold_open_ko": "교과서에서는 복잡한 수식으로 길게 설명하지만, 기하학적 보조선 한 줄을 긋는 순간 단 30초 만에 눈으로 완벽히 증명됩니다! 끝까지 눈을 떼지 말고 도형의 변화를 따라와 보세요!",
         "cold_open_en": "Textbooks bury this in pages of dry algebra, but with one clever geometric line, you can see the entire proof unfold visually in 30 seconds!",
         "quiz_ko": "💬 오늘 본 시각적 증명 중 가장 놀라웠던 단계는 몇 번째 장면이었나요? 댓글로 알려주세요!",
@@ -7094,7 +7094,7 @@ def render_youtube_short_vertical(slug_key="math20250130001", lang_code="ko"):
             # 상단 알고리즘 후킹 배너
             draw.rounded_rectangle((44, 58, 1036, 294), radius=28, fill=(23, 37, 84), outline=(56, 189, 248), width=3)
             draw.rounded_rectangle((74, 78, 690, 130), radius=18, fill=(2, 132, 199))
-            badge_txt = (vprof.get("badge_en") or "⚡ 45s Visual Math Proof #Shorts") if lang_code == "en" else (vprof.get("badge_ko") or "⚡ 99%가 공식만 외운 시각적 증명")
+            badge_txt = (vprof.get("badge_en") or "◆ Visual Math Proof #Shorts") if lang_code == "en" else (vprof.get("badge_ko") or "◆ 공식 너머의 시각적 증명")
             draw.text((92, 86), badge_txt[:34], fill=(255, 255, 255), font=font_sub)
 
             step_label = f"STEP {seq_idx}/{total_seqs}"

@@ -983,5 +983,19 @@ python -X utf8 pr.py status
   > *"아이콘에 한글로 되어 있다. 영어모드인데도 불구하고"* (영문 모드 전환 시 `.q .lvl::after` `"🪜 단계별 빌드업"` 및 `.q-actions::before` `"✓ 즉시 채점 · 상세 해설"` 배지 한글 잔존)
 - **근본 원인**: `stitch_screen_builder.py`가 생성한 CSS 의사요소(`::before`/`::after`)의 `content: "..."` 문자열은 DOM 텍스트 노드가 아니므로 `mathedu-i18n.js`의 DOM 번역 워커가 치환할 수 없었던 구조적 누락.
 - **적용 규율**:
-  1. **[전 페이지 `html[lang="en"]` CSS 오버라이드 표준화]**: `stitch_screen_builder.py`, `mathedu-room.js`, `mathedu-i18n.js`, 전 258개 `board/*.html` 및 전 258개 `offline/*.html`에 `html[lang="en"] .q .lvl::after { content: "🪜 Step-by-Step Scaffolding"; }` 및 `html[lang="en"] .q-actions::before { content: "✓ Instant Check · Detailed Solution"; }`를 일괄 적용한다.
+  1. **[전 페이지 `html[lang="en"]` CSS 오버라이드 표준화]**: `stitch_screen_builder.py`, `mathedu-room.js`, `mathedu-i18n.js`, 전 258개 `board/*.html` 및 전 258개 `offline/*.html`에 `html[lang="en"] .q .lvl::after { content: "🪜 Step-by-Step Scaffolding"; }` 및 `html[lang="en"] .q-actions::before { content: "✓ Instant Check · Detailed Solution"; }`와 영문 단계 배지(`.q .lvl > span.bilingual-en`) 스타일을 일괄 적용하고, `csat2027.html`에도 `mathedu-i18n.js` 연동을 완결한다.
   2. **[회귀 차단 규칙 (`audit_engine.py`)]**: `CSS_PSEUDO_EN_HANGUL_LEAK` (`ERROR`) 규칙을 상시 가동해 `<style>` 내 한글 `content:`가 정의된 모든 CSS `::before`/`::after` 선택자에 `html[lang="en"]` 영문 대역이 빠짐없이 존재하는지 전수 검증한다.
+
+
+---
+
+### [Policy 87] 유튜브 썸네일·메타데이터·웹 배지 탈-클릭베이트 & 영구적 유클리드 아틀리에 품격 카피 원칙 (`2026-11-22` 확정 · 회장님 텔레그램 지시)
+- **회장님(`min7014`) 원문 지시 (`2026-11-22`)**:
+  > *"시험장 90% 함정! 문구를 좀더 세련되고 영구적인 무엇인가로 바꾸면 좋겠는데."*
+- **`designer` × `mathteacher` × `pr` 협업 표준안**:
+  1. **[썸네일·메타데이터 영구 품격화 (`exam_hybrid_creator.py` · `nano_banana_cinema_creator.py` · `min7014_video_maker.py`)]**:
+     - 단기 입시·자극적 클릭베이트(`"시험장 90% 함정!"`, `"보조선 1줄 5초 컷!"`, `"90% MISS THIS!"`, `"쓰면 하수"`, `"Visual Hack"`, `"치트키"`)를 전면 폐지하고, 시대를 초월한 기하 직관 카피(**`"왜 식 없이 보일까? / 보조선 한 줄의 통찰"`**, **`"수식은 내려놓고, / 도형의 눈을 뜨다"`**, **`"공식 너머의 필연성, / 한눈에 읽는 증명"`**, 영문 **`"WHY NO ALGEBRA? / ONE HIDDEN LINE"`**, **`"BEYOND FORMULAS / ONE VISUAL PROOF"`**)로 통일한다.
+     - 썸네일 좌측은 `4px` 골드 수직 악센트 바 · 딥 로열 인디고(`(14,30,62)`) · 유클리드 슬레이트 베젤(`(15,25,48)`) + 샴페인 골드 테두리, 중단 박스는 `CORE THEOREM`(정리형)과 `VISUAL INQUIRY`(탐구형)로 문맥 분리한다.
+  2. **[라이브 채널(`@min7014_ai`) 무손실 썸네일·제목 동기화 & 웹 배지 통일]**:
+     - 이미 게시된 라이브 유튜브 영상은 삭제 없이(`Rule 33`) `thumbnails().set` 및 `videos().update`로 새 아틀리에 썸네일·제목으로 무손실 전환하며, [index.html](file:///D:/mathedu/index.html)·[video_board.html](file:///D:/mathedu/video_board.html)·[mathedu-i18n.js](file:///D:/mathedu/mathedu-i18n.js)의 `"실전함정 5초 해체"` 배지·CTA를 `"✨ NEW 보조선 한 줄 · 4분 시각 증명(본편) ↗"` 계열로 일괄 정렬한다.
+  3. **[기계적 회귀 차단 (`auditor.py` L7)]**: `exam_hybrid_creator.py`, `nano_banana_cinema_creator.py`, `index.html`, `video_board.html`, `mathedu-i18n.js`에 구 클릭베이트 토큰 잔존을 상시 차단한다.

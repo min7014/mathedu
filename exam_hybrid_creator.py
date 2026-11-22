@@ -26,134 +26,146 @@ EXAM_TRAP_BLUEPRINTS = [
     {
         "slug": "2012093001",
         "diagram_kind": "circle_inscribed",
-        "exam_badge_ko": "🚨 원과 각도 단골 함정 해법",
-        "exam_badge_en": "🚨 High-Frequency Circle Angle Trap",
+        "exam_badge_ko": "◆ 기하의 불변량 · 원주각과 중심각",
+        "exam_badge_en": "◆ Circle Invariant · Inscribed Angle",
+        "thumb_hook_ko": ["왜 식 없이 보일까?", "보조선 한 줄의 통찰"],
+        "thumb_hook_en": ["WHY NO ALGEBRA?", "ONE HIDDEN LINE"],
         "problem_label_ko": "중심각 ∠AOB = 84°일 때, 원 위를 움직이는 점 P에 대하여 x = ∠APB는?",
         "problem_label_en": "Given central angle ∠AOB = 84°, find x = ∠APB for point P on the circle!",
         "figure_caption_ko": "∠AOB = 84°,  ∠APB = x = ?",
         "figure_caption_en": "∠AOB = 84°,  ∠APB = x = ?",
-        "answer_label_ko": "보조선 PO 1줄 → 이등변삼각형 2개!  x = 84° ÷ 2 = 42° (5초 컷!)",
-        "answer_label_en": "1 Line PO → Two Isosceles Triangles!  x = 84° ÷ 2 = 42° (5s Solve!)",
-        "title_ko": "🔥 시험장 90%가 3분 헤매는 원주각 함정, 보조선 1줄로 5초 컷! | 원주각과 중심각 시각적 증명",
-        "title_en": "🔥 90% Waste 3 Minutes on This Circle Angle Trap—Solve x in 5 Seconds! | Inscribed Angle Proof",
-        "short_title_ko": "❓ x가 몇 도인지 3초 만에 보이시나요? 원주각 함정 보조선 1줄 해법! #Shorts",
-        "short_title_en": "❓ Can You Find Angle x in 3 Seconds? One Hidden Radius Trick! #Shorts",
-        "act1_ko": "잠깐! 시험장에서 중심각이 84도일 때 비스듬히 꺾인 이 각 x를 연립방정식으로 풀면 3분이 날아갑니다. 공식 암기 없이 보조선 딱 한 줄로 5초 만에 보이시나요?",
-        "act1_en": "Stop! In an exam, setting up algebra for angle x when the central angle is 84 degrees wastes three minutes. Can you see why one hidden line solves x in five seconds?",
-        "act3_ko": "이제 처음 시험 문제로 돌아와 볼까요? 점 P와 중심 O를 잇는 지름 보조선 한 줄이면 두 이등변삼각형의 외각이 되어 x는 84도의 절반, 정답 42도가 5초 만에 튀어나옵니다! 내신과 수능 도형 4점 문항을 10초 눈풀이로 바꾸는 시각 증명, 지금 바로 채널 구독을 눌러 다음 실전 해법도 놓치지 마세요!",
-        "act3_en": "Now back to our exam problem! Drawing the single diameter through P and O splits angle x into two isosceles exterior halves—so x is half of 84, which is 42 degrees in five seconds flat! Subscribe right now so you never miss our daily 10-second visual exam hacks!",
-        "comment_quiz_ko": "🧩 [5초 실전 암산 테스트] 만약 중심각 ∠AOB = 116°라면 원주각 x는 몇 도일까요? 암산한 정답을 댓글로 남겨보세요! 👇",
-        "comment_quiz_en": "🧩 [5-Sec Exam Check] If central angle ∠AOB = 116°, what is angle x? Drop your mental-math answer in the comments! 👇",
+        "answer_label_ko": "지름 보조선 PO 한 줄 → 이등변삼각형 2개!  x = 84° ÷ 2 = 42°",
+        "answer_label_en": "1 Diameter Line PO → Two Isosceles Triangles!  x = 84° ÷ 2 = 42°",
+        "title_ko": "✨ 왜 방정식 없이 풀릴까? 원주각을 단번에 여는 보조선 한 줄의 통찰 | 원주각과 중심각 시각적 증명",
+        "title_en": "✨ Why One Hidden Diameter Replaces Algebra | Inscribed Angle Visual Proof",
+        "short_title_ko": "❓ 중심각 84°일 때 원주각 x는? 지름 보조선 한 줄의 통찰! #Shorts",
+        "short_title_en": "❓ Central Angle 84°—See Why One Diameter Reveals Angle x! #Shorts",
+        "act1_ko": "잠깐! 중심각이 84도일 때 비스듬히 꺾인 원주각 x를 복잡한 연립방정식으로 푸는 대신, 지름 보조선 딱 한 줄로 그 이유가 한눈에 보이시나요?",
+        "act1_en": "Wait! Instead of setting up tedious algebra for angle x when the central angle is 84 degrees, can you see why a single diameter reveals x visually?",
+        "act3_ko": "이제 원래 문제로 돌아와 볼까요? 점 P와 중심 O를 잇는 지름 보조선 한 줄이면 두 이등변삼각형의 외각이 되어 x는 84도의 절반, 정답 42도가 명쾌하게 드러납니다! 공식 암기 대신 눈으로 원리를 꿰뚫는 시각적 증명, 지금 바로 채널 구독을 눌러 다음 기하 통찰도 함께해 보세요!",
+        "act3_en": "Now back to our geometry problem! Drawing the single diameter through P and O splits angle x into two isosceles exterior halves—so x is half of 84, or 42 degrees directly! Subscribe right now to explore daily visual math insights!",
+        "comment_quiz_ko": "🧩 [시각 암산 퀴즈] 만약 중심각 ∠AOB = 116°라면 원주각 x는 몇 도일까요? 암산한 정답을 댓글로 남겨보세요! 👇",
+        "comment_quiz_en": "🧩 [Visual Check] If central angle ∠AOB = 116°, what is inscribed angle x? Drop your answer in the comments! 👇",
     },
     {
         "slug": "2012100304",
         "diagram_kind": "tangent_chord",
-        "exam_badge_ko": "📐 고1·수능 원과 접선 핵심 해법",
-        "exam_badge_en": "📐 High-Yield Circle Tangent Proof",
+        "exam_badge_ko": "◆ 원과 접선의 대칭 · 접현각의 원리",
+        "exam_badge_en": "◆ Circle & Tangent Symmetry Proof",
+        "thumb_hook_ko": ["왜 식 없이 보일까?", "보조선 한 줄의 통찰"],
+        "thumb_hook_en": ["WHY NO ALGEBRA?", "ONE HIDDEN LINE"],
         "problem_label_ko": "접선 AT와 현 AB가 이루는 각이 58°일 때, 원주 위 ∠ACB = x는?",
         "problem_label_en": "Tangent AT and chord AB form 58°. Find inscribed angle ∠ACB = x!",
         "figure_caption_ko": "접선각 ∠BAT = 58°,  ∠ACB = x = ?",
         "figure_caption_en": "Tangent ∠BAT = 58°,  ∠ACB = x = ?",
-        "answer_label_ko": "지름 보조선 AD 1줄 → 90° 직각 대칭!  x = 58° 그대로 일치!",
+        "answer_label_ko": "지름 보조선 AD 한 줄 → 90° 직각 대칭!  x = 58° 그대로 일치!",
         "answer_label_en": "1 Diameter Line AD → Right-Angle Match!  x = 58° Instantly!",
-        "title_ko": "⚡ 예각 접선 함정! 지름 보조선 1줄로 x=58° 5초 해체 | 접현각의 정리(예각) 시각적 증명",
-        "title_en": "⚡ Acute Tangent-Chord Trap? One Diameter Solves 58° in 5s! | Alternate Segment Visual Proof",
-        "short_title_ko": "❓ 예각 접선이 58°일 때 호 반대편 각 x는? 지름 보조선 1줄 3초 해법! #Shorts",
-        "short_title_en": "❓ Acute Tangent Is 58°—Spot Angle x Across the Circle in 3s! #Shorts",
-        "act1_ko": "원과 접선이 만나 이루는 각이 58도일 때, 멀리 떨어진 원주 위의 각 x는 몇 도일까요? 공식을 깜빡해도 지름 보조선 딱 한 줄이면 5초 만에 끝납니다!",
-        "act1_en": "When a tangent and chord meet at 58 degrees, what is angle x across the circle? Even if you forget the formula, one diameter line solves it in five seconds!",
-        "act3_ko": "실전 문제에 그대로 적용하면 접점을 지나는 지름 보조선 한 줄로 직각 90도에서 같은 여각을 빼 주므로 x는 58도와 정확히 일치합니다! 시험장 도형 킬러를 눈으로 푸는 시각 증명, 지금 바로 구독 버튼을 눌러 두세요!",
-        "act3_en": "Applying that diameter line to our exam trap subtracts the exact same complement from 90 degrees—so x equals 58 degrees immediately! Hit Subscribe right now to master visual geometry for every exam!",
-        "comment_quiz_ko": "🧩 [5초 실전 암산] 접선과 현이 이루는 각이 67°라면 호 반대편 원주각 x는 몇 도일까요? 댓글로 남겨보세요! 👇",
-        "comment_quiz_en": "🧩 [5-Sec Check] If the tangent-chord angle is 67°, what is angle x across the chord? Comment below! 👇",
+        "title_ko": "✨ 접선과 현이 만날 때 숨은 대칭! 지름 보조선 한 줄의 증명 | 접현각의 정리(예각) 시각적 증명",
+        "title_en": "✨ Hidden Symmetry of Tangent & Chord—Proved by One Diameter! | Alternate Segment Visual Proof",
+        "short_title_ko": "❓ 예각 접선이 58°일 때 호 반대편 각 x는? 지름 보조선 한 줄의 통찰! #Shorts",
+        "short_title_en": "❓ Acute Tangent Is 58°—Spot Angle x Across the Circle Visually! #Shorts",
+        "act1_ko": "원과 접선이 만나 이루는 각이 58도일 때, 멀리 떨어진 원주 위의 각 x는 몇 도일까요? 공식을 외우지 않아도 지름 보조선 딱 한 줄이면 원리가 투명하게 보입니다!",
+        "act1_en": "When a tangent and chord meet at 58 degrees, what is angle x across the circle? Even without memorizing formulas, one diameter line makes the symmetry clear!",
+        "act3_ko": "접점을 지나는 지름 보조선 한 줄을 그으면 직각 90도에서 같은 여각을 빼 주므로, 복잡해 보이는 원과 접선 문제에서도 x는 58도와 정확히 일치합니다! 도형의 본질을 눈으로 읽는 시각적 증명, 지금 바로 구독 버튼을 눌러 두세요!",
+        "act3_en": "Drawing that diameter line in this circle-tangent configuration subtracts the exact same complement from 90 degrees—so x equals 58 degrees at once! Hit Subscribe to build lasting geometric intuition!",
+        "comment_quiz_ko": "🧩 [시각 암산 퀴즈] 접선과 현이 이루는 각이 67°라면 호 반대편 원주각 x는 몇 도일까요? 댓글로 남겨보세요! 👇",
+        "comment_quiz_en": "🧩 [Visual Check] If the tangent-chord angle is 67°, what is angle x across the chord? Comment below! 👇",
     },
     {
         "slug": "2017090101",
         "diagram_kind": "pythagoras_squares",
-        "exam_badge_ko": "🚨 중·고등 도형 넓이 단골 함정",
-        "exam_badge_en": "🚨 Classic Exam Area Trap",
+        "exam_badge_ko": "◆ 유클리드 넓이 보존 · 직각삼각형",
+        "exam_badge_en": "◆ Pythagorean Area Invariance",
+        "thumb_hook_ko": ["수식은 내려놓고,", "도형의 눈을 뜨다"],
+        "thumb_hook_en": ["BEYOND FORMULAS,", "SEE THE SYMMETRY"],
         "problem_label_ko": "직각삼각형 두 변 위 정사각형 넓이가 9와 16일 때, 빗변 정사각형 넓이 x는?",
         "problem_label_en": "Two leg squares have areas 9 and 16. Find hypotenuse square area x!",
         "figure_caption_ko": "넓이 S₁ = 9, S₂ = 16  →  빗변 정사각형 S₃ = x = ?",
         "figure_caption_en": "Areas S₁ = 9, S₂ = 16  →  Hypotenuse Square x = ?",
-        "answer_label_ko": "루트 계산 ZERO! 합동 직각삼각형 4개 넓이 소거(c²=a²+b²)로 x = 9 + 16 = 25!",
+        "answer_label_ko": "제곱근 계산 없이! 합동 직각삼각형 4개 넓이 보존(c²=a²+b²) → x = 9 + 16 = 25!",
         "answer_label_en": "Zero Square Roots! Four-Triangle Square Proof (c²=a²+b²) → x = 9 + 16 = 25!",
-        "title_ko": "🔥 루트 계산 쓰면 하수! 넓이 보존만으로 빗변 넓이 3초 암산법 | 피타고라스 정리 시각적 증명",
-        "title_en": "🔥 Stop Taking Square Roots! 3-Second Square Area Trick | Pythagorean Theorem Visual Proof",
-        "short_title_ko": "❓ 루트 없이 3초 만에 넓이 x가 보이시나요? 피타고라스 넓이 보존 해법! #Shorts",
-        "short_title_en": "❓ Can You Find Area x in 3 Seconds Without Roots? Visual Proof! #Shorts",
-        "act1_ko": "잠깐! 이 문제에서 변의 길이를 루트로 구한 뒤 다시 제곱하고 계신가요? 큰 정사각형 넓이 소거 원리를 알면 루트 계산 없이 3초 만에 끝납니다!",
-        "act1_en": "Wait! Are you still computing side lengths and squaring them back? With the four-triangle square proof, you can spot x in three seconds with zero square roots!",
-        "act3_ko": "큰 정사각형 테두리에서 합동인 직각삼각형 네 개를 빼내면 두 작은 정사각형 넓이 9와 16의 합이 곧 빗변 정사각형 넓이가 되므로 x는 9 더하기 16, 정답 25입니다! 공식 너머의 진짜 직관, 지금 바로 구독하고 매일 받아보세요!",
-        "act3_en": "Subtracting the four congruent right triangles around the border leaves c squared equal to a squared plus b squared—so x is simply 9 plus 16 equals 25! Subscribe now for daily visual math breakthroughs!",
-        "comment_quiz_ko": "🧩 [3초 암산] 빗변 정사각형 넓이가 40이고 한쪽 작은 정사각형 넓이가 13이면 나머지 정사각형 넓이는? 댓글로 남겨보세요! 👇",
-        "comment_quiz_en": "🧩 [3-Sec Check] If the hypotenuse square has area 40 and one leg square is 13, what is the other leg square's area? 👇",
+        "title_ko": "✨ 제곱근 계산 없이 한눈에 보인다! 넓이 보존으로 읽는 빗변 정사각형 | 피타고라스 정리 시각적 증명",
+        "title_en": "✨ Zero Square Roots Needed—See Area Conservation Directly! | Pythagorean Theorem Visual Proof",
+        "short_title_ko": "❓ 제곱근 없이 넓이 x가 한눈에 보이시나요? 피타고라스 넓이 보존 원리! #Shorts",
+        "short_title_en": "❓ Can You Spot Area x Without Square Roots? Pure Visual Proof! #Shorts",
+        "act1_ko": "잠깐! 직각삼각형에서 변의 길이를 제곱근으로 구한 뒤 다시 제곱할 필요가 있을까요? 큰 정사각형의 넓이 보존 원리를 알면 계산 없이 그림만으로 투명하게 보입니다!",
+        "act1_en": "Wait! Why compute irrational side lengths only to square them back? With four-triangle area conservation, area x reveals itself directly without square roots!",
+        "act3_ko": "큰 정사각형 테두리에서 합동인 직각삼각형 네 개를 덜어내면 두 작은 정사각형 넓이 9와 16의 합이 곧 빗변 정사각형 넓이가 되므로 x는 9 더하기 16, 정답 25입니다! 공식 너머의 깊은 직관, 지금 바로 구독하고 매일 만나보세요!",
+        "act3_en": "Removing four congruent right triangles around the border leaves c squared equal to a squared plus b squared—so x is simply 9 plus 16 equals 25! Subscribe now for daily visual math discoveries!",
+        "comment_quiz_ko": "🧩 [시각 암산 퀴즈] 빗변 정사각형 넓이가 40이고 한쪽 작은 정사각형 넓이가 13이면 나머지 정사각형 넓이는? 댓글로 남겨보세요! 👇",
+        "comment_quiz_en": "🧩 [Visual Check] If the hypotenuse square has area 40 and one leg square is 13, what is the other leg square's area? 👇",
     },
     {
         "slug": "2017090405",
         "diagram_kind": "isosceles_bisector",
-        "exam_badge_ko": "🚨 중2·수능 기하 각도 추론 단골",
-        "exam_badge_en": "🚨 Exam Triangle Angle Trap",
+        "exam_badge_ko": "◆ 대칭과 합동의 미학 · 황금삼각형",
+        "exam_badge_en": "◆ Mirror Symmetry · Isosceles Triangle",
+        "thumb_hook_ko": ["수식은 내려놓고,", "도형의 눈을 뜨다"],
+        "thumb_hook_en": ["BEYOND FORMULAS,", "SEE THE SYMMETRY"],
         "problem_label_ko": "AB = AC인 삼각형에서 꼭지각 ∠A = 36°일 때, 밑각 ∠B = x는?",
         "problem_label_en": "In triangle ABC with AB = AC and ∠A = 36°, find base angle x = ∠B!",
         "figure_caption_ko": "AB = AC,  ∠A = 36°  →  ∠B = x = ?",
         "figure_caption_en": "AB = AC,  ∠A = 36°  →  ∠B = x = ?",
-        "answer_label_ko": "꼭지각 이등분선 1줄 → 완벽 대칭 합동!  x = (180°-36°)÷2 = 72°!",
+        "answer_label_ko": "꼭지각 이등분선 한 줄 → 완벽 대칭 합동!  x = (180°-36°)÷2 = 72°!",
         "answer_label_en": "1 Angle Bisector → Mirror SAS Congruence!  x = (180°-36°)÷2 = 72°!",
-        "title_ko": "⚡ 이등변삼각형 문제마다 쓰이는 '보조선 1줄'의 비밀! 황금삼각형 72° 5초 해법 | 시각적 증명",
-        "title_en": "⚡ The One Auxiliary Line Behind Every Isosceles Exam Problem! | Base Angles Visual Proof",
-        "short_title_ko": "❓ 꼭지각 36°일 때 밑각 x와 숨은 대칭선 1줄, 3초 만에 보이시나요? #Shorts",
-        "short_title_en": "❓ Vertex Angle 36°—Spot Base Angle x & the Hidden Mirror Line in 3s! #Shorts",
-        "act1_ko": "이등변삼각형 응용 문제에서 막힐 때 1순위로 그어야 할 단 한 줄의 보조선은 어디일까요? 꼭지각이 36도인 황금삼각형 예제로 5초 만에 확인해 보세요!",
-        "act1_en": "Whenever an isosceles triangle problem blocks you on an exam, what is the number-one auxiliary line to draw first? Let's unlock it in five seconds!",
-        "act3_ko": "꼭지각 36도를 반으로 가르는 이등분선 한 줄이면 좌우 삼각형이 완벽히 포개져 두 밑각 x는 144도의 절반인 72도가 즉시 도출됩니다! 보조선 감각을 깨우는 시각 증명, 지금 구독 눌러 매일 챙겨 보세요!",
-        "act3_en": "Bisecting the 36-degree vertex folds the triangle into exact mirror halves, giving base angle x equals 72 degrees immediately! Hit Subscribe to build unstoppable geometry intuition!",
-        "comment_quiz_ko": "🧩 [5초 암산] 이등변삼각형의 한 외각(꼭지각 바깥쪽 각)이 130°일 때 한 밑각 x는 몇 도일까요? (반으로 나누기만 하면 끝!) 👇",
-        "comment_quiz_en": "🧩 [5-Sec Check] If the exterior angle at the vertex of an isosceles triangle is 130°, what is each base angle x? 👇",
+        "title_ko": "✨ 이등변삼각형의 본질을 여는 대칭선 한 줄! 황금삼각형 72°의 조화 | 시각적 증명",
+        "title_en": "✨ The One Symmetry Line Behind Every Isosceles Triangle! | Base Angles Visual Proof",
+        "short_title_ko": "❓ 꼭지각 36°일 때 밑각 x와 숨은 대칭선 한 줄이 보이시나요? #Shorts",
+        "short_title_en": "❓ Vertex Angle 36°—Spot Base Angle x & the Hidden Symmetry Line! #Shorts",
+        "act1_ko": "이등변삼각형의 성질을 가장 직관적으로 열어 주는 단 한 줄의 대칭선은 어디일까요? 꼭지각이 36도인 황금삼각형으로 완벽한 좌우 합동을 직접 확인해 보세요!",
+        "act1_en": "Where does the single symmetry line lie that illuminates every isosceles triangle property? Discover it directly on this 36-degree golden triangle!",
+        "act3_ko": "꼭지각 36도를 반으로 가르는 이등분선 한 줄이면 좌우 삼각형이 완벽히 포개져 두 밑각 x는 144도의 절반인 72도가 즉시 도출됩니다! 보조선 감각을 깨우는 시각적 증명, 지금 구독 눌러 매일 챙겨 보세요!",
+        "act3_en": "Bisecting the 36-degree vertex folds the triangle into exact mirror halves, giving base angle x equals 72 degrees immediately! Hit Subscribe to build lasting geometric intuition!",
+        "comment_quiz_ko": "🧩 [시각 암산 퀴즈] 이등변삼각형의 한 외각(꼭지각 바깥쪽 각)이 130°일 때 한 밑각 x는 몇 도일까요? 👇",
+        "comment_quiz_en": "🧩 [Visual Check] If the exterior angle at the vertex of an isosceles triangle is 130°, what is each base angle x? 👇",
     },
     {
         "slug": "2014111902",
         "diagram_kind": "ceva_ratios",
-        "exam_badge_ko": "🚨 심화 기하 삼각형 선분비 해법",
-        "exam_badge_en": "🚨 Advanced Triangle Ratio Trap",
+        "exam_badge_ko": "◆ 공점과 넓이 비의 조화 · 체바 정리",
+        "exam_badge_en": "◆ Ceva's Theorem · Area Ratio Balance",
+        "thumb_hook_ko": ["수식은 내려놓고,", "도형의 눈을 뜨다"],
+        "thumb_hook_en": ["BEYOND FORMULAS,", "SEE THE SYMMETRY"],
         "problem_label_ko": "세 체바선이 한 점 P에서 만나고 BD:DC=2:3, CE:EA=3:4일 때 AF:FB = x : y는?",
         "problem_label_en": "Three cevians concur at P with BD:DC=2:3 and CE:EA=3:4. Find AF:FB!",
         "figure_caption_ko": "BD:DC = 2:3, CE:EA = 3:4  →  AF:FB = x:y = ?",
         "figure_caption_en": "BD:DC = 2:3, CE:EA = 3:4  →  AF:FB = x:y = ?",
-        "answer_label_ko": "삼각형 넓이비 순환 곱 = 1 → (2/3)×(3/4)×(AF/FB)=1 → AF:FB = 2:1 (5초 컷!)",
+        "answer_label_ko": "삼각형 넓이 비 순환 곱 = 1 → (2/3)×(3/4)×(AF/FB)=1 → AF:FB = 2:1",
         "answer_label_en": "Cyclic Area Ratio = 1 → (2/3)×(3/4)×(AF/FB)=1 → AF:FB = 2:1!",
-        "title_ko": "🔥 보조평행선 없이 5초 컷! 삼각형 선분비를 순식간에 끝내는 넓이비 원리 | 체바의 정리 시각 증명",
-        "title_en": "🔥 Solve Triangle Ratio Traps in 5 Seconds via Area Ratios! | Ceva's Theorem Visual Proof",
-        "short_title_ko": "❓ AF:FB 비율, 좌표 안 쓰고 5초 만에 암산되시나요? 체바 넓이비 해법! #Shorts",
-        "short_title_en": "❓ Can You Find Ratio AF:FB in 5 Seconds Without Coordinates? Ceva Visual Trick! #Shorts",
-        "act1_ko": "삼각형 내부 한 점에서 세 직선이 만날 때, 복잡한 연립방정식이나 좌표 없이 AF 대 FB의 비율을 단 5초 만에 암산할 수 있을까요?",
-        "act1_en": "When three lines meet inside a triangle, can you find the missing side ratio AF to FB in five seconds flat without coordinates or messy algebra?",
-        "act3_ko": "밑변의 비가 곧 내부 삼각형 넓이의 비라는 원리로 3분의 2 곱하기 4분의 3 곱하기 AF 대 FB가 1이 되므로, 3이 약분되어 정답 2 대 1이 5초 만에 완성됩니다! 상위 1% 도형 통찰, 지금 바로 구독해 두세요!",
-        "act3_en": "Since base ratios match area ratios around point P, two-thirds times three-fourths times AF over FB equals 1—canceling 3 gives AF to FB equals 2 to 1 in five seconds! Subscribe now for more advanced visual geometry shortcuts!",
-        "comment_quiz_ko": "🧩 [5초 암산] BD:DC = 1:2, CE:EA = 2:5일 때 한 점에서 만나려면 AF:FB는 몇 대 몇일까요? 댓글로 도전! 👇",
-        "comment_quiz_en": "🧩 [5-Sec Check] If BD:DC = 1:2 and CE:EA = 2:5, what ratio AF:FB makes the three lines concurrent? 👇",
+        "title_ko": "✨ 좌표 없이 넓이 비 하나로 약분된다! 삼각형 공점의 기하학 | 체바의 정리 시각적 증명",
+        "title_en": "✨ How Triangle Area Ratios Cancel Cleanly to 1 | Ceva's Theorem Visual Proof",
+        "short_title_ko": "❓ AF:FB 비율, 좌표 없이 넓이 비만으로 보이시나요? 체바의 정리 시각 증명! #Shorts",
+        "short_title_en": "❓ Can You Spot Ratio AF:FB via Pure Area Balance? Ceva Visual Proof! #Shorts",
+        "act1_ko": "삼각형 내부 한 점에서 세 직선이 만날 때, 복잡한 연립방정식이나 좌표 없이 AF 대 FB의 비율을 넓이의 균형만으로 읽어낼 수 있을까요?",
+        "act1_en": "When three lines concur inside a triangle, can you read the missing side ratio AF to FB using pure area balance without coordinates?",
+        "act3_ko": "밑변의 비가 곧 내부 삼각형 넓이의 비라는 원리로 3분의 2 곱하기 4분의 3 곱하기 AF 대 FB가 1이 되므로, 3이 약분되어 정답 2 대 1이 명쾌하게 완성됩니다! 깊이 있는 도형 통찰, 지금 바로 구독해 두세요!",
+        "act3_en": "Because base ratios equal interior area ratios around point P, two-thirds times three-fourths times AF over FB equals 1—canceling 3 gives AF to FB equals 2 to 1! Subscribe now for more visual geometry insights!",
+        "comment_quiz_ko": "🧩 [시각 암산 퀴즈] BD:DC = 1:2, CE:EA = 2:5일 때 한 점에서 만나려면 AF:FB는 몇 대 몇일까요? 댓글로 도전! 👇",
+        "comment_quiz_en": "🧩 [Visual Check] If BD:DC = 1:2 and CE:EA = 2:5, what ratio AF:FB makes the three lines concurrent? 👇",
     },
     {
         "slug": "2014111901",
         "diagram_kind": "menelaus_line",
-        "exam_badge_ko": "🚨 내신 심화·수능 벡터/기하 필수",
-        "exam_badge_en": "🚨 Geometry & Vector Ratio Essential",
+        "exam_badge_ko": "◆ 할선과 평행 닮음의 고리 · 메넬라우스",
+        "exam_badge_en": "◆ Menelaus' Theorem · Parallel Proof",
+        "thumb_hook_ko": ["왜 식 없이 보일까?", "보조선 한 줄의 통찰"],
+        "thumb_hook_en": ["WHY NO ALGEBRA?", "ONE HIDDEN LINE"],
         "problem_label_ko": "할선이 연장선 D(BC:CD=1:1)와 변 위 E(CE:EA=1:3)를 지날 때 AF:FB는?",
         "problem_label_en": "A line cuts BC extended at D (BC=CD) and AC at E (CE:EA=1:3). Find AF:FB!",
         "figure_caption_ko": "BD:DC = 2:1, CE:EA = 1:3  →  AF:FB = ?",
         "figure_caption_en": "BD:DC = 2:1, CE:EA = 1:3  →  AF:FB = ?",
-        "answer_label_ko": "평행보조선 1줄 닮음 고리! (2/1)×(1/3)×(AF/FB)=1 → AF:FB = 3:2!",
+        "answer_label_ko": "평행보조선 한 줄 닮음 고리! (2/1)×(1/3)×(AF/FB)=1 → AF:FB = 3:2!",
         "answer_label_en": "1 Parallel Line Similarity Loop! (2/1)×(1/3)×(AF/FB)=1 → AF:FB = 3:2!",
-        "title_ko": "⚡ 헷갈리는 외분점 순서 실수 끝! 평행보조선 1줄로 꿰뚫는 5초 비율 해법 | 메넬라우스 정리 시각 증명",
-        "title_en": "⚡ Never Mix Up Ratio Order Again! One Parallel Line Proves It | Menelaus' Theorem Visualized",
-        "short_title_ko": "❓ 삼각형 가로지르는 직선 비율 문제, 평행선 1줄로 5초 컷! #Shorts",
-        "short_title_en": "❓ Transversal Line Ratio Trap—One Parallel Line Solves It in 5s! #Shorts",
-        "act1_ko": "직선이 삼각형을 비스듬히 뚫고 지나갈 때 외분점 순서를 헷갈려 틀려 본 적 있으신가요? 꼭짓점 평행선 딱 한 줄이면 절대 틀리지 않습니다!",
-        "act1_en": "Ever lose exam points mixing up segment order when a line slices across a triangle? One parallel auxiliary line makes the ratio unforgettable!",
-        "act3_ko": "꼭짓점 점프 순환 고리에 그대로 넣으면 1분의 2 곱하기 3분의 1 곱하기 FB분의 AF가 1이 되어 AF 대 FB는 3 대 2로 단번에 해결됩니다! 지금 채널을 구독하고 흔들리지 않는 도형 무기를 장착하세요!",
+        "title_ko": "✨ 외분점 비례가 한눈에 정렬된다! 평행보조선 한 줄의 닮음 원리 | 메넬라우스 정리 시각 증명",
+        "title_en": "✨ Never Mix Up Ratio Order Again! One Parallel Line Proves It | Menelaus' Theorem Visualized",
+        "short_title_ko": "❓ 삼각형을 가로지르는 직선의 비율, 평행선 한 줄의 원리! #Shorts",
+        "short_title_en": "❓ A Line Across a Triangle—One Parallel Line Proves the Ratio! #Shorts",
+        "act1_ko": "직선이 삼각형을 비스듬히 뚫고 지나갈 때 외분점 비례의 순서가 헷갈리신 적이 있나요? 꼭짓점을 지나는 평행선 딱 한 줄이면 원리가 절대 흔들리지 않습니다!",
+        "act1_en": "Ever wonder why those three segment ratios along a transversal line always multiply to 1? One parallel auxiliary line makes the proportion unforgettable!",
+        "act3_ko": "꼭짓점 점프 순환 고리에 그대로 넣으면 1분의 2 곱하기 3분의 1 곱하기 FB분의 AF가 1이 되어 AF 대 FB는 3 대 2로 단번에 정렬됩니다! 지금 채널을 구독하고 흔들리지 않는 도형 직관을 세워 보세요!",
         "act3_en": "Following the vertex-to-intersection loop gives 2 over 1 times 1 over 3 times AF over FB equals 1—so AF to FB is 3 to 2! Hit Subscribe for daily visual proof mastery!",
-        "comment_quiz_ko": "🧩 [5초 체크] BD:DC = 3:1, CE:EA = 1:3이면 AF:FB는 몇 대 몇이 될까요? 암산 결과를 댓글로! 👇",
-        "comment_quiz_en": "🧩 [5-Sec Check] If BD:DC = 3:1 and CE:EA = 1:3, what is AF:FB? Drop your answer below! 👇",
+        "comment_quiz_ko": "🧩 [시각 암산 퀴즈] BD:DC = 3:1, CE:EA = 1:3이면 AF:FB는 몇 대 몇이 될까요? 암산 결과를 댓글로! 👇",
+        "comment_quiz_en": "🧩 [Visual Check] If BD:DC = 3:1 and CE:EA = 1:3, what is AF:FB? Drop your answer below! 👇",
     },
 ]
 
@@ -161,12 +173,13 @@ EXAM_TRAP_BLUEPRINTS = [
 def _clean_canvas_text(text: str) -> str:
     """Pillow Malgun Gothic 캔버스에서 두부 박스(□)를 유발하는 이모지·특수문자를 네이티브 기호로 정화"""
     repl = [
-        ("⏱️", "★"), ("⏱", "★"),
-        ("🚨", "★"), ("📐", "■"),
-        ("💡", "★"), ("🎯", "★"),
+        ("⏱️", "◆"), ("⏱", "◆"),
+        ("🚨", "◆"), ("📐", "■"),
+        ("💡", "◆"), ("🎯", "◆"),
+        ("✨", "◆"),
         ("🔔", "▶"), ("👇", "▶"),
-        ("📝", "■"), ("⚡", "★"),
-        ("✅", "★"), ("\u2794", "→"),
+        ("📝", "■"), ("⚡", "◆"),
+        ("✅", "◆"), ("\u2794", "→"),
     ]
     out = str(text or "")
     for src, dst in repl:
@@ -552,69 +565,99 @@ def _draw_exam_problem_diagram(draw: ImageDraw.ImageDraw, box: tuple, kind: str,
             )
 
 
+def _fit_font_to_width(draw: ImageDraw.ImageDraw, vmaker, text: str, max_w: int, start_sz: int, min_sz: int = 18):
+    sz = start_sz
+    while sz >= min_sz:
+        f = vmaker.get_font_for_lang("ko", sz, bold=True)
+        bbox = draw.textbbox((0, 0), text, font=f)
+        if (bbox[2] - bbox[0]) <= max_w:
+            return f
+        sz -= 2
+    return vmaker.get_font_for_lang("ko", min_sz, bold=True)
+
+
 def render_exam_hybrid_thumbnail(bp: dict, doc, lang_code: str, out_png: Path) -> Path:
     import min7014_video_maker as vmaker
 
     W, H = 1280, 720
-    img = Image.new("RGB", (W, H), (8, 13, 28))
+    # 코스믹 아틀리에 딥 네이비 배경 & 절제된 그리드 (designer × pr)
+    img = Image.new("RGB", (W, H), (6, 11, 25))
     draw = ImageDraw.Draw(img)
     for gx in range(0, W, 80):
-        draw.line([(gx, 0), (gx, H)], fill=(16, 26, 52), width=1)
+        draw.line([(gx, 0), (gx, H)], fill=(13, 21, 44), width=1)
     for gy in range(0, H, 80):
-        draw.line([(0, gy), (W, gy)], fill=(16, 26, 52), width=1)
+        draw.line([(0, gy), (W, gy)], fill=(13, 21, 44), width=1)
 
     is_en = lang_code == "en"
-    # 우측: 원본 min7014.github.io 클라이맥스 슬라이드 무결점 배치 (Rule 28)
+    # 우측: 원본 min7014.github.io 클라이맥스 슬라이드 무결점 배치 (Rule 28 · 유클리드 슬레이트 베젤 + 샴페인 골드 테두리)
     key_idx = max(0, len(doc) - 2)
     pix = doc[key_idx].get_pixmap(dpi=240)
     slide_img = vmaker._mask_pdf_bottom_author_bar(Image.frombytes("RGB", [pix.width, pix.height], pix.samples))
     scale = min(620 / slide_img.width, 580 / slide_img.height)
     sw, sh = int(slide_img.width * scale), int(slide_img.height * scale)
     sx, sy = W - sw - 34, (H - sh) // 2
-    draw.rounded_rectangle((sx - 12, sy - 12, sx + sw + 12, sy + sh + 12), radius=22, fill=(2, 132, 199), outline=(250, 204, 21), width=4)
+    draw.rounded_rectangle((sx - 12, sy - 12, sx + sw + 12, sy + sh + 12), radius=22, fill=(15, 25, 48), outline=(234, 179, 8), width=3)
     img.paste(slide_img.resize((sw, sh), Image.Resampling.LANCZOS), (sx, sy))
 
-    # 좌측 상단 시험 킬러 배지 (Rule 37: 유클리드 로열 블루 팔레트)
+    # 좌측 상단 아틀리에 배지 (딥 로열 인디고 + 시안 헤어라인 테두리)
     badge = _clean_canvas_text(bp["exam_badge_en"] if is_en else bp["exam_badge_ko"])
-    draw.rounded_rectangle((36, 36, 586, 98), radius=16, fill=(2, 132, 199), outline=(254, 240, 138), width=3)
-    draw.text((56, 51), badge, fill=(255, 255, 255), font=vmaker.get_font_for_lang("ko", 26, bold=True))
+    draw.rounded_rectangle((36, 36, 586, 98), radius=14, fill=(14, 30, 62), outline=(56, 189, 248), width=2)
+    f_badge = _fit_font_to_width(draw, vmaker, badge, max_w=516, start_sz=25, min_sz=18)
+    draw.text((54, 52), badge, fill=(224, 242, 254), font=f_badge)
 
-    # 좌측 초대형 2줄 시험 함정 카피
-    h_lines = ["90% MISS THIS!", "SOLVE x IN 5s!"] if is_en else ["시험장 90% 함정!", "보조선 1줄 5초 컷!"]
-    f_big = vmaker.get_font_for_lang("ko", 54 if is_en else 60, bold=True)
-    yh = 128
-    for idx_l, hl in enumerate(h_lines):
-        c_fill = (255, 255, 255) if idx_l == 0 else (250, 204, 21)
-        for dx in (-4, 0, 4):
-            for dy in (-4, 0, 4):
-                if dx or dy:
-                    draw.text((40 + dx, yh + dy), hl, fill=(0, 0, 0), font=f_big)
-        draw.text((40, yh), hl, fill=c_fill, font=f_big)
-        yh += 80
+    # 좌측 초대형 2줄 시대를 초월한 기하 직관 헤드라인 + 4px 골드 수직 악센트 바
+    kind = bp.get("diagram_kind", "pdf_native")
+    if bp.get("thumb_hook_ko") and bp.get("thumb_hook_en"):
+        h_lines = bp["thumb_hook_en"] if is_en else bp["thumb_hook_ko"]
+    elif kind in ("circle_inscribed", "tangent_chord", "menelaus_line"):
+        h_lines = ["WHY NO ALGEBRA?", "ONE HIDDEN LINE"] if is_en else ["왜 식 없이 보일까?", "보조선 한 줄의 통찰"]
+    elif kind in ("pythagoras_squares", "isosceles_bisector", "ceva_ratios"):
+        h_lines = ["BEYOND FORMULAS,", "SEE THE SYMMETRY"] if is_en else ["수식은 내려놓고,", "도형의 눈을 뜨다"]
+    else:
+        h_lines = ["BEYOND FORMULAS", "ONE VISUAL PROOF"] if is_en else ["공식 너머의 필연성,", "한눈에 읽는 증명"]
 
-    # 좌측 중단 구체적 수치 조건 박스 (x = ?)
-    draw.rounded_rectangle((36, 316, 586, 496), radius=18, fill=(15, 25, 52), outline=(56, 189, 248), width=3)
+    draw.rounded_rectangle((36, 134, 41, 282), radius=2, fill=(250, 204, 21))
+    yh = 132
+    for idx_l, hl in enumerate(h_lines[:2]):
+        f_big = _fit_font_to_width(draw, vmaker, hl, max_w=532, start_sz=(48 if is_en else 54), min_sz=32)
+        c_fill = (248, 250, 252) if idx_l == 0 else (250, 204, 21)
+        # 부드러운 드롭 섀도 + 절제된 딥 네이비 윤곽
+        draw.text((55, yh + 4), hl, fill=(2, 4, 12), font=f_big)
+        for dx, dy in ((-2, 0), (2, 0), (0, -2), (0, 2)):
+            draw.text((52 + dx, yh + dy), hl, fill=(4, 8, 20), font=f_big)
+        draw.text((52, yh), hl, fill=c_fill, font=f_big)
+        yh += 78
+
+    # 좌측 중단 원리·탐구 카드 (문맥 분리: pdf_native = CORE THEOREM, 탐구 수치 = VISUAL INQUIRY)
+    draw.rounded_rectangle((36, 316, 586, 496), radius=18, fill=(13, 22, 46), outline=(56, 189, 248), width=2)
     cap_main = _clean_canvas_text(bp["figure_caption_en"] if is_en else bp["figure_caption_ko"])
-    draw.text((56, 340), "■ [실전 문제]" if not is_en else "■ [EXAM PROBLEM]", fill=(250, 204, 21), font=vmaker.get_font_for_lang("ko", 26, bold=True))
+    if kind == "pdf_native":
+        cap_main = re.sub(r"^(?:핵심\s*원리\s*[:：]|Core\s*Principle\s*[:：])\s*", "", cap_main, flags=re.I).strip()
+        box_hdr = "CORE THEOREM · 핵심 정리" if not is_en else "CORE THEOREM"
+    else:
+        box_hdr = "VISUAL INQUIRY · 사유의 질문" if not is_en else "VISUAL INQUIRY"
+    draw.text((56, 338), box_hdr, fill=(250, 204, 21), font=vmaker.get_font_for_lang("ko", 24, bold=True))
     has_ko_cap = bool(re.search(r"[가-힣]", cap_main))
-    t_sz, t_w = (32, 19) if has_ko_cap else (32, 24)
+    t_sz, t_w = (30, 19) if has_ko_cap else (30, 25)
     wrapped_cap = textwrap.wrap(cap_main, width=t_w)
     if len(wrapped_cap) > 2:
-        t_sz, t_w = (27, 24) if has_ko_cap else (27, 29)
+        t_sz, t_w = (25, 24) if has_ko_cap else (25, 30)
         wrapped_cap = textwrap.wrap(cap_main, width=t_w)
     f_tcap = vmaker.get_font_for_lang("ko", t_sz, bold=True)
-    yc = 384 if len(wrapped_cap) <= 2 else 376
-    t_lh = 44 if len(wrapped_cap) <= 2 else 35
+    yc = 382 if len(wrapped_cap) <= 2 else 374
+    t_lh = 44 if len(wrapped_cap) <= 2 else 34
     for cl in wrapped_cap[:3]:
-        draw.text((56, yc), cl, fill=(125, 211, 252), font=f_tcap)
+        draw.text((56, yc), cl, fill=(186, 230, 253), font=f_tcap)
         yc += t_lh
 
-    # 하단 구독 유도 브랜드 바
-    draw.rounded_rectangle((36, 540, 586, 656), radius=16, fill=(15, 118, 110), outline=(110, 231, 183), width=2)
-    cta1 = "★ 공식 암기 ZERO · 10초 시각 해법" if not is_en else "★ Zero Rote Formulas · 10s Visual Hack"
-    cta2 = "▶ @min7014_ai 내신·수능 도형 정복" if not is_en else "▶ @min7014_ai · Exam Visual Proofs"
-    draw.text((56, 558), cta1, fill=(254, 240, 138), font=vmaker.get_font_for_lang("ko", 24, bold=True))
-    draw.text((56, 602), cta2, fill=(255, 255, 255), font=vmaker.get_font_for_lang("ko", 24, bold=True))
+    # 하단 아틀리에 브랜드 바 (딥 에메랄드 슬레이트 + 민트 헤어라인)
+    draw.rounded_rectangle((36, 540, 586, 656), radius=16, fill=(10, 38, 46), outline=(45, 212, 191), width=2)
+    cta1 = "공식 암기 없이, 눈으로 읽는 원리" if not is_en else "See the Logic · Remember Forever"
+    cta2 = "▶ @min7014_ai · 시각적 증명 아틀리에" if not is_en else "▶ @min7014_ai · Visual Proof Atelier"
+    f_cta1 = _fit_font_to_width(draw, vmaker, cta1, max_w=516, start_sz=24, min_sz=18)
+    f_cta2 = _fit_font_to_width(draw, vmaker, cta2, max_w=516, start_sz=24, min_sz=18)
+    draw.text((56, 558), cta1, fill=(253, 230, 138), font=f_cta1)
+    draw.text((56, 602), cta2, fill=(248, 250, 252), font=f_cta2)
 
     img.save(out_png, quality=98)
     return out_png
@@ -705,7 +748,7 @@ def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
         d1 = ImageDraw.Draw(act1_img)
         d1.rounded_rectangle((56, 44, 1864, 156), radius=22, fill=(30, 64, 175), outline=(250, 204, 21), width=4)
         d1.text((88, 74), _clean_canvas_text(bp["exam_badge_en"] if is_en else bp["exam_badge_ko"]), fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 42, bold=True))
-        d1.text((1380, 78), "★ 5-SEC CHALLENGE" if is_en else "★ 실전 5초 챌린지!", fill=(254, 240, 138), font=vmaker.get_font_for_lang(lang_code, 36, bold=True))
+        d1.text((1380, 78), "◆ VISUAL INQUIRY" if is_en else "◆ 시각 직관 탐구", fill=(254, 240, 138), font=vmaker.get_font_for_lang(lang_code, 36, bold=True))
 
         _draw_exam_problem_diagram(d1, (68, 196, 940, 880), bp["diagram_kind"], solved=False, canvas_img=act1_img, pdf_doc=doc, lang_code=lang_code)
         d1.rounded_rectangle((980, 196, 1852, 880), radius=24, fill=(15, 23, 42), outline=(56, 189, 248), width=3)
@@ -766,7 +809,7 @@ def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
         act3_img = Image.new("RGB", (1920, 1080), (8, 18, 32))
         d3 = ImageDraw.Draw(act3_img)
         d3.rounded_rectangle((56, 44, 1864, 156), radius=22, fill=(5, 150, 105), outline=(250, 204, 21), width=4)
-        d3.text((88, 74), "★ SOLVED IN 5 SECONDS! (1-LINE VISUAL HACK)" if is_en else "★ 보조선 1줄로 단 5초 만에 실전 해체 완료!", fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 42, bold=True))
+        d3.text((88, 74), "◆ PROOF IN ONE LINE · GEOMETRIC INSIGHT" if is_en else "◆ 보조선 한 줄로 완성된 기하학적 통찰!", fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 42, bold=True))
         _draw_exam_problem_diagram(d3, (68, 196, 940, 880), bp["diagram_kind"], solved=True, canvas_img=act3_img, pdf_doc=doc, lang_code=lang_code)
         d3.rounded_rectangle((980, 196, 1852, 880), radius=24, fill=(15, 23, 42), outline=(52, 211, 153), width=4)
         ans_lbl = _clean_canvas_text(bp["answer_label_en"] if is_en else bp["answer_label_ko"])
@@ -776,7 +819,7 @@ def render_exam_hybrid_bundle(bp: dict, lang_code: str = "ko") -> dict:
             ya += 64
         d3.rounded_rectangle((1024, 590, 1808, 820), radius=20, fill=(2, 132, 199), outline=(255, 255, 255), width=3)
         sub_h1 = "▶ Subscribe to @min7014_ai Right Now!" if is_en else "▶ 지금 바로 @min7014_ai [구독] 누르기!"
-        sub_h2 = "Turn tough exam traps into 10-sec visual solves!" if is_en else "내신·수능 4점 도형·미적분이 10초 눈풀이로 바뀝니다!"
+        sub_h2 = "See the deep visual logic behind geometry!" if is_en else "도형과 해석의 본질을 시각적 증명으로 만나보세요!"
         d3.text((1056, 636), sub_h1, fill=(255, 255, 255), font=vmaker.get_font_for_lang(lang_code, 36, bold=True))
         d3.text((1056, 712), sub_h2, fill=(254, 240, 138), font=vmaker.get_font_for_lang(lang_code, 28, bold=True))
 
@@ -983,24 +1026,24 @@ def get_all_ranked_exam_blueprints(max_dynamic: int = 120) -> list[dict]:
             result.append({
                 "slug": slug,
                 "diagram_kind": "pdf_native",
-                "exam_badge_ko": "🚨 내신·수능 빈출 시각 증명 해법",
-                "exam_badge_en": "🚨 High-Yield Exam Visual Hack",
+                "exam_badge_ko": "◆ 유클리드 아틀리에 · 시각적 증명",
+                "exam_badge_en": "◆ Euclid Visual Proof Archive",
                 "problem_label_ko": q0_ko[:68],
                 "problem_label_en": q0_en[:96],
-                "figure_caption_ko": f"핵심 원리: {ko_c}",
-                "figure_caption_en": f"Core Principle: {en_c}",
-                "answer_label_ko": end_ko or f"보조선 1줄 시각 불변량으로 [{ko_c}] 5초 완벽 해결!",
-                "answer_label_en": end_en or f"One visual auxiliary clue proves [{en_c}] in 5 seconds!",
-                "title_ko": f"🔥 공식 암기 금지! 시험장에서 5초 만에 꿰뚫는 보조선 직관 | {ko_c} 시각적 증명",
-                "title_en": f"🔥 Stop Memorizing Formulas! 5-Second Visual Exam Proof | {en_c}",
-                "short_title_ko": f"❓ 공식 없이 3초 만에 보이시나요? {ko_c} 보조선 해법! #Shorts",
-                "short_title_en": f"❓ Can You Spot Why {en_c} Works in 3 Seconds? #Shorts",
-                "act1_ko": f"잠깐! 시험장에서 {ko_c} 관련 문제가 나왔을 때 공식만 외우면 조금만 변형되어도 막힙니다. 도형에서 핵심 단서가 3초 만에 보이시나요?",
-                "act1_en": f"Stop! Memorizing {en_c} blindly fails whenever an exam twists the figure. Can you spot the visual invariant in three seconds?",
-                "act3_ko": f"결국 이 보조선 원리 하나로 {ko_c}이 눈앞에서 명쾌하게 해결됩니다! 내신과 수능 수학을 10초 눈풀이로 바꾸는 시각 증명, 지금 바로 채널 구독을 눌러 두세요!",
-                "act3_en": f"That single visual connection proves {en_c} effortlessly! Subscribe to @min7014_ai right now for daily 10-second exam breakthroughs!",
-                "comment_quiz_ko": f"🧩 [5초 개념 체크] 오늘 본 '{ko_c}' 증명에서 가장 결정적이었던 보조선·성질은 무엇이었나요? 한 줄로 댓글에 남겨 복습해 보세요! 👇",
-                "comment_quiz_en": f"🧩 [5-Sec Recap] Which visual step made '{en_c}' click for you? Share in the comments below! 👇",
+                "figure_caption_ko": ko_c,
+                "figure_caption_en": en_c,
+                "answer_label_ko": end_ko or f"보조선과 기하 불변량으로 [{ko_c}] 원리 완전 증명!",
+                "answer_label_en": end_en or f"One visual auxiliary clue illuminates [{en_c}] completely!",
+                "title_ko": f"✨ 공식 너머의 필연성! 보조선과 대칭으로 읽는 기하 직관 | {ko_c} 시각적 증명",
+                "title_en": f"✨ Beyond Rote Formulas—See Why It Must Hold | {en_c} Visual Proof",
+                "short_title_ko": f"❓ 공식 없이 눈으로 보이시나요? {ko_c} 시각적 통찰! #Shorts",
+                "short_title_en": f"❓ Can You Spot Why {en_c} Works Visually? #Shorts",
+                "act1_ko": f"잠깐! {ko_c} 관련 원리를 공식으로만 외우면 조금만 조건이 달라져도 흐름을 놓치기 쉽습니다. 도형 속 핵심 단서가 눈앞에 보이시나요?",
+                "act1_en": f"Wait! Memorizing {en_c} blindly hides why it is true whenever conditions shift. Can you spot the visual invariant directly?",
+                "act3_ko": f"결국 이 시각적 원리 하나로 {ko_c}의 필연성이 눈앞에서 명쾌하게 증명됩니다! 수학의 본질을 그림으로 깨치는 시각 증명 아틀리에, 지금 바로 채널 구독을 눌러 두세요!",
+                "act3_en": f"That single visual connection illuminates {en_c} effortlessly! Subscribe to @min7014_ai right now for timeless visual proofs!",
+                "comment_quiz_ko": f"🧩 [시각 원리 체크] 오늘 본 '{ko_c}' 증명에서 가장 결정적이었던 보조선·성질은 무엇이었나요? 한 줄로 댓글에 남겨 복습해 보세요! 👇",
+                "comment_quiz_en": f"🧩 [Visual Recap] Which visual step made '{en_c}' click for you? Share in the comments below! 👇",
             })
     except Exception:
         pass
@@ -1035,7 +1078,7 @@ def _safe_notify_telegram(kind_label: str, slug: str, lc: str, title: str, url: 
                 sys.executable, "-X", "utf8",
                 str(ROOT_DIR / "mathedu_telegram_bridge.py"),
                 "--reply",
-                f"🎯 [실전 함정 하이브리드 자동 발행 완료 ({kind_label} · {lc.upper()})]\n• 주제({slug}): {title}\n• 링크: {url}",
+                f"🎯 [유클리드 아틀리에 하이브리드 자동 발행 완료 ({kind_label} · {lc.upper()})]\n• 주제({slug}): {title}\n• 링크: {url}",
             ],
             cwd=str(ROOT_DIR),
             timeout=20,
@@ -1044,6 +1087,212 @@ def _safe_notify_telegram(kind_label: str, slug: str, lc: str, title: str, url: 
         )
     except Exception:
         pass
+
+
+def sync_pending_policy87_live_assets(yt=None, tok_path=None, max_ops: int = 6) -> dict:
+    """
+    Policy 87 self-healing sync hook: once daily YouTube Data API quota resets,
+    gradually updates any remaining live exam_hybrid titles/thumbnails and BkxSXat12V4
+    in-place without deleting videos (Rule 33). Stops cleanly on quota limit or max_ops.
+    """
+    import re
+    import auditor
+    import min7014_video_maker as vmaker
+    from googleapiclient.errors import HttpError
+    from googleapiclient.http import MediaFileUpload
+
+    state_path = EXAM_HYBRID_DIR / "_policy87_live_sync_state.json"
+    state = {"completed": False, "done_thumbs": [], "done_titles": []}
+    if state_path.exists():
+        try:
+            loaded = json.loads(state_path.read_text(encoding="utf-8"))
+            if isinstance(loaded, dict):
+                state.update(loaded)
+        except Exception:
+            pass
+    if state.get("completed"):
+        return {}
+
+    if yt is None:
+        yt, tok_path = vmaker.get_available_youtube_upload_service()
+    if yt is None:
+        return {}
+
+    done_thumbs = set(state.get("done_thumbs") or [])
+    done_titles = set(state.get("done_titles") or [])
+    legacy_title_tokens = ("시험장", "함정", "하수", "5초", "Stop Memorizing", "90%", "Trap", "Hack")
+
+    def _has_legacy(text: str) -> bool:
+        return any(tok in (text or "") for tok in legacy_title_tokens)
+
+    def _clean_desc(desc: str, is_en: bool) -> str:
+        repl = "Beyond Formulas—One Visual Proof" if is_en else "공식 너머의 필연성, 보조선 한 줄의 통찰"
+        out = re.sub(
+            r"시험장\s*90%\s*(?:함정)?!?|90%\s*함정!?|보조선\s*1줄\s*5초\s*컷!?|90%\s*MISS\s*THIS!?|SOLVE\s+\S+\s+IN\s+5s!?|쓰면\s*하수!?|실\s*전함정|Visual\s*Hack",
+            repl,
+            desc or "",
+            flags=re.IGNORECASE,
+        )
+        return out
+
+    def _is_quota_exc(exc: Exception) -> bool:
+        msg = str(exc)
+        return ("quotaExceeded" in msg) or ("uploadLimitExceeded" in msg) or ("dailyLimitExceeded" in msg)
+
+    ops_used = 0
+    titles_updated = 0
+    thumbs_updated = 0
+    stopped_early = False
+    quota_hit = False
+
+    # Build candidate queue: BkxSXat12V4 first, then all blueprints with live exam_hybrid_urls
+    candidates = [{
+        "slug": "2012093001",
+        "lang": "ko",
+        "vid": "BkxSXat12V4",
+        "title": "✨ 왜 방정식 없이 풀릴까? 원주각을 단번에 여는 보조선 한 줄의 통찰 | 원주각과 중심각 시각적 증명",
+        "thumb": EXAM_HYBRID_DIR / "2012093001_exam_ko_thumb.png",
+    }]
+    seen_vids = {"BkxSXat12V4"}
+    for bp in get_all_ranked_exam_blueprints(max_dynamic=1000):
+        slug = bp["slug"]
+        sp = SCRIPTS_DIR / f"{slug}.json"
+        if not sp.exists():
+            continue
+        try:
+            sdoc = json.loads(sp.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        for lc, url in (sdoc.get("exam_hybrid_urls") or {}).items():
+            vid = vmaker.extract_youtube_video_id(url)
+            if not vid or vid in seen_vids:
+                continue
+            seen_vids.add(vid)
+            is_en = lc == "en"
+            candidates.append({
+                "slug": slug,
+                "lang": lc,
+                "vid": vid,
+                "title": bp["title_en"] if is_en else bp["title_ko"],
+                "thumb": EXAM_HYBRID_DIR / f"{slug}_exam_{lc}_thumb.png",
+            })
+
+    need_snippet_ids = [c["vid"] for c in candidates if c["vid"] not in done_titles]
+    live_snippets = {}
+    for i in range(0, len(need_snippet_ids), 50):
+        chunk = need_snippet_ids[i:i + 50]
+        try:
+            resp = yt.videos().list(part="snippet", id=",".join(chunk)).execute()
+            for item in resp.get("items", []):
+                live_snippets[item["id"]] = item.get("snippet", {})
+        except HttpError as exc:
+            if _is_quota_exc(exc):
+                if tok_path:
+                    vmaker.mark_token_quota_exhausted(tok_path, 3600)
+                vmaker._LAST_UPLOAD_QUOTA_BLOCKED = True
+                quota_hit = True
+                stopped_early = True
+                break
+        except Exception:
+            stopped_early = True
+
+    try:
+        for cand in candidates:
+            if quota_hit or ops_used >= max_ops:
+                stopped_early = True
+                break
+            vid = cand["vid"]
+            is_en = cand["lang"] == "en"
+
+            if vid not in done_titles:
+                snip = live_snippets.get(vid)
+                if snip is not None:
+                    live_t = snip.get("title", "")
+                    live_d = snip.get("description", "")
+                    if not _has_legacy(live_t) and not _has_legacy(live_d):
+                        done_titles.add(vid)
+                    else:
+                        new_desc = _clean_desc(live_d, is_en)
+                        raw_tags = [t for t in (snip.get("tags") or []) if not _has_legacy(t)]
+                        try:
+                            gated = auditor.sanitize_and_gate_upload_payload(cand["title"], new_desc, raw_tags)
+                            final_t = gated.get("title") or cand["title"]
+                            final_d = gated.get("description") or new_desc
+                            final_tags = gated.get("tags") if gated.get("tags") is not None else raw_tags
+                        except Exception:
+                            final_t = vmaker.sanitize_youtube_title(cand["title"])
+                            final_d = new_desc
+                            final_tags = raw_tags
+                        body_snip = {
+                            "title": final_t[:100].replace("<", "＜").replace(">", "＞"),
+                            "description": final_d[:4900],
+                            "categoryId": snip.get("categoryId") or "27",
+                        }
+                        if final_tags:
+                            body_snip["tags"] = final_tags
+                        if snip.get("defaultLanguage"):
+                            body_snip["defaultLanguage"] = snip["defaultLanguage"]
+                        if snip.get("defaultAudioLanguage"):
+                            body_snip["defaultAudioLanguage"] = snip["defaultAudioLanguage"]
+                        try:
+                            yt.videos().update(part="snippet", body={"id": vid, "snippet": body_snip}).execute()
+                            ops_used += 1
+                            titles_updated += 1
+                            done_titles.add(vid)
+                        except HttpError as exc:
+                            if _is_quota_exc(exc):
+                                if tok_path:
+                                    vmaker.mark_token_quota_exhausted(tok_path, 3600)
+                                vmaker._LAST_UPLOAD_QUOTA_BLOCKED = True
+                                quota_hit = True
+                                stopped_early = True
+                                break
+                            stopped_early = True
+
+            if quota_hit or ops_used >= max_ops:
+                stopped_early = True
+                break
+
+            if vid not in done_thumbs:
+                tp = cand["thumb"]
+                if not tp.exists():
+                    continue
+                try:
+                    yt.thumbnails().set(
+                        videoId=vid,
+                        media_body=MediaFileUpload(str(tp), mimetype="image/png"),
+                    ).execute()
+                    ops_used += 1
+                    thumbs_updated += 1
+                    done_thumbs.add(vid)
+                except HttpError as exc:
+                    if _is_quota_exc(exc):
+                        if tok_path:
+                            vmaker.mark_token_quota_exhausted(tok_path, 3600)
+                        vmaker._LAST_UPLOAD_QUOTA_BLOCKED = True
+                        quota_hit = True
+                        stopped_early = True
+                        break
+                    stopped_early = True
+
+        all_done = (not stopped_early) and (not quota_hit) and all(
+            (c["vid"] in done_titles) and (c["vid"] in done_thumbs)
+            for c in candidates
+            if c["thumb"].exists()
+        )
+        state["completed"] = bool(all_done)
+    finally:
+        state["done_thumbs"] = sorted(done_thumbs)
+        state["done_titles"] = sorted(done_titles)
+        state_path.parent.mkdir(parents=True, exist_ok=True)
+        state_path.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    return {
+        "titles_updated": titles_updated,
+        "thumbs_updated": thumbs_updated,
+        "ops_used": ops_used,
+        "completed": state["completed"],
+    }
 
 
 def try_upload_one_exam_hybrid(kind: str = "long") -> dict | None:
@@ -1060,6 +1309,14 @@ def try_upload_one_exam_hybrid(kind: str = "long") -> dict | None:
     yt, tok_path = vmaker.get_available_youtube_upload_service()
     if yt is None:
         return None
+
+    if kind == "long":
+        try:
+            sync_pending_policy87_live_assets(yt=yt, tok_path=tok_path, max_ops=6)
+        except Exception:
+            pass
+        if vmaker._LAST_UPLOAD_QUOTA_BLOCKED:
+            return None
 
     try:
         import youtube_self_evolving_engine as _ysee
@@ -1090,13 +1347,13 @@ def try_upload_one_exam_hybrid(kind: str = "long") -> dict | None:
                 raw_title = bp["title_en"] if is_en else bp["title_ko"]
                 pdf_url = sdoc.get("pdf_url") or "https://min7014.github.io/"
                 raw_desc = (
-                    f"🔥 Solve this classic geometry & algebra trap in 5 seconds using visual intuition!\n"
+                    f"✨ See why this timeless geometry & algebra theorem holds through pure visual intuition!\n"
                     f"📐 100% Original Visual Proof PDF: {pdf_url}\n"
                     f"🌐 Interactive Math Lab & Step-by-Step Archive: https://min7014.github.io/mathedu/\n"
                     f"🔔 Subscribe to @min7014_ai: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"
                     f"#VisualProof #EuclideanGeometry #MathIntuition #GeometryProof #Mathematics"
                     if is_en
-                    else f"🔥 방정식 세우다 시간 뺏기는 단골 도형·수식 함정 구조를 보조선 1줄 시각 증명으로 5초 만에 해체합니다!\n"
+                    else f"✨ 공식 암기 대신 보조선 한 줄과 기하 불변량으로 원리의 필연성을 눈으로 증명합니다!\n"
                     f"📐 100% 자체 제작 단계별 시각 증명 PDF: {pdf_url}\n"
                     f"🌐 단계별 디딤돌 & 자체 제작 MathLab 실습: https://min7014.github.io/mathedu/\n"
                     f"🔔 @min7014_ai 무료 구독하기: https://www.youtube.com/@min7014_ai?sub_confirmation=1\n\n"

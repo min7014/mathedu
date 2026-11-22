@@ -256,6 +256,34 @@ def run_full_audit(auto_fix: bool = False, check_live_youtube: bool = False) -> 
         if '"educator_tribute"' not in pr_code or '"통암기 멈추고"' in pr_code:
             findings["L7_visual_integrity"].append("pr.py: 교육자 헌정 품격 홍보 채널(educator_tribute) 누락 또는 금지 과장 문구 잔존")
 
+    # Policy 87: 유튜브 썸네일·제목·웹 배지 탈-클릭베이트 & 영구적 유클리드 아틀리에 품격 카피 검증
+    atelier_guard_tokens = (
+        "시험장 90%",
+        "90% 함정",
+        "90% MISS THIS",
+        "쓰면 하수",
+        "실전함정",
+        "Visual Hack",
+    )
+    for rel_g in (
+        "exam_hybrid_creator.py",
+        "nano_banana_cinema_creator.py",
+        "index.html",
+        "video_board.html",
+        "mathedu-i18n.js",
+    ):
+        gf = ROOT_DIR / rel_g
+        if not gf.exists():
+            continue
+        gtxt = gf.read_text(encoding="utf-8", errors="ignore")
+        if gf.suffix == ".py":
+            gtxt = "\n".join(ln for ln in gtxt.splitlines() if not ln.lstrip().startswith("#"))
+        for tok in atelier_guard_tokens:
+            if tok in gtxt:
+                findings["L7_visual_integrity"].append(
+                    f"{rel_g}: Policy 87 단기 클릭베이트 문구 잔존 ('{tok}')"
+                )
+
     # genie3_world_controller.py 3D 입체 은선(점선)·구-타원 차폐(Ray-Sphere Occlusion)·실루엣 외접 무결성 점검 (Policy 67)
     gw_file = ROOT_DIR / "genie3_world_controller.py"
     if gw_file.exists():
