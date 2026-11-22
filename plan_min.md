@@ -999,3 +999,15 @@ python -X utf8 pr.py status
   2. **[라이브 채널(`@min7014_ai`) 무손실 썸네일·제목 동기화 & 웹 배지 통일]**:
      - 이미 게시된 라이브 유튜브 영상은 삭제 없이(`Rule 33`) `thumbnails().set` 및 `videos().update`로 새 아틀리에 썸네일·제목으로 무손실 전환하며, [index.html](file:///D:/mathedu/index.html)·[video_board.html](file:///D:/mathedu/video_board.html)·[mathedu-i18n.js](file:///D:/mathedu/mathedu-i18n.js)의 `"실전함정 5초 해체"` 배지·CTA를 `"✨ NEW 보조선 한 줄 · 4분 시각 증명(본편) ↗"` 계열로 일괄 정렬한다.
   3. **[기계적 회귀 차단 (`auditor.py` L7)]**: `exam_hybrid_creator.py`, `nano_banana_cinema_creator.py`, `index.html`, `video_board.html`, `mathedu-i18n.js`에 구 클릭베이트 토큰 잔존을 상시 차단한다.
+
+
+---
+
+### [Policy 88] 홈페이지 드래그 가능 플로팅 사용법 길잡이 · 상황별 1건 즉시 안내(Just-in-Time Contextual Guide) 원칙 (`2026-11-22` 확정 · 회장님 텔레그램 지시)
+- **회장님(`min7014`) 원문 지시 (`2026-11-22`)**:
+  > *"mathedu 홈페이지를 접속했을때 사용방업을 안내하는 떠다니는 아이콘이 있었으면 좋겠다. 사용자의 반응에따라 하나씩 안내하고 이 아이콘은 떠 있기 때문에 드레그 해서 위치를 바꿀 수 있게 한다."*
+  > *"즉 사용법은 많기 때문에 그때 그때 필요한 것을 안내하면 된다."*
+- **`designer` × `mathteacher` 협업 표준 설계 (`mathedu-guide.js` v2.0 · `index.html` · `sw.js`)**:
+  1. **[자유 드래그 플로팅 오브(`#matheduGuideOrb`)]**: 우측 하단(고정 하단 독 `64px` 위 · 우측 상단 오류 신고 사이렌 `#mathedu-report-fab` 하단 여백)에 `52×52px`(모바일 `46px`) 글래스모피즘 유클리드 컴퍼스-별 플로팅 아이콘(`z-index: 999990`)을 상시 배치한다. 오브 본체와 카드 헤더(`⠿`) 모두 Pointer Events 기반 드래그(`6px` 클릭·드래그 판별 임계치, `touch-action: none`, 뷰포트 경계 자동 클램핑)로 화면 어디든 자유롭게 이동 가능하며, 정규화 좌표(`rx, ry`)를 `localStorage`(`mathedu_guide_pos_v1`)에 영구 저장해 새로고침·화면 회전 후에도 위치를 유지한다(`↺` 초기화 버튼 지원).
+  2. **[상황별 1건 즉시 안내(Just-in-Time Contextual Micro-Guide) · 14대 시나리오]**: 방대한 전체 기능을 억지로 일렬 진행하지 않고, 사용자가 실제로 반응(포커스·클릭·슬라이더 조작·스크롤 도달)하는 순간 **지금 필요한 사용법 단 1건**만 사분면 인식 팝오버(`#matheduGuideCard`)에 제시한다(`welcome`, `search`, `filters`, `wrong_bookmarks`, `lesson_pack`, `csat2027`, `visual_proofs`, `mathlab`, `deep_labs`, `classroom_code`, `teacher_tools`, `quest_streak`, `theme_lang`, `report_drag`).
+  3. **[반복 피로 제로(Seen-Memory) & 조용한 모드 · 다국어/테마/오류신고 연동]**: 이미 자동 안내로 확인한 항목(`seenTopics`)은 재노출하지 않으며 카드 내 `🔔 자동 안내 ON / 🔕 자동 안내 OFF` 토글과 `전체 14개 목록 ▾` 온디맨드 선택 칩을 제공한다. 오류신고 인스펙터(`mathedu-inspect-active`) 가동 시 팝오버를 즉시 숨겨 충돌을 차단하고, `data-no-i18n="1"` + `mathedu:lang-changed` 및 다크/라이트 테마 감지 동기화로 한/영 완전 대역과 모바일 인체공학을 보장한다.

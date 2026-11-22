@@ -3,7 +3,7 @@
  * Network-first for HTML/JS/JSON so error-report fixes & live updates reflect immediately,
  * with full offline fallback and 100/100 PWABuilder compliance.
  */
-const CACHE_NAME = 'mathedu-play-v20261115-ytonly';
+const CACHE_NAME = 'mathedu-play-v20261122-guide2';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -17,6 +17,7 @@ const CORE_ASSETS = [
   './mathedu-quest-game.js',
   './mathedu-i18n.js',
   './mathedu-report.js',
+  './mathedu-guide.js',
   './mathedu-room.js',
   './mathedu-search-logger.js',
   './assets/app_icon_192.png',
