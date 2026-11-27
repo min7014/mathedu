@@ -246,6 +246,22 @@ def get_available_youtube_upload_service():
         except Exception as e:
             _EXHAUSTED_TOKEN_FILES[str(t_file)] = (now_ts + 300.0, cur_mtime)
             print(f'⚠️ [Token Pool Skip ({t_file.name})]: {e}')
+            if "invalid_grant" in str(e).lower():
+                try:
+                    _alert_f = ROOT_DIR / ".agents" / "yt_token_expired_alert_ts.txt"
+                    _last_ts = float(_alert_f.read_text(encoding="utf-8").strip()) if _alert_f.exists() else 0.0
+                    if (now_ts - _last_ts) >= 21600.0:
+                        _alert_f.parent.mkdir(parents=True, exist_ok=True)
+                        _alert_f.write_text(str(now_ts), encoding="utf-8")
+                        import mathedu_telegram_bridge as _tg_alert
+                        _tg_alert.send_msg(
+                            f"🚨 [유튜브 API 토큰 만료 즉시 경보]\n"
+                            f"• 파일: {t_file.name} (`invalid_grant`)\n"
+                            f"• 영향: @min7014_ai 자동 업로드·댓글 감사 중단\n"
+                            f"• 조치: PC에서 `python -X utf8 min7014_video_maker.py --reauth-ai` 실행 (GCP OAuth 동의 화면 '프로덕션' 전환 시 7일 만료 예방)"
+                        )
+                except Exception:
+                    pass
     return None, None
 
 
@@ -1247,7 +1263,17 @@ def _analyze_min7014_topic_as_mathteacher_core(title: str, sub_domain_ko: str = 
 
     # 8-C. 정사각형의 한 변의 길이와 넓이 / 제곱근과 실수
     if "정사각형의 한 변" in t or "제곱근" in blob or "Square Root" in blob or "square root" in blob or "sqrt" in t or "√" in t:
-        if "정사각형의 한 변" in t:
+        if "거듭제곱근" in t or "거듭제곱근" in blob or "n제곱근" in t or "Radical root" in t:
+            return {
+                "category_type": "algebra",
+                "hypothesis_ko": f"'{ko_t}'에서 어떤 수 x를 n번 거듭제곱하여 실수 a가 되는 방정식(x의 n제곱 = a)의 해를 탐구하는 출발 조건",
+                "conclusion_ko": "복소수 범위에서 실수 a의 n제곱근은 n개이며, 그중 실수인 것의 개수는 n이 홀수일 때 a의 부호와 무관하게 항상 1개, n이 짝수일 때 a가 양수면 2개(플러스마이너스 n제곱근 a), a가 0이면 1개, a가 음수면 0개라는 결론",
+                "auxiliary_line_ko": "곡선 y = x의 n제곱(n이 짝수면 y축 대칭 포물선형, n이 홀수면 원점 대칭 단조증가 곡선)과 가로 직선 y = a의 교점 개수를 눈으로 세는 그래프 시각화 발상",
+                "proof_logic_ko": "실수 a의 n제곱근 중 실수인 것은 방정식 x의 n제곱 = a의 실근이므로, 함수 y = x의 n제곱 그래프와 직선 y = a가 만나는 교점의 x좌표 개수와 정확히 일치하는 원리",
+                "misconception_ko": "n이 짝수일 때만 음수의 실수 거듭제곱근이 없으며, n이 홀수일 때는 음수도 실수 n제곱근이 반드시 1개 존재합니다(예: -8의 실수 세제곱근은 -2)! 또한 '복소수 범위의 n개'와 '실수인 것의 개수'를 반드시 구분해야 합니다.",
+                "what_if_not_ko": "만약 지수 n을 자연수에서 유리수(a의 n분의 m제곱)로 확장한다면, 거듭제곱근의 성질이 왜 지수법칙 하나로 통합될까요?"
+            }
+        elif "정사각형의 한 변" in t:
             return {
                 "category_type": "number",
                 "hypothesis_ko": "격자 눈금 위에서 정사각형의 넓이 S와 한 변의 길이 x 사이의 관계(x의 제곱 = S)를 관찰하는 출발 조건",
@@ -2789,14 +2815,19 @@ def generate_or_update_script(slug_key, target_langs=None):
                     p_obj["narrations"][lc] = p_obj["explanation_text"]
 
     viral_hooks = VIRAL_HOOK_PRESETS.get(slug_key, {})
+    t_analysis = analyze_min7014_topic_as_mathteacher(title, sub_ko, (item_meta or {}).get("breadcrumb") or "")
 
     script_doc = {
         "slug": slug_key,
         "title": title,
         "title_en": title_en,
         "sub_domain_ko": sub_ko,
-        "core_concept": (item_meta or {}).get("core_concept") or "",
-        "solving_tip": ((item_meta or {}).get("solving_tips") or [""])[0],
+        "core_concept": (
+            f"{t_analysis['hypothesis_ko']} ➔ {t_analysis['conclusion_ko']}"
+            if t_analysis.get("hypothesis_ko") and t_analysis.get("conclusion_ko")
+            else ((item_meta or {}).get("core_concept") or "")
+        ),
+        "solving_tip": t_analysis.get("auxiliary_line_ko") or ((item_meta or {}).get("solving_tips") or [""])[0],
         "pdf_url": pdf_url,
         "web_url": web_url,
         "page_count": total_pages,
@@ -2820,7 +2851,7 @@ def generate_or_update_script(slug_key, target_langs=None):
         "shorts_packages": old_doc.get("shorts_packages") or {},
         "question_classroom_packages": old_doc.get("question_classroom_packages") or {},
         "question_shorts_packages": old_doc.get("question_shorts_packages") or {},
-        "teacher_proof_analysis": analyze_min7014_topic_as_mathteacher(title, sub_ko, (item_meta or {}).get("breadcrumb") or ""),
+        "teacher_proof_analysis": t_analysis,
         "supported_languages": list(GLOBAL_VOICE_MAP.keys()),
         "pages": pages_data
     }
@@ -5559,7 +5590,7 @@ def verify_video_content_integrity(slug_key: str) -> dict:
     all_narr_ko = " ".join(p.get("explanation_text", "") for p in pages)
     all_narr_en = " ".join((p.get("narrations") or {}).get("en", "") for p in pages)
 
-    for raw_tex in ("\\times", "\\div", "\\sqrt", "\\frac", "\\leq", "\\geq", "\\neq", "\\Leftrightarrow", "화면의 상단", "화면의 좌측", "영역에 새로운 보조선"):
+    for raw_tex in ("\\times", "\\div", "\\sqrt", "\\frac", "\\leq", "\\geq", "\\neq", "\\Leftrightarrow", "화면의 상단 영역", "화면의 좌측 영역", "영역에 새로운 보조선"):
         if raw_tex in all_narr_ko or raw_tex in all_narr_en:
             return {"ok": False, "reason": f"raw_latex_or_robotic_meta:{raw_tex}"}
 
@@ -5567,7 +5598,7 @@ def verify_video_content_integrity(slug_key: str) -> dict:
         for forbidden in ("원 위의 점을 아무리", "한 호에 대한 원주각", "비스듬한 책받침", "보조선과 기하 관계를"):
             if forbidden in all_narr_ko:
                 return {"ok": False, "reason": f"domain_mismatch:{forbidden}"}
-        if "복소수" in all_narr_ko and not any(k in title_str for k in ("복소수", "허수", "켤레", "Complex", "complex")):
+        if "복소수" in all_narr_ko and not any(k in title_str for k in ("복소수", "허수", "켤레", "거듭제곱근", "n제곱근", "Complex", "complex", "Radical root")):
             return {"ok": False, "reason": "domain_mismatch:복소수"}
         if "다항식 나눗셈" in all_narr_ko and not any(k in title_str for k in ("다항식", "나눗셈", "나머지", "인수", "Polynomial")):
             return {"ok": False, "reason": "domain_mismatch:다항식 나눗셈"}
