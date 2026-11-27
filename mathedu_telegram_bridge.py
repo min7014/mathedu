@@ -159,24 +159,37 @@ def tg_api(token: str, method: str, payload: dict | None = None, timeout: int = 
         return json.loads(resp.read().decode("utf-8"))
 
 
-def send_msg(token: str, chat_id: str | int, text: str) -> None:
+def send_msg(token: str, chat_id: str | int, text: str) -> bool:
+    """텔레그램 메시지를 분할·재시도 전송하고 모든 청크가 성공하면 True를 반환합니다."""
     if not text:
-        return
+        return False
     # 영상 ID 없는 불완전 임베드 경로 문자열(www.youtube.com/embed)이 텔레그램에서 깨진 링크·프리뷰로 오인 변환되는 현상 원천 차단
     import re as _re_tg
     text = _re_tg.sub(r"(?:https?://)?(?:www\.)?youtube\.com/embed(?!/[A-Za-z0-9_-]{11})", "유튜브 공식 임베드 경로", text)
     has_real_yt_video = bool(_re_tg.search(r"(?:youtu\.be/[A-Za-z0-9_-]{11}|youtube\.com/(?:watch\?v=|shorts/)[A-Za-z0-9_-]{11})", text))
     # 텔레그램 메시지 길이 제한(4096자) 고려 분할 전송
     chunk_size = 3800
+    all_ok = True
     for i in range(0, len(text), chunk_size):
         chunk = text[i : i + chunk_size]
-        try:
-            payload = {"chat_id": chat_id, "text": chunk}
-            if not has_real_yt_video:
-                payload["link_preview_options"] = {"is_disabled": True}
-            tg_api(token, "sendMessage", payload)
-        except Exception as e:
-            print(f"[WARN] sendMessage 오류: {e}")
+        payload = {"chat_id": chat_id, "text": chunk}
+        if not has_real_yt_video:
+            payload["link_preview_options"] = {"is_disabled": True}
+        chunk_ok = False
+        for attempt in range(1, 4):
+            try:
+                res = tg_api(token, "sendMessage", payload)
+                if isinstance(res, dict) and res.get("ok", False):
+                    chunk_ok = True
+                    break
+                print(f"[WARN] sendMessage 응답 비정상 (시도 {attempt}/3): {res}")
+            except Exception as e:
+                print(f"[WARN] sendMessage 오류 (시도 {attempt}/3): {e}")
+            if attempt < 3:
+                time.sleep(1.5 * attempt)
+        if not chunk_ok:
+            all_ok = False
+    return all_ok
 
 
 def send_photo(

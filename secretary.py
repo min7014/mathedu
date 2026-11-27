@@ -15,6 +15,7 @@ import argparse
 import datetime
 import json
 import os
+import sys
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent
@@ -213,6 +214,18 @@ def format_executive_briefing(metrics: dict) -> str:
 
 
 DAILY_REPORT_STATE_FILE = ROOT_DIR / ".agents" / "secretary_daily_report_state.json"
+SECRETARY_LOG_FILE = ROOT_DIR / ".agents" / "secretary_briefing.log"
+
+
+def _log_secretary(msg: str) -> None:
+    """조간 브리핑 및 텔레그램 전송 이력을 로그 파일에 기록합니다."""
+    try:
+        SECRETARY_LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+        ts = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        with SECRETARY_LOG_FILE.open("a", encoding="utf-8") as fp:
+            fp.write(f"[{ts}] {msg}\n")
+    except Exception:
+        pass
 
 
 def ensure_video_board_strategic_lab_features() -> bool:
@@ -451,14 +464,16 @@ def send_telegram_report(msg_text: str) -> bool:
     token = cfg.get("TELEGRAM_BOT_TOKEN", "")
     chat_id = cfg.get("TELEGRAM_CHAT_ID") or st.get("chat_id", "43453234")
     if token and chat_id and msg_text:
-        tg_bridge.send_msg(token, chat_id, msg_text)
-        return True
+        return bool(tg_bridge.send_msg(token, chat_id, msg_text))
     return False
 
 
-def send_telegram_executive_report(prefix_header: str = "") -> bool:
-    metrics = collect_live_workspace_metrics()
-    text = format_executive_briefing(metrics)
+def send_telegram_executive_report(prefix_header: str = "", preformatted_text: str = "") -> bool:
+    """실시간 경영 브리핑을 텔레그램으로 전송하고 실제 전송 성공 여부를 반환합니다."""
+    text = preformatted_text
+    if not text:
+        metrics = collect_live_workspace_metrics()
+        text = format_executive_briefing(metrics)
     if prefix_header:
         text = f"{prefix_header}\n\n{text}"
     import mathedu_telegram_bridge as tg_bridge
@@ -466,19 +481,21 @@ def send_telegram_executive_report(prefix_header: str = "") -> bool:
     st = tg_bridge.load_offset_state()
     token = cfg.get("TELEGRAM_BOT_TOKEN", "")
     chat_id = cfg.get("TELEGRAM_CHAT_ID") or st.get("chat_id", "43453234")
-    if token and chat_id:
-        tg_bridge.send_msg(token, chat_id, text)
-        return True
-    return False
+    if not (token and chat_id):
+        _log_secretary("FAIL: Telegram token or chat_id missing.")
+        return False
+    ok = bool(tg_bridge.send_msg(token, chat_id, text))
+    _log_secretary(f"send_telegram_executive_report -> {'OK' if ok else 'FAIL'} (len={len(text)})")
+    return ok
 
 
 def check_and_send_daily_7am_report() -> bool:
     """
-    24/7 데몬 루프에서 상시 호출되어 매일 아침 07:00~07:59 사이에
+    24/7 데몬 루프에서 상시 호출되어 매일 아침 07:00~09:59 사이에
     당일 조간 경영 보고가 아직 발송되지 않았다면 즉시 텔레그램(@anti7014_bot)으로 발송합니다.
     """
     now = datetime.datetime.now()
-    if now.hour != 7:
+    if not (7 <= now.hour <= 9):
         return False
     today_str = now.strftime("%Y-%m-%d")
     DAILY_REPORT_STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
@@ -486,19 +503,24 @@ def check_and_send_daily_7am_report() -> bool:
     if DAILY_REPORT_STATE_FILE.exists():
         try:
             st = json.loads(DAILY_REPORT_STATE_FILE.read_text(encoding="utf-8"))
-            last_sent_date = st.get("last_sent_date", "")
+            if st.get("delivery_ok", True):
+                last_sent_date = st.get("last_sent_date", "")
         except Exception:
             pass
     if last_sent_date == today_str:
         return False
+    _log_secretary(f"check_and_send_daily_7am_report triggered for {today_str}")
     sent = send_telegram_executive_report(
         prefix_header=f"🌅 [오전 07:00 정례 조간 경영 브리핑 — {today_str}] 회장님, 밤사이 24/7 AI 임원진 가동 성과와 금일 추진 계획을 보고드립니다!"
     )
     if sent:
         DAILY_REPORT_STATE_FILE.write_text(
-            json.dumps({"last_sent_date": today_str, "sent_at": now.isoformat()}, ensure_ascii=False, indent=2),
+            json.dumps({"last_sent_date": today_str, "sent_at": now.isoformat(), "delivery_ok": True}, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
+        _log_secretary(f"7AM report state saved (delivery_ok=True) for {today_str}")
+    else:
+        _log_secretary(f"7AM report delivery FAILED for {today_str}; state not marked complete for retry")
     return sent
 
 
@@ -539,18 +561,28 @@ def main() -> None:
 
     if args.morning_report:
         today_str = datetime.datetime.now().strftime("%Y-%m-%d")
-        send_telegram_executive_report(
-            prefix_header=f"🌅 [오전 07:00 정례 조간 경영 브리핑 — {today_str}] 회장님, 수학교육 회사 현재 상황과 금일 추진 계획을 보고드립니다!"
+        sent = send_telegram_executive_report(
+            prefix_header=f"🌅 [오전 07:00 정례 조간 경영 브리핑 — {today_str}] 회장님, 수학교육 회사 현재 상황과 금일 추진 계획을 보고드립니다!",
+            preformatted_text=text,
         )
-        DAILY_REPORT_STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
-        DAILY_REPORT_STATE_FILE.write_text(
-            json.dumps({"last_sent_date": today_str, "sent_at": datetime.datetime.now().isoformat()}, ensure_ascii=False, indent=2),
-            encoding="utf-8",
-        )
-        print("\n✅ 텔레그램으로 07:00 정례 조간 경영 보고를 전송했습니다.")
+        if sent:
+            DAILY_REPORT_STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+            DAILY_REPORT_STATE_FILE.write_text(
+                json.dumps({"last_sent_date": today_str, "sent_at": datetime.datetime.now().isoformat(), "delivery_ok": True}, ensure_ascii=False, indent=2),
+                encoding="utf-8",
+            )
+            print("\n✅ 텔레그램으로 07:00 정례 조간 경영 보고를 전송했습니다.")
+        else:
+            _log_secretary(f"--morning-report failed for {today_str}; exiting with code 1")
+            print("\n❌ 텔레그램 07:00 정례 조간 경영 보고 전송에 실패했습니다.")
+            sys.exit(1)
     elif args.telegram_briefing:
-        send_telegram_executive_report()
-        print("\n✅ 텔레그램으로 수석 비서실장 실시간 경영 보고를 전송했습니다.")
+        sent = send_telegram_executive_report(preformatted_text=text)
+        if sent:
+            print("\n✅ 텔레그램으로 수석 비서실장 실시간 경영 보고를 전송했습니다.")
+        else:
+            print("\n❌ 텔레그램 실시간 경영 보고 전송에 실패했습니다.")
+            sys.exit(1)
 
 
 if __name__ == "__main__":
