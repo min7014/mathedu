@@ -1,10 +1,21 @@
 # Auto-start Mathedu 24/7 daemons and Antigravity CLI in D:\mathedu on Windows logon
+param(
+    [switch]$InteractiveSession
+)
+
 $ErrorActionPreference = 'Continue'
 $WorkDir = 'D:\mathedu'
 $LogPath = Join-Path $WorkDir '.agents\boot_autostart.log'
 $PythonW = 'C:\Python\Python312\pythonw.exe'
 $WtExe   = Join-Path $env:LOCALAPPDATA 'Microsoft\WindowsApps\wt.exe'
 $AgyExe  = 'C:\Users\min\AppData\Local\agy\bin\agy.EXE'
+$SelfPs1 = Join-Path $WorkDir 'autostart_mathedu_boot.ps1'
+
+if ($InteractiveSession) {
+    Set-Location $WorkDir
+    & $AgyExe --continue
+    return
+}
 
 # Wait up to 30s for D:\mathedu after boot
 for ($i = 0; $i -lt 15; $i++) {
@@ -25,23 +36,21 @@ if (Test-Path $PythonW) {
     Add-Content -Path $LogPath -Encoding UTF8 -Value "[$ts] Ensured foundation_daemon and telegram_bridge from $WorkDir"
 }
 
-# 2. Launch Antigravity CLI in Windows Terminal inside D:\mathedu (duplicate-safe)
+# 2. Launch Antigravity CLI in Windows Terminal inside D:\mathedu (duplicate-safe, no semicolons for wt.exe)
 $existingAgy = Get-Process -Name 'agy' -ErrorAction SilentlyContinue
 if ($existingAgy) {
     $pids = ($existingAgy | Select-Object -ExpandProperty Id) -join ','
     Add-Content -Path $LogPath -Encoding UTF8 -Value "[$ts] agy already running (PID=$pids) -> skipped duplicate launch"
 } elseif (Test-Path $AgyExe) {
     Start-Sleep -Seconds 5
-    $innerCmd = "Set-Location '$WorkDir'; & '$AgyExe' --continue"
+    $psArgs = @('-NoExit', '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $SelfPs1, '-InteractiveSession')
     if (Test-Path $WtExe) {
-        Start-Process -FilePath $WtExe -WorkingDirectory $WorkDir -ArgumentList @(
-            '-d', $WorkDir,
-            '--title', 'Antigravity (D:\mathedu)',
-            'powershell.exe', '-NoExit', '-Command', $innerCmd
+        Start-Process -FilePath $WtExe -WorkingDirectory $WorkDir -ArgumentList (
+            @('-d', $WorkDir, '--title', 'Antigravity (D:\mathedu)', 'powershell.exe') + $psArgs
         )
         Add-Content -Path $LogPath -Encoding UTF8 -Value "[$ts] Launched Windows Terminal -> agy --continue in $WorkDir"
     } else {
-        Start-Process -FilePath 'powershell.exe' -WorkingDirectory $WorkDir -ArgumentList @('-NoExit', '-Command', $innerCmd)
+        Start-Process -FilePath 'powershell.exe' -WorkingDirectory $WorkDir -ArgumentList $psArgs
         Add-Content -Path $LogPath -Encoding UTF8 -Value "[$ts] Launched PowerShell -> agy --continue in $WorkDir"
     }
 } else {
